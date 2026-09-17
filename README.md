@@ -1,4 +1,4 @@
- 🛒 HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI (MINISUPERMARKET SYSTEM)
+🛒 HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI (MINISUPERMARKET SYSTEM)
 > **Môn học:** Lập trình Ứng dụng .NET Core (Mã môn: 229162)  
 > **Buổi thực hành:** Buổi 1 - Xây dựng Web API quản lý danh mục và kết nối WinForms Client (CRUD)
 
@@ -13,9 +13,28 @@ Dự án được xây dựng theo mô hình phân tầng hiện đại, tách b
 
 ## 🛠️ 2. Công nghệ Sử dụng
 * **Ngôn ngữ:** C# (.NET 8.0)
+* **Backend:** ASP.NET Core Web API, Controllers, In-Memory Data, LINQ
+* **Frontend:** Windows Forms (.NET 8.0), `System.Net.Http.Json`
+* **Công cụ kiểm thử:** Swagger UI
 
 ---
-## 3. Thông tin
-> **Họ và tên:** Phùng Đức Cảnh
-> **MSSV:** 2124110137
-> **Lớp:** CCQ2411D
+
+## 📂 3. Cấu trúc Solution
+```text
+MiniSupermarketSystem/
+│
+├── MiniSupermarket.API/          # Dự án Web API (Backend)
+│   ├── Controllers/              # Chứa CategoriesController (CRUD & Search)
+│   ├── Models/                   # Chứa lớp thực thể Category.cs
+│   └── Program.cs                # Cấu hình dịch vụ và Middleware
+│
+└── MiniSupermarket.WinForms/     # Dự án Windows Forms (Frontend Client)
+    └── FormCategoryManagement.cs # Giao diện quản lý danh mục CRUD
+```
+
+---
+
+## 👤 4. Tác giả
+> **Họ và tên:** Phùng Đức Cảnh\
+> **Mã sinh viên:** 2124110137\
+> **Lớp học phần:** CCQ2411D
