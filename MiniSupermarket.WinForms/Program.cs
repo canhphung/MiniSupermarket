@@ -10,10 +10,11 @@ namespace MiniSupermarket.WinForms
             //Phần gọi form hiển thị
             var categoryForm = new FormCategoryManagement();
             var roleForm = new FormRoleManagement();
+            var loginForm = new FormLogin();
 
-            roleForm.Show();
+            //roleForm.Show();
 
-            Application.Run(categoryForm);
+            Application.Run(loginForm);
         }
     }
 }

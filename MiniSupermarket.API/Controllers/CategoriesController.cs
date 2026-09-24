@@ -1,12 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using MiniSupermarket.API.Models;
 
 namespace MiniSupermarket.API.Controllers
 {
     [Route("api/[controller]")] // Định tuyến cơ sở: /api/categories
     [ApiController]
+    [Authorize] // Bắt buộc phải có Token mới gọi được các API trong Controller này
     public class CategoriesController : ControllerBase
     {
+        // Kiểm tra quyền Admin (Chỉ tài khoản có Role = Admin mới được gọi)
+        [HttpGet("admin-dashboard")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAdminDashboard()
+        {
+            return Ok(new { message = "Chào mừng Admin! Bạn có toàn quyền quản trị hệ thống siêu thị mini." });
+        }
+
+        // Kiểm tra quyền chung cho nhân viên (Cả Admin và Cashier đều gọi được)
+        [HttpGet("staff-pos")]
+        [Authorize(Roles = "Admin,Cashier")]
+        public IActionResult GetStaffPos()
+        {
+            return Ok(new { message = "Màn hình POS Thu ngân sẵn sàng phục vụ bán hàng." });
+        }
+
 
         // Dữ liệu mẫu lưu tạm trên bộ nhớ RAM (In-Memory) phục vụ kiểm thử khi chưa có Database
         private static readonly List<Category> _categories = new() {
