@@ -17,7 +17,7 @@ namespace MiniSupermarket.WinForms
     {
         private static readonly HttpClient _client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7123/api/")  // nhớ chỉnh port phù hợp
+            BaseAddress = new Uri("https://localhost:7203/api/")  // nhớ chỉnh port phù hợp
         };
 
         // Hàm gọi API đăng nhập lấy Token

@@ -6,24 +6,6 @@ namespace MiniSupermarket.WinForms
 {
     public partial class FormCategoryManagement : Form
     {
-
-        // Khởi tạo HttpClient tĩnh kết nối trực tiếp đến Web API (Đảm bảo số Port https://localhost:7203 khớp với API của bạn)
-        private static readonly HttpClient _client = new HttpClient
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
-
-        public FormCategoryManagement()
-        {
-            InitializeComponent();
-        }
-
-        // Sự kiện Form vừa bật lên: Tự động tải dữ liệu từ API lên bảng
-        private async void FormCategoryManagement_Load(object sender, EventArgs e)
-        {
-            await LoadDataAsync();
-        }
-
         // Bổ sung phương thức cấu hình HttpClient có gắn kèm Token bảo mật
         private HttpClient GetAuthenticatedClient()
         {
@@ -38,6 +20,50 @@ namespace MiniSupermarket.WinForms
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", SessionManager.JwtToken);
             }
             return client;
+        }
+
+        private bool IsCashier()
+        {
+            return SessionManager.CurrentRole.Equals(
+                "Cashier",
+                StringComparison.OrdinalIgnoreCase
+            );
+        }
+
+        private void ApplyPermissions()
+        {
+            if (IsCashier())
+            {
+                // Cashier chỉ được xem
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+
+                txtCategoryName.ReadOnly = true;
+                txtDescription.ReadOnly = true;
+            }
+            else
+            {
+                // Admin được CRUD
+                btnAdd.Enabled = true;
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
+
+                txtCategoryName.ReadOnly = false;
+                txtDescription.ReadOnly = false;
+            }
+        }
+
+        public FormCategoryManagement()
+        {
+            InitializeComponent();
+        }
+
+        // Sự kiện Form vừa bật lên: Tự động tải dữ liệu từ API lên bảng
+        private async void FormCategoryManagement_Load(object sender, EventArgs e)
+        {
+            ApplyPermissions();
+            await LoadDataAsync();
         }
 
 
@@ -218,4 +244,5 @@ namespace MiniSupermarket.WinForms
         public string CategoryName { get; set; } = string.Empty;
         public string? Description { get; set; }
     }
+
 }
