@@ -55,6 +55,7 @@ namespace MiniSupermarket.WinForms
                     this.Hide();
 
                     categoryForm.Show();
+                    customerForm.Show();
 
                     //this.Close(); // Đóng hẳn ứng dụng khi form chính tắt
                 }

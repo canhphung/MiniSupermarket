@@ -73,9 +73,19 @@ namespace MiniSupermarket.API.Migrations
                 {
                     { 1, "Đồ uống", "Nước ngọt, nước suối, trà, cà phê, nước tăng lực" },
                     { 2, "Thực phẩm ăn liền", "Cơm, mì, sandwich, burger, bánh mì và đồ ăn nóng" },
-                    { 3, "Bánh kẹo & Đồ ăn vặt", "Snack, khoai tây chiên, bánh quy, kẹo và chocolate" },
+                    { 3, "Bánh kẹo & Đồ ăn vặt", "Snack, bánh quy, kẹo và chocolate" },
                     { 4, "Sữa & sản phẩm từ sữa", "Sữa tươi, sữa chua, phô mai và đồ uống từ sữa" },
-                    { 5, "Thực phẩm khô & đóng gói", "Mì gói, ngũ cốc, đồ hộp và thực phẩm đóng gói" }
+                    { 5, "Thực phẩm khô & đóng gói", "Mì gói, ngũ cốc, đồ hộp và thực phẩm đóng gói" },
+                    { 6, "Rau củ", "Rau xanh, củ, quả và thực phẩm tươi" },
+                    { 7, "Trái cây", "Trái cây trong nước và nhập khẩu" },
+                    { 8, "Thịt & Hải sản", "Thịt heo, bò, gà, cá và hải sản" },
+                    { 9, "Gia vị", "Nước mắm, nước tương, muối, đường và gia vị nấu ăn" },
+                    { 10, "Đông lạnh", "Thực phẩm đông lạnh và chế biến sẵn" },
+                    { 11, "Chăm sóc cá nhân", "Dầu gội, sữa tắm, kem đánh răng và sản phẩm cá nhân" },
+                    { 12, "Đồ gia dụng", "Dụng cụ và vật dụng sử dụng trong gia đình" },
+                    { 13, "Vệ sinh nhà cửa", "Nước lau sàn, nước rửa chén và chất tẩy rửa" },
+                    { 14, "Mẹ & Bé", "Sản phẩm dành cho mẹ và trẻ nhỏ" },
+                    { 15, "Văn phòng phẩm", "Bút, vở, giấy và dụng cụ học tập" }
                 });
 
             migrationBuilder.InsertData(
@@ -83,16 +93,21 @@ namespace MiniSupermarket.API.Migrations
                 columns: new[] { "CustomerId", "Address", "CustomerName", "MembershipRank", "PhoneNumber", "RewardPoints" },
                 values: new object[,]
                 {
-                    { 1, "12 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh", "Nguyễn Văn A", "Vàng", "0901122334", 150 },
-                    { 2, "45 Võ Văn Tần, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh", "Trần Thị B", "Bạc", "0918877665", 50 },
-                    { 3, "128 Xô Viết Nghệ Tĩnh, Phường 21, Quận Bình Thạnh, TP. Hồ Chí Minh", "Lê Văn C", "Chuẩn", "0983344556", 10 },
-                    { 4, "76 Nguyễn Thị Thập, Phường Tân Phú, Quận 7, TP. Hồ Chí Minh", "Phạm Thị D", "Vàng", "0904455667", 200 },
-                    { 5, "215 Cộng Hòa, Phường 13, Quận Tân Bình, TP. Hồ Chí Minh", "Hoàng Văn E", "Bạc", "0935566778", 80 },
-                    { 6, "93 Quang Trung, Phường 10, Quận Gò Vấp, TP. Hồ Chí Minh", "Võ Thị F", "Chuẩn", "0976677889", 25 },
-                    { 7, "150 Võ Nguyên Giáp, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh", "Đặng Văn G", "Vàng", "0967788990", 300 },
-                    { 8, "68 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh", "Bùi Thị H", "Bạc", "0948899001", 65 },
-                    { 9, "320 Hà Huy Giáp, Phường Thạnh Lộc, Quận 12, TP. Hồ Chí Minh", "Đỗ Văn I", "Chuẩn", "0929900112", 15 },
-                    { 10, "84 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh", "Ngô Thị K", "Vàng", "0911011223", 180 }
+                    { 1, "12 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh", "Nguyễn Văn A", "Vàng", "0901122334", 150 },
+                    { 2, "45 Võ Văn Tần, Quận 3, TP. Hồ Chí Minh", "Trần Thị B", "Bạc", "0918877665", 50 },
+                    { 3, "128 Xô Viết Nghệ Tĩnh, Bình Thạnh, TP. Hồ Chí Minh", "Lê Văn C", "Chuẩn", "0983344556", 10 },
+                    { 4, "76 Nguyễn Thị Thập, Quận 7, TP. Hồ Chí Minh", "Phạm Thị D", "Vàng", "0904455667", 200 },
+                    { 5, "215 Cộng Hòa, Tân Bình, TP. Hồ Chí Minh", "Hoàng Văn E", "Bạc", "0935566778", 80 },
+                    { 6, "93 Quang Trung, Gò Vấp, TP. Hồ Chí Minh", "Võ Thị F", "Chuẩn", "0976677889", 25 },
+                    { 7, "150 Võ Nguyên Giáp, TP. Thủ Đức", "Đặng Văn G", "Vàng", "0967788990", 300 },
+                    { 8, "68 Sư Vạn Hạnh, Quận 10, TP. Hồ Chí Minh", "Bùi Thị H", "Bạc", "0948899001", 65 },
+                    { 9, "320 Hà Huy Giáp, Quận 12, TP. Hồ Chí Minh", "Đỗ Văn I", "Chuẩn", "0929900112", 15 },
+                    { 10, "84 Phan Xích Long, Phú Nhuận, TP. Hồ Chí Minh", "Ngô Thị K", "Vàng", "0911011223", 180 },
+                    { 11, "25 Lê Văn Sỹ, Quận 3, TP. Hồ Chí Minh", "Đinh Văn L", "Bạc", "0902233445", 70 },
+                    { 12, "110 Nguyễn Trãi, Quận 5, TP. Hồ Chí Minh", "Mai Thị M", "Chuẩn", "0913344556", 30 },
+                    { 13, "45 Lê Đức Thọ, Gò Vấp, TP. Hồ Chí Minh", "Phan Văn N", "Vàng", "0934455667", 250 },
+                    { 14, "78 Âu Cơ, Tân Phú, TP. Hồ Chí Minh", "Trương Thị O", "Bạc", "0945566778", 90 },
+                    { 15, "36 Phạm Văn Đồng, TP. Thủ Đức", "Huỳnh Văn P", "Chuẩn", "0956677889", 40 }
                 });
 
             migrationBuilder.InsertData(
@@ -101,20 +116,20 @@ namespace MiniSupermarket.API.Migrations
                 values: new object[,]
                 {
                     { 1, "893000000001", 1, 12000m, "Coca-Cola lon 330ml", 50 },
-                    { 2, "893000000002", 1, 7000m, "Nước suối Aquafina 500ml", 60 },
-                    { 3, "893000000003", 1, 11000m, "Trà xanh Không Độ 455ml", 45 },
-                    { 4, "893000000004", 2, 35000m, "Cơm gà sốt tiêu đen", 20 },
-                    { 5, "893000000005", 2, 25000m, "Sandwich trứng jambon", 25 },
-                    { 6, "893000000006", 2, 22000m, "Bánh mì xúc xích", 30 },
-                    { 7, "893000000007", 3, 10000m, "Snack khoai tây Oishi", 40 },
-                    { 8, "893000000008", 3, 18000m, "Bánh Oreo 133g", 35 },
-                    { 9, "893000000009", 3, 15000m, "Chocolate KitKat", 30 },
-                    { 10, "893000000010", 4, 9000m, "Sữa tươi Vinamilk 180ml", 50 },
-                    { 11, "893000000011", 4, 7000m, "Sữa chua Vinamilk", 40 },
-                    { 12, "893000000012", 4, 32000m, "Phô mai Con Bò Cười", 25 },
-                    { 13, "893000000013", 5, 4500m, "Mì Hảo Hảo tôm chua cay", 100 },
-                    { 14, "893000000014", 5, 8000m, "Cháo ăn liền thịt bằm", 60 },
-                    { 15, "893000000015", 5, 22000m, "Cá hộp sốt cà", 35 }
+                    { 2, "893000000002", 2, 35000m, "Cơm gà sốt tiêu đen", 20 },
+                    { 3, "893000000003", 3, 18000m, "Bánh Oreo 133g", 35 },
+                    { 4, "893000000004", 4, 9000m, "Sữa tươi Vinamilk 180ml", 50 },
+                    { 5, "893000000005", 5, 4500m, "Mì Hảo Hảo tôm chua cay", 100 },
+                    { 6, "893000000006", 6, 15000m, "Rau cải xanh 500g", 30 },
+                    { 7, "893000000007", 7, 65000m, "Táo Fuji 1kg", 25 },
+                    { 8, "893000000008", 8, 85000m, "Thịt ba rọi heo 500g", 20 },
+                    { 9, "893000000009", 9, 28000m, "Nước mắm Nam Ngư 500ml", 40 },
+                    { 10, "893000000010", 10, 55000m, "Xúc xích đông lạnh 500g", 30 },
+                    { 11, "893000000011", 11, 125000m, "Dầu gội Clear 630g", 20 },
+                    { 12, "893000000012", 12, 45000m, "Hộp đựng thực phẩm 1L", 25 },
+                    { 13, "893000000013", 13, 32000m, "Nước rửa chén Sunlight 750g", 35 },
+                    { 14, "893000000014", 14, 38000m, "Khăn ướt em bé Bobby", 30 },
+                    { 15, "893000000015", 15, 5000m, "Bút bi Thiên Long", 100 }
                 });
 
             migrationBuilder.CreateIndex(
