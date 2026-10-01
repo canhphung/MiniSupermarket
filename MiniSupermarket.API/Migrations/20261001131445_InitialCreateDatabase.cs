@@ -7,7 +7,7 @@
 namespace MiniSupermarket.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class InitialCreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -83,9 +83,16 @@ namespace MiniSupermarket.API.Migrations
                 columns: new[] { "CustomerId", "Address", "CustomerName", "MembershipRank", "PhoneNumber", "RewardPoints" },
                 values: new object[,]
                 {
-                    { 1, null, "Nguyễn Văn A", "Vàng", "0901122334", 150 },
-                    { 2, null, "Trần Thị B", "Bạc", "0918877665", 50 },
-                    { 3, null, "Lê Văn C", "Chuẩn", "0983344556", 10 }
+                    { 1, "12 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh", "Nguyễn Văn A", "Vàng", "0901122334", 150 },
+                    { 2, "45 Võ Văn Tần, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh", "Trần Thị B", "Bạc", "0918877665", 50 },
+                    { 3, "128 Xô Viết Nghệ Tĩnh, Phường 21, Quận Bình Thạnh, TP. Hồ Chí Minh", "Lê Văn C", "Chuẩn", "0983344556", 10 },
+                    { 4, "76 Nguyễn Thị Thập, Phường Tân Phú, Quận 7, TP. Hồ Chí Minh", "Phạm Thị D", "Vàng", "0904455667", 200 },
+                    { 5, "215 Cộng Hòa, Phường 13, Quận Tân Bình, TP. Hồ Chí Minh", "Hoàng Văn E", "Bạc", "0935566778", 80 },
+                    { 6, "93 Quang Trung, Phường 10, Quận Gò Vấp, TP. Hồ Chí Minh", "Võ Thị F", "Chuẩn", "0976677889", 25 },
+                    { 7, "150 Võ Nguyên Giáp, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh", "Đặng Văn G", "Vàng", "0967788990", 300 },
+                    { 8, "68 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh", "Bùi Thị H", "Bạc", "0948899001", 65 },
+                    { 9, "320 Hà Huy Giáp, Phường Thạnh Lộc, Quận 12, TP. Hồ Chí Minh", "Đỗ Văn I", "Chuẩn", "0929900112", 15 },
+                    { 10, "84 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh", "Ngô Thị K", "Vàng", "0911011223", 180 }
                 });
 
             migrationBuilder.InsertData(

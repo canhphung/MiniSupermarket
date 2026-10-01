@@ -82,7 +82,7 @@
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(330, 35);
             btnLogin.TabIndex = 4;
-            btnLogin.Text = "Đăng nhập hệ thống";
+            btnLogin.Text = "Đăng nhập hệ thống - Cosmo Mart";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
@@ -97,7 +97,7 @@
             MaximizeBox = false;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Đăng nhập hệ thống";
+            Text = "Đăng nhập hệ thống - Cosmo Mart";
             grpLogin.ResumeLayout(false);
             grpLogin.PerformLayout();
             ResumeLayout(false);

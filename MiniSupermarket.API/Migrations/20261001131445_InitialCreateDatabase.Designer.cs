@@ -11,8 +11,8 @@ using MiniSupermarket.API.Data;
 namespace MiniSupermarket.API.Migrations
 {
     [DbContext(typeof(SupermarketDbContext))]
-    [Migration("20261001114756_initialcreate")]
-    partial class initialcreate
+    [Migration("20261001131445_InitialCreateDatabase")]
+    partial class InitialCreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 1,
+                            Address = "12 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh",
                             CustomerName = "Nguyễn Văn A",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0901122334",
@@ -124,6 +125,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 2,
+                            Address = "45 Võ Văn Tần, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh",
                             CustomerName = "Trần Thị B",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0918877665",
@@ -132,10 +134,74 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 3,
+                            Address = "128 Xô Viết Nghệ Tĩnh, Phường 21, Quận Bình Thạnh, TP. Hồ Chí Minh",
                             CustomerName = "Lê Văn C",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0983344556",
                             RewardPoints = 10
+                        },
+                        new
+                        {
+                            CustomerId = 4,
+                            Address = "76 Nguyễn Thị Thập, Phường Tân Phú, Quận 7, TP. Hồ Chí Minh",
+                            CustomerName = "Phạm Thị D",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0904455667",
+                            RewardPoints = 200
+                        },
+                        new
+                        {
+                            CustomerId = 5,
+                            Address = "215 Cộng Hòa, Phường 13, Quận Tân Bình, TP. Hồ Chí Minh",
+                            CustomerName = "Hoàng Văn E",
+                            MembershipRank = "Bạc",
+                            PhoneNumber = "0935566778",
+                            RewardPoints = 80
+                        },
+                        new
+                        {
+                            CustomerId = 6,
+                            Address = "93 Quang Trung, Phường 10, Quận Gò Vấp, TP. Hồ Chí Minh",
+                            CustomerName = "Võ Thị F",
+                            MembershipRank = "Chuẩn",
+                            PhoneNumber = "0976677889",
+                            RewardPoints = 25
+                        },
+                        new
+                        {
+                            CustomerId = 7,
+                            Address = "150 Võ Nguyên Giáp, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh",
+                            CustomerName = "Đặng Văn G",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0967788990",
+                            RewardPoints = 300
+                        },
+                        new
+                        {
+                            CustomerId = 8,
+                            Address = "68 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh",
+                            CustomerName = "Bùi Thị H",
+                            MembershipRank = "Bạc",
+                            PhoneNumber = "0948899001",
+                            RewardPoints = 65
+                        },
+                        new
+                        {
+                            CustomerId = 9,
+                            Address = "320 Hà Huy Giáp, Phường Thạnh Lộc, Quận 12, TP. Hồ Chí Minh",
+                            CustomerName = "Đỗ Văn I",
+                            MembershipRank = "Chuẩn",
+                            PhoneNumber = "0929900112",
+                            RewardPoints = 15
+                        },
+                        new
+                        {
+                            CustomerId = 10,
+                            Address = "84 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh",
+                            CustomerName = "Ngô Thị K",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0911011223",
+                            RewardPoints = 180
                         });
                 });
 
