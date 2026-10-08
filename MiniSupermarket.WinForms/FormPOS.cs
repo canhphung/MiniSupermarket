@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace MiniSupermarket.WinForms
 {
     public partial class FormPOS : Form
     {
+        private readonly BindingList<CartItemDto> _cart = new();
+        private readonly BindingSource _cartSource = new();
+
         private static readonly HttpClient Client = new()
         {
             BaseAddress = new Uri("https://localhost:7203/api/")
@@ -25,55 +29,52 @@ namespace MiniSupermarket.WinForms
         private static readonly CultureInfo MoneyCulture =
             CultureInfo.GetCultureInfo("vi-VN");
 
-        private readonly List<PosCartItemDto> _cart = new();
-
-        private string _verifiedCustomerPhone = string.Empty;
         private bool _isBusy;
 
         public FormPOS()
         {
             InitializeComponent();
             SetupCartGrid();
-        }
 
-        private static bool HasPermission()
-        {
-            string role = SessionManager.CurrentRole.Trim();
+            // Chỉ gán nguồn dữ liệu một lần.
+            _cartSource.DataSource = _cart;
+            dgvCart.DataSource = _cartSource;
 
-            return role.Equals("Admin", StringComparison.OrdinalIgnoreCase)
-                || role.Equals("Cashier", StringComparison.OrdinalIgnoreCase);
-        }
-
-        private void FormPOS_Load(object? sender, EventArgs e)
-        {
             UpdateCartDisplay();
-            SetBusy(false);
-            txtBarcode.Focus();
         }
 
         private void SetupCartGrid()
         {
+            dgvCart.AutoGenerateColumns = false;
+            dgvCart.AllowUserToAddRows = false;
+            dgvCart.AllowUserToDeleteRows = false;
+            dgvCart.ReadOnly = true;
+            dgvCart.MultiSelect = false;
+            dgvCart.RowHeadersVisible = false;
+            dgvCart.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
             dgvCart.Columns.Clear();
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "ProductId",
+                DataPropertyName = nameof(CartItemDto.ProductId),
                 HeaderText = "Mã SP",
-                Width = 60
+                Width = 65
             });
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "ProductName",
+                DataPropertyName = nameof(CartItemDto.ProductName),
                 HeaderText = "Tên sản phẩm",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             });
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "UnitPrice",
+                DataPropertyName = nameof(CartItemDto.UnitPrice),
                 HeaderText = "Đơn giá",
-                Width = 95,
+                Width = 100,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Format = "N0",
@@ -83,14 +84,14 @@ namespace MiniSupermarket.WinForms
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "Quantity",
+                DataPropertyName = nameof(CartItemDto.Quantity),
                 HeaderText = "SL",
-                Width = 45
+                Width = 50
             });
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "TotalPrice",
+                DataPropertyName = nameof(CartItemDto.TotalPrice),
                 HeaderText = "Thành tiền",
                 Width = 110,
                 DefaultCellStyle = new DataGridViewCellStyle
@@ -99,6 +100,12 @@ namespace MiniSupermarket.WinForms
                     FormatProvider = MoneyCulture
                 }
             });
+        }
+
+        private void FormPOS_Load(object? sender, EventArgs e)
+        {
+            SetBusy(false);
+            txtBarcode.Focus();
         }
 
         // ================= QUÉT BARCODE =================
@@ -112,72 +119,86 @@ namespace MiniSupermarket.WinForms
             }
 
             e.SuppressKeyPress = true;
+            e.Handled = true;
 
             string barcode = txtBarcode.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(barcode))
+            if (_isBusy || string.IsNullOrWhiteSpace(barcode))
             {
                 return;
             }
 
-            await RunActionAsync(async () =>
-            {
-                string json = await SendApiAsync(
-                    HttpMethod.Get,
-                    $"products/barcode/{Uri.EscapeDataString(barcode)}");
-
-                var product = JsonSerializer.Deserialize<PosProductDto>(
-                    json, JsonOptions)
-                    ?? throw new InvalidOperationException(
-                        "Dữ liệu sản phẩm không hợp lệ.");
-
-                var existing = _cart.FirstOrDefault(
-                    item => item.ProductId == product.ProductId);
-
-                int nextQuantity = (existing?.Quantity ?? 0) + 1;
-
-                if (nextQuantity > product.StockQuantity)
-                {
-                    throw new InvalidOperationException(
-                        $"\"{product.ProductName}\" chỉ còn " +
-                        $"{product.StockQuantity} sản phẩm!");
-                }
-
-                if (existing != null)
-                {
-                    if (existing.UnitPrice != product.Price)
-                    {
-                        throw new InvalidOperationException(
-                            "Giá sản phẩm đã thay đổi. Hãy hủy giỏ và quét lại!");
-                    }
-
-                    existing.Quantity++;
-                }
-                else
-                {
-                    _cart.Add(new PosCartItemDto
-                    {
-                        ProductId = product.ProductId,
-                        ProductName = product.ProductName,
-                        UnitPrice = product.Price,
-                        Quantity = 1
-                    });
-                }
-
-                txtBarcode.Clear();
-                UpdateCartDisplay();
-            });
+            await RunActionAsync(
+                () => AddProductToCartByBarcodeAsync(barcode));
 
             txtBarcode.Focus();
         }
 
-        // ================= TRA KHÁCH HÀNG =================
+        private async Task AddProductToCartByBarcodeAsync(
+            string barcode)
+        {
+            string json = await SendApiAsync(
+                HttpMethod.Get,
+                $"products/barcode/{Uri.EscapeDataString(barcode)}");
+
+            var product = JsonSerializer.Deserialize<ProductDto>(
+                json, JsonOptions)
+                ?? throw new InvalidOperationException(
+                    "Dữ liệu sản phẩm không hợp lệ.");
+
+            var existingItem = _cart.FirstOrDefault(
+                item => item.ProductId == product.ProductId);
+
+            int nextQuantity = (existingItem?.Quantity ?? 0) + 1;
+
+            if (nextQuantity > product.StockQuantity)
+            {
+                throw new InvalidOperationException(
+                    $"\"{product.ProductName}\" chỉ còn " +
+                    $"{product.StockQuantity} sản phẩm!");
+            }
+
+            if (existingItem != null)
+            {
+                if (existingItem.UnitPrice != product.Price)
+                {
+                    throw new InvalidOperationException(
+                        "Giá sản phẩm đã thay đổi. Hãy hủy giỏ và quét lại!");
+                }
+
+                existingItem.Quantity++;
+            }
+            else
+            {
+                _cart.Add(new CartItemDto
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    UnitPrice = product.Price,
+                    Quantity = 1
+                });
+            }
+
+            txtBarcode.Clear();
+            UpdateCartDisplay();
+        }
+
+        private void UpdateCartDisplay()
+        {
+            // Quantity và TotalPrice được cập nhật trên grid.
+            _cartSource.ResetBindings(false);
+
+            lblTotalAmount.Text =
+                FormatMoney(_cart.Sum(item => item.TotalPrice));
+
+            CalculateChange();
+        }
+
+        // ================= KHÁCH HÀNG =================
 
         private void txtCustomerPhone_TextChanged(
             object? sender, EventArgs e)
         {
-            _verifiedCustomerPhone = string.Empty;
-
             lblCustomerName.Text =
                 string.IsNullOrWhiteSpace(txtCustomerPhone.Text)
                     ? "Khách vãng lai"
@@ -193,6 +214,7 @@ namespace MiniSupermarket.WinForms
             }
 
             e.SuppressKeyPress = true;
+            e.Handled = true;
 
             await RunActionAsync(LookupCustomerAsync);
         }
@@ -203,12 +225,10 @@ namespace MiniSupermarket.WinForms
 
             if (string.IsNullOrWhiteSpace(phone))
             {
-                _verifiedCustomerPhone = string.Empty;
                 lblCustomerName.Text = "Khách vãng lai";
                 return;
             }
 
-            // Dùng endpoint search đang có trong CustomersController.
             string json = await SendApiAsync(
                 HttpMethod.Get,
                 $"customers/search?keyword={Uri.EscapeDataString(phone)}");
@@ -218,21 +238,17 @@ namespace MiniSupermarket.WinForms
                     json, JsonOptions)
                 ?? new List<PosCustomerDto>();
 
-            // Search có thể trả kết quả gần đúng: chọn số điện thoại khớp.
             var customer = customers.FirstOrDefault(
                 item => item.PhoneNumber == phone);
 
             if (customer == null)
             {
-                _verifiedCustomerPhone = string.Empty;
                 lblCustomerName.Text = "Không tìm thấy khách hàng.";
 
                 throw new InvalidOperationException(
                     "Số điện thoại chưa được đăng ký. " +
-                    "Bạn có thể để trống để bán cho khách vãng lai.");
+                    "Để trống nếu bán cho khách vãng lai.");
             }
-
-            _verifiedCustomerPhone = phone;
 
             lblCustomerName.Text =
                 $"{customer.CustomerName}\n" +
@@ -254,17 +270,6 @@ namespace MiniSupermarket.WinForms
                 MoneyCulture,
                 out cash)
                 && cash >= 0;
-        }
-
-        private void UpdateCartDisplay()
-        {
-            dgvCart.DataSource = null;
-            dgvCart.DataSource = _cart;
-
-            lblTotalAmount.Text =
-                FormatMoney(_cart.Sum(item => item.TotalPrice));
-
-            CalculateChange();
         }
 
         private void txtCashReceived_TextChanged(
@@ -291,7 +296,7 @@ namespace MiniSupermarket.WinForms
                 : "Chưa đủ tiền!";
 
             lblChange.ForeColor = change >= 0
-                ? Color.FromArgb(22, 140, 95)
+                ? Color.Black
                 : Color.Red;
         }
 
@@ -316,17 +321,9 @@ namespace MiniSupermarket.WinForms
                         "Vui lòng nhập đủ tiền khách đưa!");
                 }
 
-                string phone = txtCustomerPhone.Text.Trim();
-
-                if (!string.IsNullOrWhiteSpace(phone)
-                    && phone != _verifiedCustomerPhone)
+                var orderRequest = new
                 {
-                    await LookupCustomerAsync();
-                }
-
-                var request = new
-                {
-                    CustomerPhone = phone,
+                    CustomerPhone = txtCustomerPhone.Text.Trim(),
                     CashReceived = cash,
 
                     Items = _cart.Select(item => new
@@ -340,7 +337,7 @@ namespace MiniSupermarket.WinForms
                 string json = await SendApiAsync(
                     HttpMethod.Post,
                     "orders/checkout",
-                    request);
+                    orderRequest);
 
                 var result =
                     JsonSerializer.Deserialize<PosCheckoutResponse>(
@@ -380,7 +377,8 @@ namespace MiniSupermarket.WinForms
 
         // ================= HỦY GIỎ =================
 
-        private void btnClearCart_Click(object? sender, EventArgs e)
+        private void btnClearCart_Click(
+            object? sender, EventArgs e)
         {
             if (_isBusy || !HasPermission())
             {
@@ -411,14 +409,12 @@ namespace MiniSupermarket.WinForms
             txtBarcode.Clear();
             txtCashReceived.Clear();
             txtCustomerPhone.Clear();
-
-            _verifiedCustomerPhone = string.Empty;
             lblCustomerName.Text = "Khách vãng lai";
 
             UpdateCartDisplay();
         }
 
-        // ================= GỌI API =================
+        // ================= GỌI API KÈM JWT =================
 
         private static async Task<string> SendApiAsync(
             HttpMethod method,
@@ -428,7 +424,7 @@ namespace MiniSupermarket.WinForms
             if (string.IsNullOrWhiteSpace(SessionManager.JwtToken))
             {
                 throw new InvalidOperationException(
-                    "Bạn chưa đăng nhập.");
+                    "Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn.");
             }
 
             using var request = new HttpRequestMessage(method, endpoint);
@@ -443,7 +439,9 @@ namespace MiniSupermarket.WinForms
             }
 
             using var response = await Client.SendAsync(request);
-            string content = await response.Content.ReadAsStringAsync();
+
+            string content =
+                await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
@@ -462,7 +460,8 @@ namespace MiniSupermarket.WinForms
                     "Bạn không có quyền thực hiện thao tác này.");
             }
 
-            string error = $"API trả về HTTP {(int)response.StatusCode}.";
+            string error =
+                $"API trả về HTTP {(int)response.StatusCode}.";
 
             try
             {
@@ -481,13 +480,24 @@ namespace MiniSupermarket.WinForms
             }
             catch (JsonException)
             {
-                // Backend có thể trả nội dung không phải JSON.
+                // Giữ thông báo HTTP nếu API không trả JSON.
             }
 
             throw new InvalidOperationException(error);
         }
 
-        // ================= CHỐNG BẤM LẶP =================
+        // ================= PHÂN QUYỀN / CHỐNG BẤM LẶP =================
+
+        private static bool HasPermission()
+        {
+            string role = SessionManager.CurrentRole?.Trim()
+                ?? string.Empty;
+
+            return role.Equals(
+                "Admin", StringComparison.OrdinalIgnoreCase)
+                || role.Equals(
+                    "Cashier", StringComparison.OrdinalIgnoreCase);
+        }
 
         private async Task RunActionAsync(Func<Task> action)
         {
@@ -502,7 +512,8 @@ namespace MiniSupermarket.WinForms
                     "Chỉ Admin và Cashier được sử dụng POS!",
                     "Từ chối",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Stop);
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -514,14 +525,11 @@ namespace MiniSupermarket.WinForms
             }
             catch (Exception ex)
             {
-                if (!IsDisposed)
-                {
-                    MessageBox.Show(
-                        ex.Message,
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                }
+                MessageBox.Show(
+                    ex.Message,
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
             finally
             {
@@ -535,6 +543,7 @@ namespace MiniSupermarket.WinForms
         private void SetBusy(bool busy)
         {
             _isBusy = busy;
+
             bool enabled = !busy && HasPermission();
 
             txtBarcode.Enabled = enabled;
@@ -549,7 +558,6 @@ namespace MiniSupermarket.WinForms
         private void FormPOS_FormClosing(
             object? sender, FormClosingEventArgs e)
         {
-            // Tránh chuyển màn hình khi request đang xử lý.
             if (_isBusy)
             {
                 e.Cancel = true;
@@ -557,7 +565,7 @@ namespace MiniSupermarket.WinForms
         }
     }
 
-    public class PosCartItemDto
+    public class CartItemDto
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; } = string.Empty;
@@ -566,7 +574,7 @@ namespace MiniSupermarket.WinForms
         public decimal TotalPrice => UnitPrice * Quantity;
     }
 
-    public class PosProductDto
+    public class ProductDto
     {
         public int ProductId { get; set; }
         public string Barcode { get; set; } = string.Empty;

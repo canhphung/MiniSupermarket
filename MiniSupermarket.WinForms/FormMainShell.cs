@@ -302,9 +302,9 @@ namespace MiniSupermarket.WinForms
 
         private void btnProduct_Click(object? sender, EventArgs e)
         {
-            ShowPendingFeature(
-                btnProduct,
-                "Quản lý Sản phẩm");
+            OpenChildForm<FormProductManagement>(
+                "QUẢN LÝ SẢN PHẨM & KHO HÀNG",
+                btnProduct);
         }
 
         private void btnReports_Click(object? sender, EventArgs e)
