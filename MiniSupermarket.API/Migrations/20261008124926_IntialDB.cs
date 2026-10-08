@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace MiniSupermarket.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateDatabase : Migration
+    public partial class IntialDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,6 +45,23 @@ namespace MiniSupermarket.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -64,6 +82,66 @@ namespace MiniSupermarket.API.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAtUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CashierId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CashReceived = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ChangeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_CashierId",
+                        column: x => x.CashierId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    OrderItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.OrderItemId);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -111,6 +189,28 @@ namespace MiniSupermarket.API.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "FullName", "IsActive", "PasswordHash", "Role", "Username" },
+                values: new object[,]
+                {
+                    { 1, "Nguyễn Quản Trị", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Admin", "admin01" },
+                    { 2, "Trần Giám Đốc", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Admin", "admin02" },
+                    { 3, "Lê Thu Ngân", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier01" },
+                    { 4, "Phạm Bán Hàng", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier02" },
+                    { 5, "Hoàng Thu Ngân", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier03" },
+                    { 6, "Vũ Thị Quầy", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier04" },
+                    { 7, "Đỗ Bán Lẻ", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier05" },
+                    { 8, "Ngô Quản Kho", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Warehouse", "ware01" },
+                    { 9, "Bùi Kiểm Kê", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Warehouse", "ware02" },
+                    { 10, "Dương Thủ Kho", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Warehouse", "ware03" },
+                    { 11, "Lý Nhập Hàng", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Warehouse", "ware04" },
+                    { 12, "Đặng Hỗ Trợ", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Admin", "admin_backup" },
+                    { 13, "Hồ Ca Chiều", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Cashier", "cashier06" },
+                    { 14, "Trương Vận Chuyển", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Warehouse", "ware05" },
+                    { 15, "Mai Giám Sát", true, "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==", "Admin", "supervisor" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "Barcode", "CategoryId", "Price", "ProductName", "StockQuantity" },
                 values: new object[,]
@@ -133,6 +233,26 @@ namespace MiniSupermarket.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CashierId",
+                table: "Orders",
+                column: "CashierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -142,10 +262,19 @@ namespace MiniSupermarket.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Categories");

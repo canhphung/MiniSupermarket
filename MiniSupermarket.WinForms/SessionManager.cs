@@ -11,6 +11,8 @@ namespace MiniSupermarket.WinForms
 
         // Lưu trữ vai trò người dùng (Admin / Cashier) để phân quyền giao diện
         public static string CurrentRole { get; set; } = string.Empty;
+
+        public static string CurrentUsername { get; set; } = string.Empty;
     }
 
     public static class ApiClientService

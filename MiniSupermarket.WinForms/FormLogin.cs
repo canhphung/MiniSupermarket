@@ -21,7 +21,7 @@ namespace MiniSupermarket.WinForms
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUser.Text.Trim();
-            string password = txtPass.Text.Trim();
+            string password = txtPass.Text;
 
             // Kiểm tra ràng buộc cơ bản phía Client
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -38,26 +38,44 @@ namespace MiniSupermarket.WinForms
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Đọc chuỗi JSON trả về từ Server khi đăng nhập thành công
+                    // Đọc kết quả đăng nhập.
                     var jsonString = await response.Content.ReadAsStringAsync();
                     using var doc = JsonDocument.Parse(jsonString);
 
-                    // Trích xuất Token và Role lưu vào lớp tĩnh SessionManager dùng chung toàn ứng dụng
-                    SessionManager.JwtToken = doc.RootElement.GetProperty("token").GetString() ?? string.Empty;
-                    SessionManager.CurrentRole = doc.RootElement.GetProperty("role").GetString() ?? string.Empty;
+                    // Lưu thông tin phiên.
+                    SessionManager.JwtToken =
+                        doc.RootElement.GetProperty("token").GetString()
+                        ?? string.Empty;
 
-                    MessageBox.Show($"Đăng nhập thành công với quyền: {SessionManager.CurrentRole}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SessionManager.CurrentRole =
+                        doc.RootElement.GetProperty("role").GetString()
+                        ?? string.Empty;
 
-                    // Mở Form quản lý chính (FormCategoryManagement) và ẩn Form đăng nhập đi
-                    FormCategoryManagement categoryForm = new FormCategoryManagement();
-                    // Mở Form quản lý khách hàng
-                    FormCustomerManagement customerForm = new FormCustomerManagement();
+                    SessionManager.CurrentUsername = username;
+
+                    // Mở giao diện chính.
                     this.Hide();
 
-                    categoryForm.Show();
-                    customerForm.Show();
+                    DialogResult result;
 
-                    //this.Close(); // Đóng hẳn ứng dụng khi form chính tắt
+                    using (var mainForm = new FormMainShell())
+                    {
+                        result = mainForm.ShowDialog();
+                    }
+
+                    if (result == DialogResult.Retry)
+                    {
+                        // Người dùng đăng xuất: trở về form đăng nhập hiện tại.
+                        txtPass.Clear();
+                        this.Show();
+                        this.Activate();
+                        txtUser.Focus();
+                    }
+                    else
+                    {
+                        // Người dùng đóng cửa sổ chính: kết thúc ứng dụng.
+                        this.Close();
+                    }
                 }
                 else
                 {

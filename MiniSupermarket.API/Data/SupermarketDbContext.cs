@@ -13,11 +13,38 @@ namespace MiniSupermarket.API.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         // Cấu hình dữ liệu mồi ban đầu
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(order => order.Items)
+                .WithOne(item => item.Order)
+                .HasForeignKey(item => item.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Order>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(order => order.CashierId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne<Customer>()
+                .WithMany()
+                .HasForeignKey(order => order.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne<Product>()
+                .WithMany()
+                .HasForeignKey(item => item.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // =========================
             // 15 CATEGORY
@@ -321,6 +348,53 @@ namespace MiniSupermarket.API.Data
                     Address = "36 Phạm Văn Đồng, TP. Thủ Đức"
                 }
             );
+
+            // =========================
+            // 15 USER MẪU
+            // Mật khẩu chung: 123456
+            // =========================
+            const string samplePasswordHash =
+                "AQAAAAIAAYagAAAAEO5wcfkHQBsfJN/oCIQQ+D4YGuVsAvjV4cbdU6ARhty5S7eVD+oIAH8YWGOj7QOfuA==";
+
+            var sampleUsers =
+                new (string Username, string FullName, string Role)[]
+                {
+                    ("admin01", "Nguyễn Quản Trị", "Admin"),
+                    ("admin02", "Trần Giám Đốc", "Admin"),
+
+                    ("cashier01", "Lê Thu Ngân", "Cashier"),
+                    ("cashier02", "Phạm Bán Hàng", "Cashier"),
+                    ("cashier03", "Hoàng Thu Ngân", "Cashier"),
+                    ("cashier04", "Vũ Thị Quầy", "Cashier"),
+                    ("cashier05", "Đỗ Bán Lẻ", "Cashier"),
+
+                    ("ware01", "Ngô Quản Kho", "Warehouse"),
+                    ("ware02", "Bùi Kiểm Kê", "Warehouse"),
+                    ("ware03", "Dương Thủ Kho", "Warehouse"),
+                    ("ware04", "Lý Nhập Hàng", "Warehouse"),
+
+                    ("admin_backup", "Đặng Hỗ Trợ", "Admin"),
+                    ("cashier06", "Hồ Ca Chiều", "Cashier"),
+                    ("ware05", "Trương Vận Chuyển", "Warehouse"),
+                    ("supervisor", "Mai Giám Sát", "Admin")
+                };
+
+            for (int index = 0; index < sampleUsers.Length; index++)
+            {
+                var sample = sampleUsers[index];
+
+                modelBuilder.Entity<User>().HasData(
+                    new User
+                    {
+                        // HasData yêu cầu khai báo khóa chính.
+                        Id = index + 1,
+                        Username = sample.Username,
+                        FullName = sample.FullName,
+                        PasswordHash = samplePasswordHash,
+                        Role = sample.Role,
+                        IsActive = true
+                    });
+            }
         }
     }
 }
