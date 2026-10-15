@@ -12,8 +12,8 @@ using MiniSupermarket.API.Data;
 namespace MiniSupermarket.API.Migrations
 {
     [DbContext(typeof(SupermarketDbContext))]
-    [Migration("20261015121013_IntialDB")]
-    partial class IntialDB
+    [Migration("20261015123913_AddReportStoredProcedures")]
+    partial class AddReportStoredProcedures
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Text.Json;
 using System.Windows.Forms;
 using MiniSupermarket.WinForms.UI;
 
@@ -163,20 +164,93 @@ public partial class FormQuickReport : Form
         });
     }
 
-    private static async Task<T> SendAsync<T>(HttpMethod method, string endpoint)
+    private static async Task<T> SendAsync<T>(
+    HttpMethod method,
+    string endpoint)
     {
-        if (string.IsNullOrWhiteSpace(SessionManager.JwtToken)) throw new InvalidOperationException("Hãy đăng nhập lại.");
+        if (string.IsNullOrWhiteSpace(SessionManager.JwtToken))
+        {
+            throw new InvalidOperationException("Hãy đăng nhập lại.");
+        }
+
         using var request = new HttpRequestMessage(method, endpoint);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", SessionManager.JwtToken);
+
+        request.Headers.Authorization =
+            new AuthenticationHeaderValue(
+                "Bearer",
+                SessionManager.JwtToken);
+
         using var response = await Client.SendAsync(request);
-        if (response.StatusCode == HttpStatusCode.Unauthorized) throw new InvalidOperationException("Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.");
-        if (response.StatusCode == HttpStatusCode.Forbidden) throw new InvalidOperationException("Bạn không có quyền thực hiện thao tác này.");
+
+        string content = await response.Content.ReadAsStringAsync();
+
+        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            throw new InvalidOperationException(
+                "Phiên đăng nhập hết hạn. Hãy đăng nhập lại.");
+        }
+
+        if (response.StatusCode == HttpStatusCode.Forbidden)
+        {
+            throw new InvalidOperationException(
+                "Bạn không có quyền thực hiện thao tác này.");
+        }
+
         if (!response.IsSuccessStatusCode)
         {
-            var error = await response.Content.ReadFromJsonAsync<ReportApiError>();
-            throw new InvalidOperationException(error?.Message ?? $"HTTP {(int)response.StatusCode}");
+            string message = content;
+
+            // API có thể trả JSON hoặc thông báo lỗi dạng văn bản.
+            try
+            {
+                using var document = JsonDocument.Parse(content);
+                var root = document.RootElement;
+
+                if (root.ValueKind == JsonValueKind.Object)
+                {
+                    foreach (string property in new[] { "message", "detail", "title" })
+                    {
+                        if (root.TryGetProperty(property, out var value)
+                            && value.ValueKind == JsonValueKind.String)
+                        {
+                            message = value.GetString() ?? content;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (JsonException)
+            {
+                // Giữ nội dung văn bản để xem nguyên nhân thật.
+            }
+
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                message = "API không trả nội dung lỗi.";
+            }
+
+            if (message.Length > 1200)
+            {
+                message = message[..1200] + "...";
+            }
+
+            throw new InvalidOperationException(
+                $"HTTP {(int)response.StatusCode}\n{message}");
         }
-        return await response.Content.ReadFromJsonAsync<T>() ?? throw new InvalidOperationException("Dữ liệu API không hợp lệ.");
+
+        try
+        {
+            return JsonSerializer.Deserialize<T>(
+                content,
+                new JsonSerializerOptions(JsonSerializerDefaults.Web))
+                ?? throw new InvalidOperationException(
+                    "API trả dữ liệu rỗng.");
+        }
+        catch (JsonException)
+        {
+            throw new InvalidOperationException(
+                $"API {endpoint} trả dữ liệu không đúng định dạng JSON.");
+        }
     }
 
     private async Task RunAsync(Func<Task> action)

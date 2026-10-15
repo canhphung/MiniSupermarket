@@ -178,7 +178,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Nguyễn Văn A",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0901122334",
-                            RewardPoints = 150
+                            RewardPoints = 153
                         },
                         new
                         {
@@ -187,7 +187,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Trần Thị B",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0918877665",
-                            RewardPoints = 50
+                            RewardPoints = 67
                         },
                         new
                         {
@@ -196,7 +196,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Lê Văn C",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0983344556",
-                            RewardPoints = 10
+                            RewardPoints = 20
                         },
                         new
                         {
@@ -205,7 +205,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Phạm Thị D",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0904455667",
-                            RewardPoints = 200
+                            RewardPoints = 204
                         },
                         new
                         {
@@ -214,7 +214,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Hoàng Văn E",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0935566778",
-                            RewardPoints = 80
+                            RewardPoints = 86
                         },
                         new
                         {
@@ -223,7 +223,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Võ Thị F",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0976677889",
-                            RewardPoints = 25
+                            RewardPoints = 39
                         },
                         new
                         {
@@ -232,7 +232,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Đặng Văn G",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0967788990",
-                            RewardPoints = 300
+                            RewardPoints = 317
                         },
                         new
                         {
@@ -241,7 +241,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Bùi Thị H",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0948899001",
-                            RewardPoints = 65
+                            RewardPoints = 93
                         },
                         new
                         {
@@ -250,7 +250,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Đỗ Văn I",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0929900112",
-                            RewardPoints = 15
+                            RewardPoints = 21
                         },
                         new
                         {
@@ -259,7 +259,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Ngô Thị K",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0911011223",
-                            RewardPoints = 180
+                            RewardPoints = 191
                         },
                         new
                         {
@@ -268,7 +268,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Đinh Văn L",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0902233445",
-                            RewardPoints = 70
+                            RewardPoints = 108
                         },
                         new
                         {
@@ -277,7 +277,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Mai Thị M",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0913344556",
-                            RewardPoints = 30
+                            RewardPoints = 38
                         },
                         new
                         {
@@ -286,7 +286,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Phan Văn N",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0934455667",
-                            RewardPoints = 250
+                            RewardPoints = 258
                         },
                         new
                         {
@@ -295,7 +295,7 @@ namespace MiniSupermarket.API.Migrations
                             CustomerName = "Trương Thị O",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0945566778",
-                            RewardPoints = 90
+                            RewardPoints = 102
                         },
                         new
                         {
@@ -348,6 +348,173 @@ namespace MiniSupermarket.API.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = -1001,
+                            CashReceived = 50000m,
+                            CashierId = 3,
+                            ChangeAmount = 11000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 15, 1, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 1,
+                            RewardPointsAwarded = 3,
+                            TotalAmount = 39000m
+                        },
+                        new
+                        {
+                            OrderId = -1002,
+                            CashReceived = 200000m,
+                            CashierId = 4,
+                            ChangeAmount = 30000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 15, 1, 45, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 2,
+                            RewardPointsAwarded = 17,
+                            TotalAmount = 170000m
+                        },
+                        new
+                        {
+                            OrderId = -1003,
+                            CashReceived = 150000m,
+                            CashierId = 5,
+                            ChangeAmount = 47000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 15, 2, 30, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 3,
+                            RewardPointsAwarded = 10,
+                            TotalAmount = 103000m
+                        },
+                        new
+                        {
+                            OrderId = -1004,
+                            CashReceived = 50000m,
+                            CashierId = 6,
+                            ChangeAmount = 4000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 15, 3, 15, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 4,
+                            RewardPointsAwarded = 4,
+                            TotalAmount = 46000m
+                        },
+                        new
+                        {
+                            OrderId = -1005,
+                            CashReceived = 100000m,
+                            CashierId = 7,
+                            ChangeAmount = 31500m,
+                            CreatedAtUtc = new DateTime(2026, 10, 15, 4, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 5,
+                            RewardPointsAwarded = 6,
+                            TotalAmount = 68500m
+                        },
+                        new
+                        {
+                            OrderId = -1006,
+                            CashReceived = 150000m,
+                            CashierId = 3,
+                            ChangeAmount = 10000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 14, 1, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 6,
+                            RewardPointsAwarded = 14,
+                            TotalAmount = 140000m
+                        },
+                        new
+                        {
+                            OrderId = -1007,
+                            CashReceived = 200000m,
+                            CashierId = 4,
+                            ChangeAmount = 25000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 14, 1, 45, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 7,
+                            RewardPointsAwarded = 17,
+                            TotalAmount = 175000m
+                        },
+                        new
+                        {
+                            OrderId = -1008,
+                            CashReceived = 300000m,
+                            CashierId = 5,
+                            ChangeAmount = 13000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 14, 2, 30, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 8,
+                            RewardPointsAwarded = 28,
+                            TotalAmount = 287000m
+                        },
+                        new
+                        {
+                            OrderId = -1009,
+                            CashReceived = 100000m,
+                            CashierId = 6,
+                            ChangeAmount = 34000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 14, 3, 15, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 9,
+                            RewardPointsAwarded = 6,
+                            TotalAmount = 66000m
+                        },
+                        new
+                        {
+                            OrderId = -1010,
+                            CashReceived = 150000m,
+                            CashierId = 7,
+                            ChangeAmount = 35000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 14, 4, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 10,
+                            RewardPointsAwarded = 11,
+                            TotalAmount = 115000m
+                        },
+                        new
+                        {
+                            OrderId = -1011,
+                            CashReceived = 400000m,
+                            CashierId = 3,
+                            ChangeAmount = 13000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 13, 1, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 11,
+                            RewardPointsAwarded = 38,
+                            TotalAmount = 387000m
+                        },
+                        new
+                        {
+                            OrderId = -1012,
+                            CashReceived = 100000m,
+                            CashierId = 4,
+                            ChangeAmount = 20000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 13, 1, 45, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 12,
+                            RewardPointsAwarded = 8,
+                            TotalAmount = 80000m
+                        },
+                        new
+                        {
+                            OrderId = -1013,
+                            CashReceived = 100000m,
+                            CashierId = 5,
+                            ChangeAmount = 18000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 13, 2, 30, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 13,
+                            RewardPointsAwarded = 8,
+                            TotalAmount = 82000m
+                        },
+                        new
+                        {
+                            OrderId = -1014,
+                            CashReceived = 150000m,
+                            CashierId = 6,
+                            ChangeAmount = 27000m,
+                            CreatedAtUtc = new DateTime(2026, 10, 13, 3, 15, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 14,
+                            RewardPointsAwarded = 12,
+                            TotalAmount = 123000m
+                        },
+                        new
+                        {
+                            OrderId = -1015,
+                            CashReceived = 50000m,
+                            CashierId = 7,
+                            ChangeAmount = 40500m,
+                            CreatedAtUtc = new DateTime(2026, 10, 13, 4, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerId = 15,
+                            RewardPointsAwarded = 0,
+                            TotalAmount = 9500m
+                        });
                 });
 
             modelBuilder.Entity("MiniSupermarket.API.Models.OrderItem", b =>
@@ -385,6 +552,308 @@ namespace MiniSupermarket.API.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderItemId = -2001,
+                            OrderId = -1001,
+                            ProductId = 1,
+                            ProductName = "Coca-Cola lon 330ml",
+                            Quantity = 2,
+                            TotalPrice = 24000m,
+                            UnitPrice = 12000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2002,
+                            OrderId = -1001,
+                            ProductId = 6,
+                            ProductName = "Rau cải xanh 500g",
+                            Quantity = 1,
+                            TotalPrice = 15000m,
+                            UnitPrice = 15000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2003,
+                            OrderId = -1002,
+                            ProductId = 2,
+                            ProductName = "Cơm gà sốt tiêu đen",
+                            Quantity = 3,
+                            TotalPrice = 105000m,
+                            UnitPrice = 35000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2004,
+                            OrderId = -1002,
+                            ProductId = 7,
+                            ProductName = "Táo Fuji 1kg",
+                            Quantity = 1,
+                            TotalPrice = 65000m,
+                            UnitPrice = 65000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2005,
+                            OrderId = -1003,
+                            ProductId = 3,
+                            ProductName = "Bánh Oreo 133g",
+                            Quantity = 1,
+                            TotalPrice = 18000m,
+                            UnitPrice = 18000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2006,
+                            OrderId = -1003,
+                            ProductId = 8,
+                            ProductName = "Thịt ba rọi heo 500g",
+                            Quantity = 1,
+                            TotalPrice = 85000m,
+                            UnitPrice = 85000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2007,
+                            OrderId = -1004,
+                            ProductId = 4,
+                            ProductName = "Sữa tươi Vinamilk 180ml",
+                            Quantity = 2,
+                            TotalPrice = 18000m,
+                            UnitPrice = 9000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2008,
+                            OrderId = -1004,
+                            ProductId = 9,
+                            ProductName = "Nước mắm Nam Ngư 500ml",
+                            Quantity = 1,
+                            TotalPrice = 28000m,
+                            UnitPrice = 28000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2009,
+                            OrderId = -1005,
+                            ProductId = 5,
+                            ProductName = "Mì Hảo Hảo tôm chua cay",
+                            Quantity = 3,
+                            TotalPrice = 13500m,
+                            UnitPrice = 4500m
+                        },
+                        new
+                        {
+                            OrderItemId = -2010,
+                            OrderId = -1005,
+                            ProductId = 10,
+                            ProductName = "Xúc xích đông lạnh 500g",
+                            Quantity = 1,
+                            TotalPrice = 55000m,
+                            UnitPrice = 55000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2011,
+                            OrderId = -1006,
+                            ProductId = 6,
+                            ProductName = "Rau cải xanh 500g",
+                            Quantity = 1,
+                            TotalPrice = 15000m,
+                            UnitPrice = 15000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2012,
+                            OrderId = -1006,
+                            ProductId = 11,
+                            ProductName = "Dầu gội Clear 630g",
+                            Quantity = 1,
+                            TotalPrice = 125000m,
+                            UnitPrice = 125000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2013,
+                            OrderId = -1007,
+                            ProductId = 7,
+                            ProductName = "Táo Fuji 1kg",
+                            Quantity = 2,
+                            TotalPrice = 130000m,
+                            UnitPrice = 65000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2014,
+                            OrderId = -1007,
+                            ProductId = 12,
+                            ProductName = "Hộp đựng thực phẩm 1L",
+                            Quantity = 1,
+                            TotalPrice = 45000m,
+                            UnitPrice = 45000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2015,
+                            OrderId = -1008,
+                            ProductId = 8,
+                            ProductName = "Thịt ba rọi heo 500g",
+                            Quantity = 3,
+                            TotalPrice = 255000m,
+                            UnitPrice = 85000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2016,
+                            OrderId = -1008,
+                            ProductId = 13,
+                            ProductName = "Nước rửa chén Sunlight 750g",
+                            Quantity = 1,
+                            TotalPrice = 32000m,
+                            UnitPrice = 32000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2017,
+                            OrderId = -1009,
+                            ProductId = 9,
+                            ProductName = "Nước mắm Nam Ngư 500ml",
+                            Quantity = 1,
+                            TotalPrice = 28000m,
+                            UnitPrice = 28000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2018,
+                            OrderId = -1009,
+                            ProductId = 14,
+                            ProductName = "Khăn ướt em bé Bobby",
+                            Quantity = 1,
+                            TotalPrice = 38000m,
+                            UnitPrice = 38000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2019,
+                            OrderId = -1010,
+                            ProductId = 10,
+                            ProductName = "Xúc xích đông lạnh 500g",
+                            Quantity = 2,
+                            TotalPrice = 110000m,
+                            UnitPrice = 55000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2020,
+                            OrderId = -1010,
+                            ProductId = 15,
+                            ProductName = "Bút bi Thiên Long",
+                            Quantity = 1,
+                            TotalPrice = 5000m,
+                            UnitPrice = 5000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2021,
+                            OrderId = -1011,
+                            ProductId = 11,
+                            ProductName = "Dầu gội Clear 630g",
+                            Quantity = 3,
+                            TotalPrice = 375000m,
+                            UnitPrice = 125000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2022,
+                            OrderId = -1011,
+                            ProductId = 1,
+                            ProductName = "Coca-Cola lon 330ml",
+                            Quantity = 1,
+                            TotalPrice = 12000m,
+                            UnitPrice = 12000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2023,
+                            OrderId = -1012,
+                            ProductId = 12,
+                            ProductName = "Hộp đựng thực phẩm 1L",
+                            Quantity = 1,
+                            TotalPrice = 45000m,
+                            UnitPrice = 45000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2024,
+                            OrderId = -1012,
+                            ProductId = 2,
+                            ProductName = "Cơm gà sốt tiêu đen",
+                            Quantity = 1,
+                            TotalPrice = 35000m,
+                            UnitPrice = 35000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2025,
+                            OrderId = -1013,
+                            ProductId = 13,
+                            ProductName = "Nước rửa chén Sunlight 750g",
+                            Quantity = 2,
+                            TotalPrice = 64000m,
+                            UnitPrice = 32000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2026,
+                            OrderId = -1013,
+                            ProductId = 3,
+                            ProductName = "Bánh Oreo 133g",
+                            Quantity = 1,
+                            TotalPrice = 18000m,
+                            UnitPrice = 18000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2027,
+                            OrderId = -1014,
+                            ProductId = 14,
+                            ProductName = "Khăn ướt em bé Bobby",
+                            Quantity = 3,
+                            TotalPrice = 114000m,
+                            UnitPrice = 38000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2028,
+                            OrderId = -1014,
+                            ProductId = 4,
+                            ProductName = "Sữa tươi Vinamilk 180ml",
+                            Quantity = 1,
+                            TotalPrice = 9000m,
+                            UnitPrice = 9000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2029,
+                            OrderId = -1015,
+                            ProductId = 15,
+                            ProductName = "Bút bi Thiên Long",
+                            Quantity = 1,
+                            TotalPrice = 5000m,
+                            UnitPrice = 5000m
+                        },
+                        new
+                        {
+                            OrderItemId = -2030,
+                            OrderId = -1015,
+                            ProductId = 5,
+                            ProductName = "Mì Hảo Hảo tôm chua cay",
+                            Quantity = 1,
+                            TotalPrice = 4500m,
+                            UnitPrice = 4500m
+                        });
                 });
 
             modelBuilder.Entity("MiniSupermarket.API.Models.Product", b =>
@@ -430,7 +899,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 1,
                             Price = 12000m,
                             ProductName = "Coca-Cola lon 330ml",
-                            StockQuantity = 50
+                            StockQuantity = 47
                         },
                         new
                         {
@@ -439,7 +908,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 2,
                             Price = 35000m,
                             ProductName = "Cơm gà sốt tiêu đen",
-                            StockQuantity = 20
+                            StockQuantity = 16
                         },
                         new
                         {
@@ -448,7 +917,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 3,
                             Price = 18000m,
                             ProductName = "Bánh Oreo 133g",
-                            StockQuantity = 35
+                            StockQuantity = 33
                         },
                         new
                         {
@@ -457,7 +926,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 4,
                             Price = 9000m,
                             ProductName = "Sữa tươi Vinamilk 180ml",
-                            StockQuantity = 50
+                            StockQuantity = 47
                         },
                         new
                         {
@@ -466,7 +935,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 5,
                             Price = 4500m,
                             ProductName = "Mì Hảo Hảo tôm chua cay",
-                            StockQuantity = 100
+                            StockQuantity = 96
                         },
                         new
                         {
@@ -475,7 +944,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 6,
                             Price = 15000m,
                             ProductName = "Rau cải xanh 500g",
-                            StockQuantity = 30
+                            StockQuantity = 28
                         },
                         new
                         {
@@ -484,7 +953,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 7,
                             Price = 65000m,
                             ProductName = "Táo Fuji 1kg",
-                            StockQuantity = 25
+                            StockQuantity = 22
                         },
                         new
                         {
@@ -493,7 +962,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 8,
                             Price = 85000m,
                             ProductName = "Thịt ba rọi heo 500g",
-                            StockQuantity = 20
+                            StockQuantity = 16
                         },
                         new
                         {
@@ -502,7 +971,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 9,
                             Price = 28000m,
                             ProductName = "Nước mắm Nam Ngư 500ml",
-                            StockQuantity = 40
+                            StockQuantity = 38
                         },
                         new
                         {
@@ -511,7 +980,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 10,
                             Price = 55000m,
                             ProductName = "Xúc xích đông lạnh 500g",
-                            StockQuantity = 30
+                            StockQuantity = 27
                         },
                         new
                         {
@@ -520,7 +989,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 11,
                             Price = 125000m,
                             ProductName = "Dầu gội Clear 630g",
-                            StockQuantity = 20
+                            StockQuantity = 16
                         },
                         new
                         {
@@ -529,7 +998,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 12,
                             Price = 45000m,
                             ProductName = "Hộp đựng thực phẩm 1L",
-                            StockQuantity = 25
+                            StockQuantity = 23
                         },
                         new
                         {
@@ -538,7 +1007,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 13,
                             Price = 32000m,
                             ProductName = "Nước rửa chén Sunlight 750g",
-                            StockQuantity = 35
+                            StockQuantity = 32
                         },
                         new
                         {
@@ -547,7 +1016,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 14,
                             Price = 38000m,
                             ProductName = "Khăn ướt em bé Bobby",
-                            StockQuantity = 30
+                            StockQuantity = 26
                         },
                         new
                         {
@@ -556,7 +1025,7 @@ namespace MiniSupermarket.API.Migrations
                             CategoryId = 15,
                             Price = 5000m,
                             ProductName = "Bút bi Thiên Long",
-                            StockQuantity = 100
+                            StockQuantity = 98
                         });
                 });
 
