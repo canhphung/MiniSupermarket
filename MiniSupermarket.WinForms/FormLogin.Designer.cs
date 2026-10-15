@@ -29,7 +29,7 @@ namespace MiniSupermarket.WinForms
             Padding = new Padding(24);
             AutoScroll = true;
             Name = "FormLogin";
-            Text = "Đăng nhập • MiniMart";
+            Text = "Đăng nhập • CosmoMart";
             StartPosition = FormStartPosition.CenterScreen;
             loginLayout = new TableLayoutPanel();
             loginLayout.Name = "loginLayout";
@@ -66,7 +66,7 @@ namespace MiniSupermarket.WinForms
             brandPanel.Controls.Add(brandLayout);
             brandLogo = new Label();
             brandLogo.Name = "brandLogo";
-            brandLogo.Text = "MiniMart";
+            brandLogo.Text = "CosmoMart";
             brandLogo.AutoSize = false;
             brandLogo.Dock = DockStyle.Fill;
             brandLogo.Font = UiTheme.HeadingFont;

@@ -29,7 +29,7 @@ namespace MiniSupermarket.WinForms
             Padding = new Padding(24);
             AutoScroll = true;
             Name = "FormMainShell";
-            Text = "Không gian làm việc • MiniMart";
+            Text = "Không gian làm việc • CosmoMart";
             StartPosition = FormStartPosition.CenterScreen;
             this.Padding = new Padding(0);
             this.MinimumSize = new Size(1180, 780);
@@ -44,7 +44,7 @@ namespace MiniSupermarket.WinForms
             panelSidebar.Width = 220;
             lblLogo = new Label();
             lblLogo.Name = "lblLogo";
-            lblLogo.Text = "MiniMart";
+            lblLogo.Text = "CosmoMart";
             lblLogo.AutoSize = false;
             lblLogo.Dock = DockStyle.Fill;
             lblLogo.Font = UiTheme.HeadingFont;

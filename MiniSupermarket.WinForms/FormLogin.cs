@@ -92,5 +92,10 @@ namespace MiniSupermarket.WinForms
         {
 
         }
+
+        private void FormLogin_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
