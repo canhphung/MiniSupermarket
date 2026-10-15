@@ -1,339 +1,441 @@
-﻿namespace MiniSupermarket.WinForms
+#nullable enable annotations
+
+using System.Drawing;
+using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
+
+namespace MiniSupermarket.WinForms
 {
     partial class FormCustomerManagement
     {
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer? components = null;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            grpSearch = new GroupBox();
-            btnLoad = new Button();
-            btnSearch = new Button();
-            txtKeyword = new TextBox();
-            grpList = new GroupBox();
-            dgvCustomers = new DataGridView();
-            grpInfo = new GroupBox();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnAdd = new Button();
-            txtMembershipRank = new TextBox();
-            lblMembershipRank = new Label();
-            txtRewardPoints = new TextBox();
-            lblRewardPoints = new Label();
-            txtAddress = new TextBox();
-            lblAddress = new Label();
-            txtPhoneNumber = new TextBox();
-            lblPhoneNumber = new Label();
-            txtCustomerName = new TextBox();
-            lblCustomerName = new Label();
-            txtCustomerId = new TextBox();
-            lblCustomerId = new Label();
-            grpSearch.SuspendLayout();
-            grpList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
-            grpInfo.SuspendLayout();
             SuspendLayout();
-
-            // 
-            // grpSearch
-            // 
-            grpSearch.Controls.Add(btnLoad);
-            grpSearch.Controls.Add(btnSearch);
-            grpSearch.Controls.Add(txtKeyword);
-            grpSearch.Location = new Point(20, 15);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
+            Name = "FormCustomerManagement";
+            Text = "Quản lý khách hàng • MiniMart";
+            StartPosition = FormStartPosition.CenterScreen;
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 3;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 92F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Quản lý khách hàng";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Tra cứu thông tin khách hàng, điểm thưởng và hạng thành viên.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            grpSearch = new Panel();
             grpSearch.Name = "grpSearch";
-            grpSearch.Size = new Size(1040, 80);
-            grpSearch.TabIndex = 0;
-            grpSearch.TabStop = false;
-            grpSearch.Text = "Tìm kiếm khách hàng";
-
-            // 
-            // btnLoad
-            // 
-            btnLoad.Location = new Point(485, 28);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(100, 30);
-            btnLoad.TabIndex = 2;
-            btnLoad.Text = "Tải lại";
-            btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += btnLoad_Click;
-
-            // 
-            // btnSearch
-            // 
-            btnSearch.Location = new Point(370, 28);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(100, 30);
-            btnSearch.TabIndex = 1;
-            btnSearch.Text = "Tìm kiếm";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
-
-            // 
-            // txtKeyword
-            // 
-            txtKeyword.Location = new Point(20, 32);
+            grpSearch.Dock = DockStyle.Fill;
+            grpSearch.BackColor = UiTheme.Surface;
+            grpSearch.Padding = new Padding(12);
+            grpSearch.Margin = new Padding(0);
+            searchLayout = new TableLayoutPanel();
+            searchLayout.Name = "searchLayout";
+            searchLayout.Dock = DockStyle.Fill;
+            searchLayout.ColumnCount = 3;
+            searchLayout.RowCount = 1;
+            searchLayout.Margin = new Padding(0);
+            searchLayout.Padding = new Padding(0);
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112F));
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112F));
+            searchLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            grpSearch.Controls.Add(searchLayout);
+            txtKeyword = new TextBox();
             txtKeyword.Name = "txtKeyword";
-            txtKeyword.PlaceholderText = "Nhập tên hoặc số điện thoại...";
-            txtKeyword.Size = new Size(330, 23);
-            txtKeyword.TabIndex = 0;
-
-            // 
-            // grpList
-            // 
-            grpList.Controls.Add(dgvCustomers);
-            grpList.Location = new Point(20, 110);
+            txtKeyword.Dock = DockStyle.Top;
+            txtKeyword.Margin = new Padding(0, 2, 0, 8);
+            txtKeyword.PlaceholderText = "Tìm theo tên hoặc thông tin liên quan...";
+            txtKeyword.ReadOnly = false;
+            txtKeyword.TabIndex = 1;
+            txtKeyword.Margin = new Padding(0, 10, 16, 0);
+            searchLayout.Controls.Add(txtKeyword, 0, 0);
+            btnSearch = new Button();
+            btnSearch.Name = "btnSearch";
+            btnSearch.Text = "Tìm kiếm";
+            btnSearch.Tag = "primary";
+            btnSearch.Dock = DockStyle.Fill;
+            btnSearch.Margin = new Padding(0, 4, 8, 4);
+            btnSearch.TabIndex = 2;
+            searchLayout.Controls.Add(btnSearch, 1, 0);
+            btnLoad = new Button();
+            btnLoad.Name = "btnLoad";
+            btnLoad.Text = "Tải lại";
+            btnLoad.Tag = "secondary";
+            btnLoad.Dock = DockStyle.Fill;
+            btnLoad.Margin = new Padding(0, 4, 8, 4);
+            btnLoad.TabIndex = 3;
+            searchLayout.Controls.Add(btnLoad, 2, 0);
+            grpSearch.Margin = new Padding(0, 0, 0, 16);
+            pageLayout.Controls.Add(grpSearch, 0, 1);
+            contentLayout = new TableLayoutPanel();
+            contentLayout.Name = "contentLayout";
+            contentLayout.Dock = DockStyle.Fill;
+            contentLayout.ColumnCount = 2;
+            contentLayout.RowCount = 1;
+            contentLayout.Margin = new Padding(0);
+            contentLayout.Padding = new Padding(0);
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.Controls.Add(contentLayout, 0, 2);
+            grpList = new Panel();
             grpList.Name = "grpList";
-            grpList.Size = new Size(670, 440);
-            grpList.TabIndex = 1;
-            grpList.TabStop = false;
-            grpList.Text = "Danh sách Khách hàng";
-
-            // 
-            // dgvCustomers
-            // 
+            grpList.Dock = DockStyle.Fill;
+            grpList.BackColor = UiTheme.Surface;
+            grpList.Padding = new Padding(18);
+            grpList.Margin = new Padding(0);
+            grpList.Margin = new Padding(0, 0, 16, 0);
+            listLayout = new TableLayoutPanel();
+            listLayout.Name = "listLayout";
+            listLayout.Dock = DockStyle.Fill;
+            listLayout.ColumnCount = 1;
+            listLayout.RowCount = 3;
+            listLayout.Margin = new Padding(0);
+            listLayout.Padding = new Padding(0);
+            listLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            grpList.Controls.Add(listLayout);
+            listHeading = new Label();
+            listHeading.Name = "listHeading";
+            listHeading.Text = "Danh sách khách hàng";
+            listHeading.AutoSize = false;
+            listHeading.Dock = DockStyle.Fill;
+            listHeading.Font = UiTheme.SectionFont;
+            listHeading.ForeColor = UiTheme.Ink;
+            listHeading.Margin = new Padding(0);
+            listHeading.TextAlign = ContentAlignment.MiddleLeft;
+            dgvCustomers = new DataGridView();
+            dgvCustomers.Name = "dgvCustomers";
+            dgvCustomers.Dock = DockStyle.Fill;
+            dgvCustomers.Margin = new Padding(0);
             dgvCustomers.AllowUserToAddRows = false;
             dgvCustomers.AllowUserToDeleteRows = false;
-            dgvCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCustomers.Location = new Point(15, 25);
-            dgvCustomers.MultiSelect = false;
-            dgvCustomers.Name = "dgvCustomers";
             dgvCustomers.ReadOnly = true;
-            dgvCustomers.RowHeadersWidth = 51;
+            dgvCustomers.MultiSelect = false;
+            dgvCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCustomers.Size = new Size(640, 400);
-            dgvCustomers.TabIndex = 0;
-            dgvCustomers.CellClick += dgvCustomers_CellClick;
-
-            // 
-            // grpInfo
-            // 
-            grpInfo.Controls.Add(btnDelete);
-            grpInfo.Controls.Add(btnUpdate);
-            grpInfo.Controls.Add(btnAdd);
-            grpInfo.Controls.Add(txtMembershipRank);
-            grpInfo.Controls.Add(lblMembershipRank);
-            grpInfo.Controls.Add(txtRewardPoints);
-            grpInfo.Controls.Add(lblRewardPoints);
-            grpInfo.Controls.Add(txtAddress);
-            grpInfo.Controls.Add(lblAddress);
-            grpInfo.Controls.Add(txtPhoneNumber);
-            grpInfo.Controls.Add(lblPhoneNumber);
-            grpInfo.Controls.Add(txtCustomerName);
-            grpInfo.Controls.Add(lblCustomerName);
-            grpInfo.Controls.Add(txtCustomerId);
-            grpInfo.Controls.Add(lblCustomerId);
-            grpInfo.Location = new Point(705, 110);
+            dgvCustomers.TabIndex = 4;
+            listHint = new Label();
+            listHint.Name = "listHint";
+            listHint.Text = "Chọn một dòng để xem và chỉnh sửa thông tin.";
+            listHint.AutoSize = false;
+            listHint.Dock = DockStyle.Fill;
+            listHint.Font = UiTheme.BodyFont;
+            listHint.ForeColor = UiTheme.Muted;
+            listHint.Margin = new Padding(0);
+            listHint.TextAlign = ContentAlignment.MiddleLeft;
+            listLayout.Controls.Add(listHeading, 0, 0);
+            listLayout.Controls.Add(dgvCustomers, 0, 1);
+            listLayout.Controls.Add(listHint, 0, 2);
+            contentLayout.Controls.Add(grpList, 0, 0);
+            grpInfo = new Panel();
             grpInfo.Name = "grpInfo";
-            grpInfo.Size = new Size(355, 440);
-            grpInfo.TabIndex = 2;
-            grpInfo.TabStop = false;
-            grpInfo.Text = "Thông tin Khách hàng";
-
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(238, 380);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(90, 32);
-            btnDelete.TabIndex = 14;
-            btnDelete.Text = "Xóa";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Location = new Point(128, 380);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(90, 32);
-            btnUpdate.TabIndex = 13;
-            btnUpdate.Text = "Cập nhật";
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
-
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(20, 380);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(90, 32);
-            btnAdd.TabIndex = 12;
-            btnAdd.Text = "Thêm mới";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
-
-            // 
-            // txtMembershipRank
-            // 
-            txtMembershipRank.Location = new Point(20, 335);
-            txtMembershipRank.Name = "txtMembershipRank";
-            txtMembershipRank.Size = new Size(308, 23);
-            txtMembershipRank.TabIndex = 11;
-
-            // 
-            // lblMembershipRank
-            // 
-            lblMembershipRank.AutoSize = true;
-            lblMembershipRank.Location = new Point(20, 315);
-            lblMembershipRank.Name = "lblMembershipRank";
-            lblMembershipRank.Size = new Size(92, 15);
-            lblMembershipRank.TabIndex = 10;
-            lblMembershipRank.Text = "Hạng thành viên";
-
-            // 
-            // txtRewardPoints
-            // 
-            txtRewardPoints.Location = new Point(20, 275);
-            txtRewardPoints.Name = "txtRewardPoints";
-            txtRewardPoints.Size = new Size(308, 23);
-            txtRewardPoints.TabIndex = 9;
-
-            // 
-            // lblRewardPoints
-            // 
-            lblRewardPoints.AutoSize = true;
-            lblRewardPoints.Location = new Point(20, 255);
-            lblRewardPoints.Name = "lblRewardPoints";
-            lblRewardPoints.Size = new Size(69, 15);
-            lblRewardPoints.TabIndex = 8;
-            lblRewardPoints.Text = "Điểm thưởng";
-
-            // 
-            // txtAddress
-            // 
-            txtAddress.Location = new Point(20, 215);
-            txtAddress.Name = "txtAddress";
-            txtAddress.Size = new Size(308, 23);
-            txtAddress.TabIndex = 7;
-
-            // 
-            // lblAddress
-            // 
-            lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(20, 195);
-            lblAddress.Name = "lblAddress";
-            lblAddress.Size = new Size(43, 15);
-            lblAddress.TabIndex = 6;
-            lblAddress.Text = "Địa chỉ";
-
-            // 
-            // txtPhoneNumber
-            // 
-            txtPhoneNumber.Location = new Point(20, 155);
-            txtPhoneNumber.Name = "txtPhoneNumber";
-            txtPhoneNumber.Size = new Size(308, 23);
-            txtPhoneNumber.TabIndex = 5;
-
-            // 
-            // lblPhoneNumber
-            // 
-            lblPhoneNumber.AutoSize = true;
-            lblPhoneNumber.Location = new Point(20, 135);
-            lblPhoneNumber.Name = "lblPhoneNumber";
-            lblPhoneNumber.Size = new Size(78, 15);
-            lblPhoneNumber.TabIndex = 4;
-            lblPhoneNumber.Text = "Số điện thoại";
-
-            // 
-            // txtCustomerName
-            // 
-            txtCustomerName.Location = new Point(20, 95);
-            txtCustomerName.Name = "txtCustomerName";
-            txtCustomerName.Size = new Size(308, 23);
-            txtCustomerName.TabIndex = 3;
-
-            // 
-            // lblCustomerName
-            // 
-            lblCustomerName.AutoSize = true;
-            lblCustomerName.Location = new Point(20, 75);
-            lblCustomerName.Name = "lblCustomerName";
-            lblCustomerName.Size = new Size(89, 15);
-            lblCustomerName.TabIndex = 2;
-            lblCustomerName.Text = "Tên khách hàng";
-
-            // 
-            // txtCustomerId
-            // 
-            txtCustomerId.Location = new Point(20, 35);
-            txtCustomerId.Name = "txtCustomerId";
-            txtCustomerId.ReadOnly = true;
-            txtCustomerId.Size = new Size(308, 23);
-            txtCustomerId.TabIndex = 1;
-
-            // 
-            // lblCustomerId
-            // 
-            lblCustomerId.AutoSize = true;
-            lblCustomerId.Location = new Point(20, 15);
+            grpInfo.Dock = DockStyle.Fill;
+            grpInfo.BackColor = UiTheme.Surface;
+            grpInfo.Padding = new Padding(18);
+            grpInfo.Margin = new Padding(0);
+            editorLayout = new TableLayoutPanel();
+            editorLayout.Name = "editorLayout";
+            editorLayout.Dock = DockStyle.Fill;
+            editorLayout.ColumnCount = 1;
+            editorLayout.RowCount = 2;
+            editorLayout.Margin = new Padding(0);
+            editorLayout.Padding = new Padding(0);
+            editorLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            grpInfo.Controls.Add(editorLayout);
+            editorHeading = new Label();
+            editorHeading.Name = "editorHeading";
+            editorHeading.Text = "Thông tin chi tiết";
+            editorHeading.AutoSize = false;
+            editorHeading.Dock = DockStyle.Fill;
+            editorHeading.Font = UiTheme.SectionFont;
+            editorHeading.ForeColor = UiTheme.Ink;
+            editorHeading.Margin = new Padding(0);
+            editorHeading.TextAlign = ContentAlignment.MiddleLeft;
+            editorLayout.Controls.Add(editorHeading, 0, 0);
+            editorScroll = new Panel();
+            editorScroll.Name = "editorScroll";
+            editorScroll.Dock = DockStyle.Fill;
+            editorScroll.BackColor = UiTheme.Surface;
+            editorScroll.Padding = new Padding(0);
+            editorScroll.Margin = new Padding(0);
+            editorScroll.AutoScroll = true;
+            editorLayout.Controls.Add(editorScroll, 0, 1);
+            fieldsLayout = new TableLayoutPanel();
+            fieldsLayout.Name = "fieldsLayout";
+            fieldsLayout.Dock = DockStyle.Fill;
+            fieldsLayout.ColumnCount = 1;
+            fieldsLayout.RowCount = 13;
+            fieldsLayout.Margin = new Padding(0);
+            fieldsLayout.Padding = new Padding(0);
+            fieldsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Dock = DockStyle.Top;
+            fieldsLayout.Height = 460;
+            fieldsLayout.AutoSize = false;
+            editorScroll.Controls.Add(fieldsLayout);
+            lblCustomerId = new Label();
             lblCustomerId.Name = "lblCustomerId";
-            lblCustomerId.Size = new Size(38, 15);
-            lblCustomerId.TabIndex = 0;
-            lblCustomerId.Text = "Mã ID";
-
-            // 
-            // FormCustomerManagement
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 571);
-            Controls.Add(grpInfo);
-            Controls.Add(grpList);
-            Controls.Add(grpSearch);
-            Name = "FormCustomerManagement";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Quản lý Khách hàng";
+            lblCustomerId.Text = "Mã khách hàng";
+            lblCustomerId.AutoSize = false;
+            lblCustomerId.Dock = DockStyle.Fill;
+            lblCustomerId.Font = UiTheme.StrongFont;
+            lblCustomerId.ForeColor = UiTheme.Ink;
+            lblCustomerId.Margin = new Padding(0);
+            lblCustomerId.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblCustomerId, 0, 0);
+            txtCustomerId = new TextBox();
+            txtCustomerId.Name = "txtCustomerId";
+            txtCustomerId.Dock = DockStyle.Top;
+            txtCustomerId.Margin = new Padding(0, 2, 0, 8);
+            txtCustomerId.PlaceholderText = "";
+            txtCustomerId.ReadOnly = true;
+            txtCustomerId.TabIndex = 5;
+            fieldsLayout.Controls.Add(txtCustomerId, 0, 1);
+            lblCustomerName = new Label();
+            lblCustomerName.Name = "lblCustomerName";
+            lblCustomerName.Text = "Họ và tên";
+            lblCustomerName.AutoSize = false;
+            lblCustomerName.Dock = DockStyle.Fill;
+            lblCustomerName.Font = UiTheme.StrongFont;
+            lblCustomerName.ForeColor = UiTheme.Ink;
+            lblCustomerName.Margin = new Padding(0);
+            lblCustomerName.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblCustomerName, 0, 2);
+            txtCustomerName = new TextBox();
+            txtCustomerName.Name = "txtCustomerName";
+            txtCustomerName.Dock = DockStyle.Top;
+            txtCustomerName.Margin = new Padding(0, 2, 0, 8);
+            txtCustomerName.PlaceholderText = "";
+            txtCustomerName.ReadOnly = false;
+            txtCustomerName.TabIndex = 6;
+            fieldsLayout.Controls.Add(txtCustomerName, 0, 3);
+            lblPhoneNumber = new Label();
+            lblPhoneNumber.Name = "lblPhoneNumber";
+            lblPhoneNumber.Text = "Số điện thoại";
+            lblPhoneNumber.AutoSize = false;
+            lblPhoneNumber.Dock = DockStyle.Fill;
+            lblPhoneNumber.Font = UiTheme.StrongFont;
+            lblPhoneNumber.ForeColor = UiTheme.Ink;
+            lblPhoneNumber.Margin = new Padding(0);
+            lblPhoneNumber.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblPhoneNumber, 0, 4);
+            txtPhoneNumber = new TextBox();
+            txtPhoneNumber.Name = "txtPhoneNumber";
+            txtPhoneNumber.Dock = DockStyle.Top;
+            txtPhoneNumber.Margin = new Padding(0, 2, 0, 8);
+            txtPhoneNumber.PlaceholderText = "";
+            txtPhoneNumber.ReadOnly = false;
+            txtPhoneNumber.TabIndex = 7;
+            fieldsLayout.Controls.Add(txtPhoneNumber, 0, 5);
+            lblAddress = new Label();
+            lblAddress.Name = "lblAddress";
+            lblAddress.Text = "Địa chỉ";
+            lblAddress.AutoSize = false;
+            lblAddress.Dock = DockStyle.Fill;
+            lblAddress.Font = UiTheme.StrongFont;
+            lblAddress.ForeColor = UiTheme.Ink;
+            lblAddress.Margin = new Padding(0);
+            lblAddress.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblAddress, 0, 6);
+            txtAddress = new TextBox();
+            txtAddress.Name = "txtAddress";
+            txtAddress.Dock = DockStyle.Top;
+            txtAddress.Margin = new Padding(0, 2, 0, 8);
+            txtAddress.PlaceholderText = "";
+            txtAddress.ReadOnly = false;
+            txtAddress.TabIndex = 8;
+            fieldsLayout.Controls.Add(txtAddress, 0, 7);
+            lblRewardPoints = new Label();
+            lblRewardPoints.Name = "lblRewardPoints";
+            lblRewardPoints.Text = "Điểm thưởng";
+            lblRewardPoints.AutoSize = false;
+            lblRewardPoints.Dock = DockStyle.Fill;
+            lblRewardPoints.Font = UiTheme.StrongFont;
+            lblRewardPoints.ForeColor = UiTheme.Ink;
+            lblRewardPoints.Margin = new Padding(0);
+            lblRewardPoints.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblRewardPoints, 0, 8);
+            txtRewardPoints = new TextBox();
+            txtRewardPoints.Name = "txtRewardPoints";
+            txtRewardPoints.Dock = DockStyle.Top;
+            txtRewardPoints.Margin = new Padding(0, 2, 0, 8);
+            txtRewardPoints.PlaceholderText = "";
+            txtRewardPoints.ReadOnly = false;
+            txtRewardPoints.TabIndex = 9;
+            fieldsLayout.Controls.Add(txtRewardPoints, 0, 9);
+            lblMembershipRank = new Label();
+            lblMembershipRank.Name = "lblMembershipRank";
+            lblMembershipRank.Text = "Hạng thành viên";
+            lblMembershipRank.AutoSize = false;
+            lblMembershipRank.Dock = DockStyle.Fill;
+            lblMembershipRank.Font = UiTheme.StrongFont;
+            lblMembershipRank.ForeColor = UiTheme.Ink;
+            lblMembershipRank.Margin = new Padding(0);
+            lblMembershipRank.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblMembershipRank, 0, 10);
+            txtMembershipRank = new TextBox();
+            txtMembershipRank.Name = "txtMembershipRank";
+            txtMembershipRank.Dock = DockStyle.Top;
+            txtMembershipRank.Margin = new Padding(0, 2, 0, 8);
+            txtMembershipRank.PlaceholderText = "";
+            txtMembershipRank.ReadOnly = false;
+            txtMembershipRank.TabIndex = 10;
+            fieldsLayout.Controls.Add(txtMembershipRank, 0, 11);
+            actionLayout = new TableLayoutPanel();
+            actionLayout.Name = "actionLayout";
+            actionLayout.Dock = DockStyle.Fill;
+            actionLayout.ColumnCount = 3;
+            actionLayout.RowCount = 1;
+            actionLayout.Margin = new Padding(0);
+            actionLayout.Padding = new Padding(0);
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28F));
+            actionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Controls.Add(actionLayout, 0, 12);
+            btnAdd = new Button();
+            btnAdd.Name = "btnAdd";
+            btnAdd.Text = "Thêm mới";
+            btnAdd.Tag = "primary";
+            btnAdd.Dock = DockStyle.Fill;
+            btnAdd.Margin = new Padding(0, 4, 8, 4);
+            btnAdd.TabIndex = 11;
+            actionLayout.Controls.Add(btnAdd, 0, 0);
+            btnUpdate = new Button();
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Text = "Cập nhật";
+            btnUpdate.Tag = "secondary";
+            btnUpdate.Dock = DockStyle.Fill;
+            btnUpdate.Margin = new Padding(0, 4, 8, 4);
+            btnUpdate.TabIndex = 12;
+            actionLayout.Controls.Add(btnUpdate, 1, 0);
+            btnDelete = new Button();
+            btnDelete.Name = "btnDelete";
+            btnDelete.Text = "Xóa";
+            btnDelete.Tag = "danger";
+            btnDelete.Dock = DockStyle.Fill;
+            btnDelete.Margin = new Padding(0, 4, 8, 4);
+            btnDelete.TabIndex = 13;
+            actionLayout.Controls.Add(btnDelete, 2, 0);
+            contentLayout.Controls.Add(grpInfo, 1, 0);
+            btnLoad.Click += btnLoad_Click;
+            btnSearch.Click += btnSearch_Click;
+            dgvCustomers.CellClick += dgvCustomers_CellClick;
+            btnDelete.Click += btnDelete_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnAdd.Click += btnAdd_Click;
             Load += FormCustomerManagement_Load;
-
-            grpSearch.ResumeLayout(false);
-            grpSearch.PerformLayout();
-            grpList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
-            grpInfo.ResumeLayout(false);
-            grpInfo.PerformLayout();
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private System.Windows.Forms.GroupBox grpSearch;
-        private System.Windows.Forms.TextBox txtKeyword;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnLoad;
-
-        private System.Windows.Forms.GroupBox grpList;
-        private System.Windows.Forms.DataGridView dgvCustomers;
-
-        private System.Windows.Forms.GroupBox grpInfo;
-        private System.Windows.Forms.Label lblCustomerId;
-        private System.Windows.Forms.TextBox txtCustomerId;
-        private System.Windows.Forms.Label lblCustomerName;
-        private System.Windows.Forms.TextBox txtCustomerName;
-        private System.Windows.Forms.Label lblPhoneNumber;
-        private System.Windows.Forms.TextBox txtPhoneNumber;
-        private System.Windows.Forms.Label lblAddress;
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.Label lblRewardPoints;
-        private System.Windows.Forms.TextBox txtRewardPoints;
-        private System.Windows.Forms.Label lblMembershipRank;
-        private System.Windows.Forms.TextBox txtMembershipRank;
-
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
+        private Panel grpSearch = null!;
+        private TableLayoutPanel searchLayout = null!;
+        private TextBox txtKeyword = null!;
+        private Button btnSearch = null!;
+        private Button btnLoad = null!;
+        private TableLayoutPanel contentLayout = null!;
+        private Panel grpList = null!;
+        private TableLayoutPanel listLayout = null!;
+        private Label listHeading = null!;
+        private DataGridView dgvCustomers = null!;
+        private Label listHint = null!;
+        private Panel grpInfo = null!;
+        private TableLayoutPanel editorLayout = null!;
+        private Label editorHeading = null!;
+        private Panel editorScroll = null!;
+        private TableLayoutPanel fieldsLayout = null!;
+        private Label lblCustomerId = null!;
+        private TextBox txtCustomerId = null!;
+        private Label lblCustomerName = null!;
+        private TextBox txtCustomerName = null!;
+        private Label lblPhoneNumber = null!;
+        private TextBox txtPhoneNumber = null!;
+        private Label lblAddress = null!;
+        private TextBox txtAddress = null!;
+        private Label lblRewardPoints = null!;
+        private TextBox txtRewardPoints = null!;
+        private Label lblMembershipRank = null!;
+        private TextBox txtMembershipRank = null!;
+        private TableLayoutPanel actionLayout = null!;
+        private Button btnAdd = null!;
+        private Button btnUpdate = null!;
+        private Button btnDelete = null!;
     }
 }

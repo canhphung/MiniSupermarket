@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -285,7 +285,7 @@ namespace MiniSupermarket.WinForms
             if (!TryGetCash(out decimal cash))
             {
                 lblChange.Text = "0 đ";
-                lblChange.ForeColor = Color.Black;
+                lblChange.ForeColor = UI.UiTheme.Ink;
                 return;
             }
 
@@ -296,8 +296,8 @@ namespace MiniSupermarket.WinForms
                 : "Chưa đủ tiền!";
 
             lblChange.ForeColor = change >= 0
-                ? Color.Black
-                : Color.Red;
+                ? UI.UiTheme.Ink
+                : UI.UiTheme.Danger;
         }
 
         // ================= THANH TOÁN =================

@@ -1,115 +1,227 @@
-﻿namespace MiniSupermarket.WinForms
+#nullable enable annotations
+
+using System.Drawing;
+using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
+
+namespace MiniSupermarket.WinForms
 {
     partial class FormLogin
     {
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer? components = null;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            grpLogin = new GroupBox();
-            btnLogin = new Button();
-            txtPass = new TextBox();
-            lblPass = new Label();
-            txtUser = new TextBox();
-            lblUser = new Label();
-            grpLogin.SuspendLayout();
             SuspendLayout();
-            // 
-            // grpLogin
-            // 
-            grpLogin.Controls.Add(btnLogin);
-            grpLogin.Controls.Add(txtPass);
-            grpLogin.Controls.Add(lblPass);
-            grpLogin.Controls.Add(txtUser);
-            grpLogin.Controls.Add(lblUser);
-            grpLogin.Location = new Point(20, 20);
-            grpLogin.Name = "grpLogin";
-            grpLogin.Size = new Size(390, 220);
-            grpLogin.TabIndex = 0;
-            grpLogin.TabStop = false;
-            grpLogin.Text = "Thông tin đăng nhập";
-            // 
-            // lblUser
-            // 
-            lblUser.AutoSize = true;
-            lblUser.Location = new Point(30, 40);
-            lblUser.Name = "lblUser";
-            lblUser.Size = new Size(61, 15);
-            lblUser.TabIndex = 0;
-            lblUser.Text = "Tài khoản";
-            // 
-            // txtUser
-            // 
-            txtUser.Location = new Point(30, 62);
-            txtUser.Name = "txtUser";
-            txtUser.PlaceholderText = "Nhập tài khoản...";
-            txtUser.Size = new Size(330, 23);
-            txtUser.TabIndex = 1;
-            // 
-            // lblPass
-            // 
-            lblPass.AutoSize = true;
-            lblPass.Location = new Point(30, 100);
-            lblPass.Name = "lblPass";
-            lblPass.Size = new Size(57, 15);
-            lblPass.TabIndex = 2;
-            lblPass.Text = "Mật khẩu";
-            // 
-            // txtPass
-            // 
-            txtPass.Location = new Point(30, 122);
-            txtPass.Name = "txtPass";
-            txtPass.PlaceholderText = "Nhập mật khẩu...";
-            txtPass.Size = new Size(330, 23);
-            txtPass.TabIndex = 3;
-            txtPass.UseSystemPasswordChar = true;
-            // 
-            // btnLogin
-            // 
-            btnLogin.Location = new Point(30, 165);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(330, 35);
-            btnLogin.TabIndex = 4;
-            btnLogin.Text = "Đăng nhập hệ thống - Cosmo Mart";
-            btnLogin.UseVisualStyleBackColor = true;
-            btnLogin.Click += btnLogin_Click;
-            // 
-            // FormLogin
-            // 
-            AcceptButton = btnLogin;
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(430, 260);
-            Controls.Add(grpLogin);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(960, 600);
+            Padding = new Padding(24);
+            AutoScroll = true;
             Name = "FormLogin";
+            Text = "Đăng nhập • MiniMart";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Đăng nhập hệ thống - Cosmo Mart";
-            grpLogin.ResumeLayout(false);
-            grpLogin.PerformLayout();
+            loginLayout = new TableLayoutPanel();
+            loginLayout.Name = "loginLayout";
+            loginLayout.Dock = DockStyle.Fill;
+            loginLayout.ColumnCount = 2;
+            loginLayout.RowCount = 1;
+            loginLayout.Margin = new Padding(0);
+            loginLayout.Padding = new Padding(0);
+            loginLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44F));
+            loginLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 56F));
+            loginLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this.Controls.Add(loginLayout);
+            this.Padding = new Padding(0);
+            this.MinimumSize = new Size(840, 580);
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            brandPanel = new Panel();
+            brandPanel.Name = "brandPanel";
+            brandPanel.Dock = DockStyle.Fill;
+            brandPanel.BackColor = UiTheme.Sidebar;
+            brandPanel.Padding = new Padding(36);
+            brandPanel.Margin = new Padding(0);
+            brandLayout = new TableLayoutPanel();
+            brandLayout.Name = "brandLayout";
+            brandLayout.Dock = DockStyle.Fill;
+            brandLayout.ColumnCount = 1;
+            brandLayout.RowCount = 3;
+            brandLayout.Margin = new Padding(0);
+            brandLayout.Padding = new Padding(0);
+            brandLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            brandLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 90F));
+            brandPanel.Controls.Add(brandLayout);
+            brandLogo = new Label();
+            brandLogo.Name = "brandLogo";
+            brandLogo.Text = "MiniMart";
+            brandLogo.AutoSize = false;
+            brandLogo.Dock = DockStyle.Fill;
+            brandLogo.Font = UiTheme.HeadingFont;
+            brandLogo.ForeColor = UiTheme.Ink;
+            brandLogo.Margin = new Padding(0);
+            brandLogo.TextAlign = ContentAlignment.MiddleLeft;
+            brandLogo.ForeColor = Color.White;
+            brandLayout.Controls.Add(brandLogo, 0, 0);
+            brandMessage = new Label();
+            brandMessage.Name = "brandMessage";
+            brandMessage.Text = "Quản lý gọn gàng.\nBán hàng nhẹ nhàng.";
+            brandMessage.AutoSize = false;
+            brandMessage.Dock = DockStyle.Fill;
+            brandMessage.Font = UiTheme.HeadingFont;
+            brandMessage.ForeColor = UiTheme.Ink;
+            brandMessage.Margin = new Padding(0);
+            brandMessage.TextAlign = ContentAlignment.MiddleLeft;
+            brandMessage.ForeColor = Color.White;
+            brandLayout.Controls.Add(brandMessage, 0, 1);
+            brandNote = new Label();
+            brandNote.Name = "brandNote";
+            brandNote.Text = "HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI\nKhông gian làm việc dành cho nhân viên.";
+            brandNote.AutoSize = false;
+            brandNote.Dock = DockStyle.Fill;
+            brandNote.Font = UiTheme.BodyFont;
+            brandNote.ForeColor = UiTheme.Muted;
+            brandNote.Margin = new Padding(0);
+            brandNote.TextAlign = ContentAlignment.MiddleLeft;
+            brandNote.ForeColor = Color.FromArgb(182, 204, 205);
+            brandLayout.Controls.Add(brandNote, 0, 2);
+            loginLayout.Controls.Add(brandPanel, 0, 0);
+            grpLogin = new Panel();
+            grpLogin.Name = "grpLogin";
+            grpLogin.Dock = DockStyle.Fill;
+            grpLogin.BackColor = UiTheme.Surface;
+            grpLogin.Padding = new Padding(48);
+            grpLogin.Margin = new Padding(0);
+            loginFields = new TableLayoutPanel();
+            loginFields.Name = "loginFields";
+            loginFields.Dock = DockStyle.Fill;
+            loginFields.ColumnCount = 1;
+            loginFields.RowCount = 10;
+            loginFields.Margin = new Padding(0);
+            loginFields.Padding = new Padding(0);
+            loginFields.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            loginFields.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            grpLogin.Controls.Add(loginFields);
+            loginLayout.Controls.Add(grpLogin, 1, 0);
+            loginTitle = new Label();
+            loginTitle.Name = "loginTitle";
+            loginTitle.Text = "Chào mừng trở lại";
+            loginTitle.AutoSize = false;
+            loginTitle.Dock = DockStyle.Fill;
+            loginTitle.Font = UiTheme.HeadingFont;
+            loginTitle.ForeColor = UiTheme.Ink;
+            loginTitle.Margin = new Padding(0);
+            loginTitle.TextAlign = ContentAlignment.MiddleLeft;
+            loginSubtitle = new Label();
+            loginSubtitle.Name = "loginSubtitle";
+            loginSubtitle.Text = "Đăng nhập để bắt đầu ca làm việc.";
+            loginSubtitle.AutoSize = false;
+            loginSubtitle.Dock = DockStyle.Fill;
+            loginSubtitle.Font = UiTheme.BodyFont;
+            loginSubtitle.ForeColor = UiTheme.Muted;
+            loginSubtitle.Margin = new Padding(0);
+            loginSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            loginFields.Controls.Add(loginTitle, 0, 1);
+            loginFields.Controls.Add(loginSubtitle, 0, 2);
+            lblUser = new Label();
+            lblUser.Name = "lblUser";
+            lblUser.Text = "Tài khoản";
+            lblUser.AutoSize = false;
+            lblUser.Dock = DockStyle.Fill;
+            lblUser.Font = UiTheme.StrongFont;
+            lblUser.ForeColor = UiTheme.Ink;
+            lblUser.Margin = new Padding(0);
+            lblUser.TextAlign = ContentAlignment.MiddleLeft;
+            loginFields.Controls.Add(lblUser, 0, 3);
+            txtUser = new TextBox();
+            txtUser.Name = "txtUser";
+            txtUser.Dock = DockStyle.Top;
+            txtUser.Margin = new Padding(0, 2, 0, 8);
+            txtUser.PlaceholderText = "Tên đăng nhập";
+            txtUser.ReadOnly = false;
+            txtUser.TabIndex = 1;
+            loginFields.Controls.Add(txtUser, 0, 4);
+            lblPass = new Label();
+            lblPass.Name = "lblPass";
+            lblPass.Text = "Mật khẩu";
+            lblPass.AutoSize = false;
+            lblPass.Dock = DockStyle.Fill;
+            lblPass.Font = UiTheme.StrongFont;
+            lblPass.ForeColor = UiTheme.Ink;
+            lblPass.Margin = new Padding(0);
+            lblPass.TextAlign = ContentAlignment.MiddleLeft;
+            loginFields.Controls.Add(lblPass, 0, 5);
+            txtPass = new TextBox();
+            txtPass.Name = "txtPass";
+            txtPass.Dock = DockStyle.Top;
+            txtPass.Margin = new Padding(0, 2, 0, 8);
+            txtPass.PlaceholderText = "Nhập mật khẩu";
+            txtPass.ReadOnly = false;
+            txtPass.TabIndex = 2;
+            loginFields.Controls.Add(txtPass, 0, 6);
+            txtPass.UseSystemPasswordChar = true;
+            btnLogin = new Button();
+            btnLogin.Name = "btnLogin";
+            btnLogin.Text = "Đăng nhập";
+            btnLogin.Tag = "primary";
+            btnLogin.Dock = DockStyle.Fill;
+            btnLogin.Margin = new Padding(0, 4, 8, 4);
+            btnLogin.TabIndex = 3;
+            loginFields.Controls.Add(btnLogin, 0, 7);
+            loginNote = new Label();
+            loginNote.Name = "loginNote";
+            loginNote.Text = "Sử dụng tài khoản được quản trị viên cấp.";
+            loginNote.AutoSize = false;
+            loginNote.Dock = DockStyle.Fill;
+            loginNote.Font = UiTheme.BodyFont;
+            loginNote.ForeColor = UiTheme.Muted;
+            loginNote.Margin = new Padding(0);
+            loginNote.TextAlign = ContentAlignment.MiddleLeft;
+            loginFields.Controls.Add(loginNote, 0, 8);
+            btnLogin.Click += btnLogin_Click;
+            AcceptButton = btnLogin;
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private System.Windows.Forms.GroupBox grpLogin;
-        private System.Windows.Forms.Label lblUser;
-        private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.Label lblPass;
-        private System.Windows.Forms.TextBox txtPass;
-        private System.Windows.Forms.Button btnLogin;
+        private TableLayoutPanel loginLayout = null!;
+        private Panel brandPanel = null!;
+        private TableLayoutPanel brandLayout = null!;
+        private Label brandLogo = null!;
+        private Label brandMessage = null!;
+        private Label brandNote = null!;
+        private Panel grpLogin = null!;
+        private TableLayoutPanel loginFields = null!;
+        private Label loginTitle = null!;
+        private Label loginSubtitle = null!;
+        private Label lblUser = null!;
+        private TextBox txtUser = null!;
+        private Label lblPass = null!;
+        private TextBox txtPass = null!;
+        private Button btnLogin = null!;
+        private Label loginNote = null!;
     }
 }

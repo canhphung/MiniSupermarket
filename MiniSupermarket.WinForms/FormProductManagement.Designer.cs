@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+#nullable enable annotations
+
+using System.Drawing;
 using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
 
 namespace MiniSupermarket.WinForms
 {
@@ -9,520 +12,430 @@ namespace MiniSupermarket.WinForms
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                components?.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            layoutMain = new TableLayoutPanel();
-            layoutSearch = new TableLayoutPanel();
-            layoutContent = new TableLayoutPanel();
-            layoutDetails = new TableLayoutPanel();
-            layoutButtons = new TableLayoutPanel();
-
-            grpSearch = new GroupBox();
-            grpProducts = new GroupBox();
-            grpDetails = new GroupBox();
-
-            lblSearchBarcode = new Label();
-            lblFilterCategory = new Label();
-            lblId = new Label();
-            lblBarcode = new Label();
-            lblProductName = new Label();
-            lblPrice = new Label();
-            lblStock = new Label();
-            lblCategory = new Label();
-            lblNote = new Label();
-
-            txtSearchBarcode = new TextBox();
-            cboFilterCategory = new ComboBox();
-            btnSearch = new Button();
-
-            dgvProducts = new DataGridView();
-
-            txtId = new TextBox();
-            txtBarcode = new TextBox();
-            txtProductName = new TextBox();
-            nudPrice = new NumericUpDown();
-            nudStock = new NumericUpDown();
-            cboCategory = new ComboBox();
-
-            btnLoad = new Button();
-            btnAdd = new Button();
-            btnUpdate = new Button();
-            btnDelete = new Button();
-
-            layoutMain.SuspendLayout();
-            layoutSearch.SuspendLayout();
-            layoutContent.SuspendLayout();
-            layoutDetails.SuspendLayout();
-            layoutButtons.SuspendLayout();
-
-            grpSearch.SuspendLayout();
-            grpProducts.SuspendLayout();
-            grpDetails.SuspendLayout();
-
-            ((System.ComponentModel.ISupportInitialize)dgvProducts)
-                .BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudPrice)
-                .BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudStock)
-                .BeginInit();
-
             SuspendLayout();
-
-            // layoutMain
-            layoutMain.Name = "layoutMain";
-            layoutMain.Dock = DockStyle.Fill;
-            layoutMain.ColumnCount = 1;
-            layoutMain.RowCount = 2;
-            layoutMain.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 100F));
-            layoutMain.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 100F));
-            layoutMain.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 100F));
-            layoutMain.Controls.Add(grpSearch, 0, 0);
-            layoutMain.Controls.Add(layoutContent, 0, 1);
-
-            // grpSearch
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
+            Name = "FormProductManagement";
+            Text = "Quản lý sản phẩm • MiniMart";
+            StartPosition = FormStartPosition.CenterScreen;
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 3;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 92F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Quản lý sản phẩm";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Theo dõi hàng hóa, giá bán và số lượng tồn kho.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            grpSearch = new Panel();
             grpSearch.Name = "grpSearch";
-            grpSearch.Text = "TÌM KIẾM SẢN PHẨM";
             grpSearch.Dock = DockStyle.Fill;
-            grpSearch.BackColor = Color.White;
+            grpSearch.BackColor = UiTheme.Surface;
             grpSearch.Padding = new Padding(12);
-            grpSearch.Margin = new Padding(0, 0, 0, 12);
-            grpSearch.Controls.Add(layoutSearch);
-
-            // layoutSearch
-            layoutSearch.Name = "layoutSearch";
-            layoutSearch.Dock = DockStyle.Fill;
-            layoutSearch.ColumnCount = 5;
-            layoutSearch.RowCount = 1;
-            layoutSearch.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Absolute, 70F));
-            layoutSearch.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 50F));
-            layoutSearch.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Absolute, 100F));
-            layoutSearch.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 50F));
-            layoutSearch.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Absolute, 120F));
-            layoutSearch.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 100F));
-
-            layoutSearch.Controls.Add(lblSearchBarcode, 0, 0);
-            layoutSearch.Controls.Add(txtSearchBarcode, 1, 0);
-            layoutSearch.Controls.Add(lblFilterCategory, 2, 0);
-            layoutSearch.Controls.Add(cboFilterCategory, 3, 0);
-            layoutSearch.Controls.Add(btnSearch, 4, 0);
-
-            // lblSearchBarcode
-            lblSearchBarcode.Name = "lblSearchBarcode";
-            lblSearchBarcode.Text = "Mã vạch";
-            lblSearchBarcode.Dock = DockStyle.Fill;
-            lblSearchBarcode.TextAlign = ContentAlignment.MiddleLeft;
-
-            // txtSearchBarcode
+            grpSearch.Margin = new Padding(0);
+            searchLayout = new TableLayoutPanel();
+            searchLayout.Name = "searchLayout";
+            searchLayout.Dock = DockStyle.Fill;
+            searchLayout.ColumnCount = 4;
+            searchLayout.RowCount = 1;
+            searchLayout.Margin = new Padding(0);
+            searchLayout.Padding = new Padding(0);
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55F));
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112F));
+            searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112F));
+            searchLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            grpSearch.Controls.Add(searchLayout);
+            txtSearchBarcode = new TextBox();
             txtSearchBarcode.Name = "txtSearchBarcode";
-            txtSearchBarcode.Anchor =
-                AnchorStyles.Left | AnchorStyles.Right;
-            txtSearchBarcode.PlaceholderText = "Nhập mã vạch...";
-            txtSearchBarcode.MaxLength = 50;
-            txtSearchBarcode.Margin = new Padding(3, 3, 12, 3);
-            txtSearchBarcode.TabIndex = 0;
-
-            // lblFilterCategory
-            lblFilterCategory.Name = "lblFilterCategory";
-            lblFilterCategory.Text = "Nhóm hàng";
-            lblFilterCategory.Dock = DockStyle.Fill;
-            lblFilterCategory.TextAlign = ContentAlignment.MiddleLeft;
-
-            // cboFilterCategory
+            txtSearchBarcode.Dock = DockStyle.Top;
+            txtSearchBarcode.Margin = new Padding(0, 2, 0, 8);
+            txtSearchBarcode.PlaceholderText = "Nhập mã vạch sản phẩm...";
+            txtSearchBarcode.ReadOnly = false;
+            txtSearchBarcode.TabIndex = 1;
+            txtSearchBarcode.Margin = new Padding(0, 10, 16, 0);
+            searchLayout.Controls.Add(txtSearchBarcode, 0, 0);
+            cboFilterCategory = new ComboBox();
             cboFilterCategory.Name = "cboFilterCategory";
-            cboFilterCategory.Anchor =
-                AnchorStyles.Left | AnchorStyles.Right;
-            cboFilterCategory.DropDownStyle =
-                ComboBoxStyle.DropDownList;
-            cboFilterCategory.Margin = new Padding(3, 3, 12, 3);
-            cboFilterCategory.TabIndex = 1;
-
-            // btnSearch
+            cboFilterCategory.Dock = DockStyle.Top;
+            cboFilterCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFilterCategory.Margin = new Padding(0, 10, 16, 0);
+            cboFilterCategory.TabIndex = 2;
+            searchLayout.Controls.Add(cboFilterCategory, 1, 0);
+            btnSearch = new Button();
             btnSearch.Name = "btnSearch";
-            btnSearch.Text = "TÌM KIẾM";
-            btnSearch.Anchor =
-                AnchorStyles.Left | AnchorStyles.Right;
-            btnSearch.Height = 36;
-            btnSearch.BackColor = Color.FromArgb(37, 99, 235);
-            btnSearch.ForeColor = Color.White;
-            btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.FlatAppearance.BorderSize = 0;
-            btnSearch.UseVisualStyleBackColor = false;
-            btnSearch.Cursor = Cursors.Hand;
-            btnSearch.TabIndex = 2;
-
-            // layoutContent
-            layoutContent.Name = "layoutContent";
-            layoutContent.Dock = DockStyle.Fill;
-            layoutContent.Margin = new Padding(0);
-            layoutContent.ColumnCount = 2;
-            layoutContent.RowCount = 1;
-            layoutContent.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 68F));
-            layoutContent.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 32F));
-            layoutContent.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 100F));
-            layoutContent.Controls.Add(grpProducts, 0, 0);
-            layoutContent.Controls.Add(grpDetails, 1, 0);
-
-            // grpProducts
+            btnSearch.Text = "Tìm kiếm";
+            btnSearch.Tag = "primary";
+            btnSearch.Dock = DockStyle.Fill;
+            btnSearch.Margin = new Padding(0, 4, 8, 4);
+            btnSearch.TabIndex = 3;
+            searchLayout.Controls.Add(btnSearch, 2, 0);
+            btnLoad = new Button();
+            btnLoad.Name = "btnLoad";
+            btnLoad.Text = "Tải lại";
+            btnLoad.Tag = "secondary";
+            btnLoad.Dock = DockStyle.Fill;
+            btnLoad.Margin = new Padding(0, 4, 8, 4);
+            btnLoad.TabIndex = 4;
+            searchLayout.Controls.Add(btnLoad, 3, 0);
+            grpSearch.Margin = new Padding(0, 0, 0, 16);
+            pageLayout.Controls.Add(grpSearch, 0, 1);
+            contentLayout = new TableLayoutPanel();
+            contentLayout.Name = "contentLayout";
+            contentLayout.Dock = DockStyle.Fill;
+            contentLayout.ColumnCount = 2;
+            contentLayout.RowCount = 1;
+            contentLayout.Margin = new Padding(0);
+            contentLayout.Padding = new Padding(0);
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.Controls.Add(contentLayout, 0, 2);
+            grpProducts = new Panel();
             grpProducts.Name = "grpProducts";
-            grpProducts.Text = "DANH SÁCH SẢN PHẨM";
             grpProducts.Dock = DockStyle.Fill;
-            grpProducts.BackColor = Color.White;
-            grpProducts.Padding = new Padding(12);
-            grpProducts.Margin = new Padding(0, 0, 8, 0);
-            grpProducts.Controls.Add(dgvProducts);
-
-            // dgvProducts
+            grpProducts.BackColor = UiTheme.Surface;
+            grpProducts.Padding = new Padding(18);
+            grpProducts.Margin = new Padding(0);
+            grpProducts.Margin = new Padding(0, 0, 16, 0);
+            listLayout = new TableLayoutPanel();
+            listLayout.Name = "listLayout";
+            listLayout.Dock = DockStyle.Fill;
+            listLayout.ColumnCount = 1;
+            listLayout.RowCount = 3;
+            listLayout.Margin = new Padding(0);
+            listLayout.Padding = new Padding(0);
+            listLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            grpProducts.Controls.Add(listLayout);
+            listHeading = new Label();
+            listHeading.Name = "listHeading";
+            listHeading.Text = "Danh sách sản phẩm";
+            listHeading.AutoSize = false;
+            listHeading.Dock = DockStyle.Fill;
+            listHeading.Font = UiTheme.SectionFont;
+            listHeading.ForeColor = UiTheme.Ink;
+            listHeading.Margin = new Padding(0);
+            listHeading.TextAlign = ContentAlignment.MiddleLeft;
+            dgvProducts = new DataGridView();
             dgvProducts.Name = "dgvProducts";
             dgvProducts.Dock = DockStyle.Fill;
-            dgvProducts.BackgroundColor = Color.White;
-            dgvProducts.BorderStyle = BorderStyle.None;
-            dgvProducts.AutoGenerateColumns = false;
+            dgvProducts.Margin = new Padding(0);
             dgvProducts.AllowUserToAddRows = false;
             dgvProducts.AllowUserToDeleteRows = false;
             dgvProducts.ReadOnly = true;
             dgvProducts.MultiSelect = false;
-            dgvProducts.RowHeadersVisible = false;
-            dgvProducts.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dgvProducts.EnableHeadersVisualStyles = false;
-            dgvProducts.ColumnHeadersHeight = 42;
-            dgvProducts.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(30, 41, 59);
-            dgvProducts.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-            dgvProducts.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10F, FontStyle.Bold);
-
-            dgvProducts.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10F);
-            dgvProducts.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(219, 234, 254);
-            dgvProducts.DefaultCellStyle.SelectionForeColor =
-                Color.FromArgb(15, 23, 42);
-            dgvProducts.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 250, 252);
-            dgvProducts.GridColor = Color.FromArgb(226, 232, 240);
-            dgvProducts.RowTemplate.Height = 36;
-            dgvProducts.TabIndex = 0;
-
-            // grpDetails
+            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProducts.TabIndex = 5;
+            listHint = new Label();
+            listHint.Name = "listHint";
+            listHint.Text = "Chọn một dòng để xem và chỉnh sửa thông tin.";
+            listHint.AutoSize = false;
+            listHint.Dock = DockStyle.Fill;
+            listHint.Font = UiTheme.BodyFont;
+            listHint.ForeColor = UiTheme.Muted;
+            listHint.Margin = new Padding(0);
+            listHint.TextAlign = ContentAlignment.MiddleLeft;
+            listLayout.Controls.Add(listHeading, 0, 0);
+            listLayout.Controls.Add(dgvProducts, 0, 1);
+            listLayout.Controls.Add(listHint, 0, 2);
+            contentLayout.Controls.Add(grpProducts, 0, 0);
+            grpDetails = new Panel();
             grpDetails.Name = "grpDetails";
-            grpDetails.Text = "THÔNG TIN SẢN PHẨM";
             grpDetails.Dock = DockStyle.Fill;
-            grpDetails.BackColor = Color.White;
-            grpDetails.Padding = new Padding(12);
-            grpDetails.Margin = new Padding(4, 0, 0, 0);
-            grpDetails.Controls.Add(layoutDetails);
-
-            // layoutDetails
-            layoutDetails.Name = "layoutDetails";
-            layoutDetails.Dock = DockStyle.Fill;
-            layoutDetails.AutoScroll = true;
-            layoutDetails.ColumnCount = 1;
-            layoutDetails.RowCount = 14;
-            layoutDetails.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 100F));
-
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 26F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 38F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 108F));
-            layoutDetails.RowStyles.Add(
-                new RowStyle(SizeType.Absolute, 64F));
-
-            layoutDetails.Controls.Add(lblId, 0, 0);
-            layoutDetails.Controls.Add(txtId, 0, 1);
-            layoutDetails.Controls.Add(lblBarcode, 0, 2);
-            layoutDetails.Controls.Add(txtBarcode, 0, 3);
-            layoutDetails.Controls.Add(lblProductName, 0, 4);
-            layoutDetails.Controls.Add(txtProductName, 0, 5);
-            layoutDetails.Controls.Add(lblPrice, 0, 6);
-            layoutDetails.Controls.Add(nudPrice, 0, 7);
-            layoutDetails.Controls.Add(lblStock, 0, 8);
-            layoutDetails.Controls.Add(nudStock, 0, 9);
-            layoutDetails.Controls.Add(lblCategory, 0, 10);
-            layoutDetails.Controls.Add(cboCategory, 0, 11);
-            layoutDetails.Controls.Add(layoutButtons, 0, 12);
-            layoutDetails.Controls.Add(lblNote, 0, 13);
-
-            // lblId
+            grpDetails.BackColor = UiTheme.Surface;
+            grpDetails.Padding = new Padding(18);
+            grpDetails.Margin = new Padding(0);
+            editorLayout = new TableLayoutPanel();
+            editorLayout.Name = "editorLayout";
+            editorLayout.Dock = DockStyle.Fill;
+            editorLayout.ColumnCount = 1;
+            editorLayout.RowCount = 2;
+            editorLayout.Margin = new Padding(0);
+            editorLayout.Padding = new Padding(0);
+            editorLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            grpDetails.Controls.Add(editorLayout);
+            editorHeading = new Label();
+            editorHeading.Name = "editorHeading";
+            editorHeading.Text = "Thông tin chi tiết";
+            editorHeading.AutoSize = false;
+            editorHeading.Dock = DockStyle.Fill;
+            editorHeading.Font = UiTheme.SectionFont;
+            editorHeading.ForeColor = UiTheme.Ink;
+            editorHeading.Margin = new Padding(0);
+            editorHeading.TextAlign = ContentAlignment.MiddleLeft;
+            editorLayout.Controls.Add(editorHeading, 0, 0);
+            editorScroll = new Panel();
+            editorScroll.Name = "editorScroll";
+            editorScroll.Dock = DockStyle.Fill;
+            editorScroll.BackColor = UiTheme.Surface;
+            editorScroll.Padding = new Padding(0);
+            editorScroll.Margin = new Padding(0);
+            editorScroll.AutoScroll = true;
+            editorLayout.Controls.Add(editorScroll, 0, 1);
+            fieldsLayout = new TableLayoutPanel();
+            fieldsLayout.Name = "fieldsLayout";
+            fieldsLayout.Dock = DockStyle.Fill;
+            fieldsLayout.ColumnCount = 1;
+            fieldsLayout.RowCount = 13;
+            fieldsLayout.Margin = new Padding(0);
+            fieldsLayout.Padding = new Padding(0);
+            fieldsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Dock = DockStyle.Top;
+            fieldsLayout.Height = 460;
+            fieldsLayout.AutoSize = false;
+            editorScroll.Controls.Add(fieldsLayout);
+            lblId = new Label();
             lblId.Name = "lblId";
             lblId.Text = "Mã sản phẩm";
+            lblId.AutoSize = false;
             lblId.Dock = DockStyle.Fill;
+            lblId.Font = UiTheme.StrongFont;
+            lblId.ForeColor = UiTheme.Ink;
+            lblId.Margin = new Padding(0);
             lblId.TextAlign = ContentAlignment.MiddleLeft;
-
-            // txtId
+            fieldsLayout.Controls.Add(lblId, 0, 0);
+            txtId = new TextBox();
             txtId.Name = "txtId";
             txtId.Dock = DockStyle.Top;
+            txtId.Margin = new Padding(0, 2, 0, 8);
+            txtId.PlaceholderText = "";
             txtId.ReadOnly = true;
-            txtId.BackColor = Color.FromArgb(241, 245, 249);
-            txtId.PlaceholderText = "Tự động tạo";
-            txtId.TabStop = false;
-
-            // lblBarcode
+            txtId.TabIndex = 6;
+            fieldsLayout.Controls.Add(txtId, 0, 1);
+            lblBarcode = new Label();
             lblBarcode.Name = "lblBarcode";
             lblBarcode.Text = "Mã vạch";
+            lblBarcode.AutoSize = false;
             lblBarcode.Dock = DockStyle.Fill;
+            lblBarcode.Font = UiTheme.StrongFont;
+            lblBarcode.ForeColor = UiTheme.Ink;
+            lblBarcode.Margin = new Padding(0);
             lblBarcode.TextAlign = ContentAlignment.MiddleLeft;
-
-            // txtBarcode
+            fieldsLayout.Controls.Add(lblBarcode, 0, 2);
+            txtBarcode = new TextBox();
             txtBarcode.Name = "txtBarcode";
             txtBarcode.Dock = DockStyle.Top;
-            txtBarcode.MaxLength = 50;
-            txtBarcode.PlaceholderText = "Ví dụ: 893000000016";
-            txtBarcode.TabIndex = 0;
-
-            // lblProductName
+            txtBarcode.Margin = new Padding(0, 2, 0, 8);
+            txtBarcode.PlaceholderText = "";
+            txtBarcode.ReadOnly = false;
+            txtBarcode.TabIndex = 7;
+            fieldsLayout.Controls.Add(txtBarcode, 0, 3);
+            lblProductName = new Label();
             lblProductName.Name = "lblProductName";
             lblProductName.Text = "Tên sản phẩm";
+            lblProductName.AutoSize = false;
             lblProductName.Dock = DockStyle.Fill;
+            lblProductName.Font = UiTheme.StrongFont;
+            lblProductName.ForeColor = UiTheme.Ink;
+            lblProductName.Margin = new Padding(0);
             lblProductName.TextAlign = ContentAlignment.MiddleLeft;
-
-            // txtProductName
+            fieldsLayout.Controls.Add(lblProductName, 0, 4);
+            txtProductName = new TextBox();
             txtProductName.Name = "txtProductName";
             txtProductName.Dock = DockStyle.Top;
-            txtProductName.MaxLength = 150;
-            txtProductName.PlaceholderText = "Nhập tên sản phẩm";
-            txtProductName.TabIndex = 1;
-
-            // lblPrice
+            txtProductName.Margin = new Padding(0, 2, 0, 8);
+            txtProductName.PlaceholderText = "";
+            txtProductName.ReadOnly = false;
+            txtProductName.TabIndex = 8;
+            fieldsLayout.Controls.Add(txtProductName, 0, 5);
+            lblPrice = new Label();
             lblPrice.Name = "lblPrice";
-            lblPrice.Text = "Đơn giá (VNĐ)";
+            lblPrice.Text = "Đơn giá (đ)";
+            lblPrice.AutoSize = false;
             lblPrice.Dock = DockStyle.Fill;
+            lblPrice.Font = UiTheme.StrongFont;
+            lblPrice.ForeColor = UiTheme.Ink;
+            lblPrice.Margin = new Padding(0);
             lblPrice.TextAlign = ContentAlignment.MiddleLeft;
-
-            // nudPrice
+            fieldsLayout.Controls.Add(lblPrice, 0, 6);
+            nudPrice = new NumericUpDown();
             nudPrice.Name = "nudPrice";
             nudPrice.Dock = DockStyle.Top;
-            nudPrice.Minimum = 0;
-            nudPrice.Maximum = 9999999999999999.99m;
-            nudPrice.DecimalPlaces = 2;
-            nudPrice.Increment = 1000m;
-            nudPrice.ThousandsSeparator = true;
-            nudPrice.TabIndex = 2;
-
-            // lblStock
+            nudPrice.Margin = new Padding(0, 2, 0, 8);
+            nudPrice.TabIndex = 9;
+            fieldsLayout.Controls.Add(nudPrice, 0, 7);
+            lblStock = new Label();
             lblStock.Name = "lblStock";
             lblStock.Text = "Số lượng tồn kho";
+            lblStock.AutoSize = false;
             lblStock.Dock = DockStyle.Fill;
+            lblStock.Font = UiTheme.StrongFont;
+            lblStock.ForeColor = UiTheme.Ink;
+            lblStock.Margin = new Padding(0);
             lblStock.TextAlign = ContentAlignment.MiddleLeft;
-
-            // nudStock
+            fieldsLayout.Controls.Add(lblStock, 0, 8);
+            nudStock = new NumericUpDown();
             nudStock.Name = "nudStock";
             nudStock.Dock = DockStyle.Top;
-            nudStock.Minimum = 0;
-            nudStock.Maximum = int.MaxValue;
-            nudStock.DecimalPlaces = 0;
-            nudStock.ThousandsSeparator = true;
-            nudStock.TabIndex = 3;
-
-            // lblCategory
+            nudStock.Margin = new Padding(0, 2, 0, 8);
+            nudStock.TabIndex = 10;
+            fieldsLayout.Controls.Add(nudStock, 0, 9);
+            lblCategory = new Label();
             lblCategory.Name = "lblCategory";
             lblCategory.Text = "Nhóm hàng";
+            lblCategory.AutoSize = false;
             lblCategory.Dock = DockStyle.Fill;
+            lblCategory.Font = UiTheme.StrongFont;
+            lblCategory.ForeColor = UiTheme.Ink;
+            lblCategory.Margin = new Padding(0);
             lblCategory.TextAlign = ContentAlignment.MiddleLeft;
-
-            // cboCategory
+            fieldsLayout.Controls.Add(lblCategory, 0, 10);
+            cboCategory = new ComboBox();
             cboCategory.Name = "cboCategory";
             cboCategory.Dock = DockStyle.Top;
+            cboCategory.Margin = new Padding(0, 2, 0, 8);
+            cboCategory.TabIndex = 11;
             cboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboCategory.TabIndex = 4;
-
-            // layoutButtons
-            layoutButtons.Name = "layoutButtons";
-            layoutButtons.Dock = DockStyle.Fill;
-            layoutButtons.Margin = new Padding(0, 8, 0, 0);
-            layoutButtons.ColumnCount = 2;
-            layoutButtons.RowCount = 2;
-            layoutButtons.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 50F));
-            layoutButtons.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 50F));
-            layoutButtons.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 50F));
-            layoutButtons.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 50F));
-
-            layoutButtons.Controls.Add(btnLoad, 0, 0);
-            layoutButtons.Controls.Add(btnAdd, 1, 0);
-            layoutButtons.Controls.Add(btnUpdate, 0, 1);
-            layoutButtons.Controls.Add(btnDelete, 1, 1);
-
-            // btnLoad
-            btnLoad.Name = "btnLoad";
-            btnLoad.Text = "TẢI LẠI";
-            btnLoad.Dock = DockStyle.Fill;
-            btnLoad.BackColor = Color.FromArgb(71, 85, 105);
-            btnLoad.ForeColor = Color.White;
-            btnLoad.FlatStyle = FlatStyle.Flat;
-            btnLoad.FlatAppearance.BorderSize = 0;
-            btnLoad.UseVisualStyleBackColor = false;
-            btnLoad.Cursor = Cursors.Hand;
-            btnLoad.TabIndex = 0;
-
-            // btnAdd
+            fieldsLayout.Controls.Add(cboCategory, 0, 11);
+            actionLayout = new TableLayoutPanel();
+            actionLayout.Name = "actionLayout";
+            actionLayout.Dock = DockStyle.Fill;
+            actionLayout.ColumnCount = 3;
+            actionLayout.RowCount = 1;
+            actionLayout.Margin = new Padding(0);
+            actionLayout.Padding = new Padding(0);
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28F));
+            actionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Controls.Add(actionLayout, 0, 12);
+            btnAdd = new Button();
             btnAdd.Name = "btnAdd";
-            btnAdd.Text = "THÊM";
+            btnAdd.Text = "Thêm mới";
+            btnAdd.Tag = "primary";
             btnAdd.Dock = DockStyle.Fill;
-            btnAdd.BackColor = Color.FromArgb(22, 163, 74);
-            btnAdd.ForeColor = Color.White;
-            btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.FlatAppearance.BorderSize = 0;
-            btnAdd.UseVisualStyleBackColor = false;
-            btnAdd.Cursor = Cursors.Hand;
-            btnAdd.TabIndex = 1;
-
-            // btnUpdate
+            btnAdd.Margin = new Padding(0, 4, 8, 4);
+            btnAdd.TabIndex = 12;
+            actionLayout.Controls.Add(btnAdd, 0, 0);
+            btnUpdate = new Button();
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Text = "CẬP NHẬT";
+            btnUpdate.Text = "Cập nhật";
+            btnUpdate.Tag = "secondary";
             btnUpdate.Dock = DockStyle.Fill;
-            btnUpdate.BackColor = Color.FromArgb(37, 99, 235);
-            btnUpdate.ForeColor = Color.White;
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.FlatAppearance.BorderSize = 0;
-            btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Cursor = Cursors.Hand;
-            btnUpdate.TabIndex = 2;
-
-            // btnDelete
+            btnUpdate.Margin = new Padding(0, 4, 8, 4);
+            btnUpdate.TabIndex = 13;
+            actionLayout.Controls.Add(btnUpdate, 1, 0);
+            btnDelete = new Button();
             btnDelete.Name = "btnDelete";
-            btnDelete.Text = "XÓA";
+            btnDelete.Text = "Xóa";
+            btnDelete.Tag = "danger";
             btnDelete.Dock = DockStyle.Fill;
-            btnDelete.BackColor = Color.FromArgb(220, 38, 38);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.FlatAppearance.BorderSize = 0;
-            btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Cursor = Cursors.Hand;
-            btnDelete.TabIndex = 3;
-
-            // lblNote
-            lblNote.Name = "lblNote";
-            lblNote.Text =
-                "Chọn một sản phẩm trong bảng để sửa hoặc xóa.\r\n" +
-                "Nhấn Tải lại để làm mới dữ liệu.";
-            lblNote.Dock = DockStyle.Fill;
-            lblNote.ForeColor = Color.FromArgb(100, 116, 139);
-            lblNote.Font = new Font("Segoe UI", 9F);
-            lblNote.Padding = new Padding(0, 8, 0, 0);
-
-            // FormProductManagement
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(241, 245, 249);
-            ClientSize = new Size(1180, 720);
-            Font = new Font("Segoe UI", 9F);
-            Padding = new Padding(12);
-            Name = "FormProductManagement";
-            Text = "Quản lý sản phẩm & kho hàng";
-            StartPosition = FormStartPosition.CenterScreen;
-            Controls.Add(layoutMain);
-
-            layoutMain.ResumeLayout(false);
-            layoutSearch.ResumeLayout(false);
-            layoutSearch.PerformLayout();
-            layoutContent.ResumeLayout(false);
-            layoutDetails.ResumeLayout(false);
-            layoutDetails.PerformLayout();
-            layoutButtons.ResumeLayout(false);
-
-            grpSearch.ResumeLayout(false);
-            grpProducts.ResumeLayout(false);
-            grpDetails.ResumeLayout(false);
-
-            ((System.ComponentModel.ISupportInitialize)dgvProducts)
-                .EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudPrice)
-                .EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudStock)
-                .EndInit();
-
+            btnDelete.Margin = new Padding(0, 4, 8, 4);
+            btnDelete.TabIndex = 14;
+            actionLayout.Controls.Add(btnDelete, 2, 0);
+            contentLayout.Controls.Add(grpDetails, 1, 0);
+            nudPrice.Maximum = 9999999999999999.99m;
+            nudPrice.DecimalPlaces = 2;
+            nudPrice.ThousandsSeparator = true;
+            nudStock.Maximum = int.MaxValue;
+            nudStock.ThousandsSeparator = true;
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private TableLayoutPanel layoutMain = null!;
-        private TableLayoutPanel layoutSearch = null!;
-        private TableLayoutPanel layoutContent = null!;
-        private TableLayoutPanel layoutDetails = null!;
-        private TableLayoutPanel layoutButtons = null!;
-
-        private GroupBox grpSearch = null!;
-        private GroupBox grpProducts = null!;
-        private GroupBox grpDetails = null!;
-
-        private Label lblSearchBarcode = null!;
-        private Label lblFilterCategory = null!;
-        private Label lblId = null!;
-        private Label lblBarcode = null!;
-        private Label lblProductName = null!;
-        private Label lblPrice = null!;
-        private Label lblStock = null!;
-        private Label lblCategory = null!;
-        private Label lblNote = null!;
-
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
+        private Panel grpSearch = null!;
+        private TableLayoutPanel searchLayout = null!;
         private TextBox txtSearchBarcode = null!;
         private ComboBox cboFilterCategory = null!;
         private Button btnSearch = null!;
-
-        private DataGridView dgvProducts = null!;
-
-        private TextBox txtId = null!;
-        private TextBox txtBarcode = null!;
-        private TextBox txtProductName = null!;
-        private NumericUpDown nudPrice = null!;
-        private NumericUpDown nudStock = null!;
-        private ComboBox cboCategory = null!;
-
         private Button btnLoad = null!;
+        private TableLayoutPanel contentLayout = null!;
+        private Panel grpProducts = null!;
+        private TableLayoutPanel listLayout = null!;
+        private Label listHeading = null!;
+        private DataGridView dgvProducts = null!;
+        private Label listHint = null!;
+        private Panel grpDetails = null!;
+        private TableLayoutPanel editorLayout = null!;
+        private Label editorHeading = null!;
+        private Panel editorScroll = null!;
+        private TableLayoutPanel fieldsLayout = null!;
+        private Label lblId = null!;
+        private TextBox txtId = null!;
+        private Label lblBarcode = null!;
+        private TextBox txtBarcode = null!;
+        private Label lblProductName = null!;
+        private TextBox txtProductName = null!;
+        private Label lblPrice = null!;
+        private NumericUpDown nudPrice = null!;
+        private Label lblStock = null!;
+        private NumericUpDown nudStock = null!;
+        private Label lblCategory = null!;
+        private ComboBox cboCategory = null!;
+        private TableLayoutPanel actionLayout = null!;
         private Button btnAdd = null!;
         private Button btnUpdate = null!;
         private Button btnDelete = null!;

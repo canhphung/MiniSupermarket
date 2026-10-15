@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,10 +11,10 @@ namespace MiniSupermarket.WinForms
         private string _currentRole = string.Empty;
 
         private static readonly Color SidebarColor =
-            Color.FromArgb(24, 30, 48);
+            UI.UiTheme.Sidebar;
 
         private static readonly Color ActiveButtonColor =
-            Color.FromArgb(41, 100, 180);
+            UI.UiTheme.Accent;
 
         public FormMainShell()
         {
@@ -149,13 +149,13 @@ namespace MiniSupermarket.WinForms
                 case "ADMIN":
                 case "WAREHOUSE":
                     OpenChildForm<FormCategoryManagement>(
-                        "QUẢN LÝ DANH MỤC NHÓM HÀNG",
+                        "Danh mục",
                         btnCategory);
                     break;
 
                 case "CASHIER":
                     OpenChildForm<FormCustomerManagement>(
-                        "QUẢN LÝ KHÁCH HÀNG & TÍCH ĐIỂM",
+                        "Khách hàng",
                         btnCustomer);
                     break;
             }
@@ -226,8 +226,7 @@ namespace MiniSupermarket.WinForms
                 childForm.FormBorderStyle = FormBorderStyle.None;
                 childForm.Dock = DockStyle.Fill;
 
-                // Form Khách hàng hiện có layout rộng hơn vùng nội dung.
-                // Cho phép cuộn để truy cập các control nằm ngoài vùng nhìn.
+                // Layout tự co giãn; vẫn cho phép cuộn trên màn hình nhỏ.
                 childForm.AutoScroll = true;
 
                 panelMainContent.Controls.Add(childForm);
@@ -249,7 +248,7 @@ namespace MiniSupermarket.WinForms
 
                 childForm.Dispose();
 
-                lblTitle.Text = "BÀN LÀM VIỆC HỆ THỐNG";
+                lblTitle.Text = "Không gian làm việc";
                 ResetMenuColors();
 
                 MessageBox.Show(
@@ -282,28 +281,28 @@ namespace MiniSupermarket.WinForms
         private void btnCategory_Click(object? sender, EventArgs e)
         {
             OpenChildForm<FormCategoryManagement>(
-                "QUẢN LÝ DANH MỤC NHÓM HÀNG",
+                "Danh mục",
                 btnCategory);
         }
 
         private void btnCustomer_Click(object? sender, EventArgs e)
         {
             OpenChildForm<FormCustomerManagement>(
-                "QUẢN LÝ KHÁCH HÀNG & TÍCH ĐIỂM",
+                "Khách hàng",
                 btnCustomer);
         }
 
         private void btnPOS_Click(object? sender, EventArgs e)
         {
             OpenChildForm<FormPOS>(
-                "HỆ THỐNG QUẦY BÁN HÀNG & THU NGÂN (POS)",
+                "Bán hàng",
                 btnPOS);
         }
 
         private void btnProduct_Click(object? sender, EventArgs e)
         {
             OpenChildForm<FormProductManagement>(
-                "QUẢN LÝ SẢN PHẨM & KHO HÀNG",
+                "Sản phẩm & Kho",
                 btnProduct);
         }
 
@@ -325,14 +324,14 @@ namespace MiniSupermarket.WinForms
             }
 
             OpenChildForm<FormQuickReport>(
-                "BÁO CÁO DOANH THU & HIỆU SUẤT",
+                "Báo cáo doanh thu",
                 btnReports);
         }
 
         private void btnUserManage_Click(object? sender, EventArgs e)
         {
             OpenChildForm<FormUserManagement>(
-                "QUẢN TRỊ TÀI KHOẢN VÀ PHÂN QUYỀN",
+                "Tài khoản",
                 btnUserManage);
         }
 

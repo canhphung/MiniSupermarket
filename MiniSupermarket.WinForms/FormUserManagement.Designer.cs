@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+#nullable enable annotations
+
+using System.Drawing;
 using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
 
 namespace MiniSupermarket.WinForms
 {
@@ -9,262 +12,338 @@ namespace MiniSupermarket.WinForms
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && components != null)
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            grpUsers = new GroupBox();
-            dgvUsers = new DataGridView();
-
-            grpInfo = new GroupBox();
-            lblUsername = new Label();
-            txtUsername = new TextBox();
-            lblFullName = new Label();
-            txtFullName = new TextBox();
-            lblPassword = new Label();
-            txtPassword = new TextBox();
-            lblRole = new Label();
-            cboRole = new ComboBox();
-            lblSelectedUser = new Label();
-
-            btnAddUser = new Button();
-            btnResetPassword = new Button();
-            btnToggleLock = new Button();
-            btnLoad = new Button();
-
-            grpUsers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
-            grpInfo.SuspendLayout();
             SuspendLayout();
-
-            //
-            // grpUsers
-            //
-            grpUsers.Controls.Add(dgvUsers);
-            grpUsers.Dock = DockStyle.Fill;
-            grpUsers.Location = new Point(16, 16);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
+            Name = "FormUserManagement";
+            Text = "Quản lý tài khoản • MiniMart";
+            StartPosition = FormStartPosition.CenterScreen;
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 2;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Quản lý tài khoản";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Tạo tài khoản, quản lý trạng thái và đặt lại mật khẩu.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            contentLayout = new TableLayoutPanel();
+            contentLayout.Name = "contentLayout";
+            contentLayout.Dock = DockStyle.Fill;
+            contentLayout.ColumnCount = 2;
+            contentLayout.RowCount = 1;
+            contentLayout.Margin = new Padding(0);
+            contentLayout.Padding = new Padding(0);
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.Controls.Add(contentLayout, 0, 1);
+            grpUsers = new Panel();
             grpUsers.Name = "grpUsers";
-            grpUsers.Padding = new Padding(12);
-            grpUsers.Size = new Size(648, 568);
-            grpUsers.TabIndex = 0;
-            grpUsers.TabStop = false;
-            grpUsers.Text = "Danh sách tài khoản";
-
-            //
-            // dgvUsers
-            //
+            grpUsers.Dock = DockStyle.Fill;
+            grpUsers.BackColor = UiTheme.Surface;
+            grpUsers.Padding = new Padding(18);
+            grpUsers.Margin = new Padding(0);
+            grpUsers.Margin = new Padding(0, 0, 16, 0);
+            listLayout = new TableLayoutPanel();
+            listLayout.Name = "listLayout";
+            listLayout.Dock = DockStyle.Fill;
+            listLayout.ColumnCount = 1;
+            listLayout.RowCount = 3;
+            listLayout.Margin = new Padding(0);
+            listLayout.Padding = new Padding(0);
+            listLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            grpUsers.Controls.Add(listLayout);
+            listHeading = new Label();
+            listHeading.Name = "listHeading";
+            listHeading.Text = "Danh sách tài khoản";
+            listHeading.AutoSize = false;
+            listHeading.Dock = DockStyle.Fill;
+            listHeading.Font = UiTheme.SectionFont;
+            listHeading.ForeColor = UiTheme.Ink;
+            listHeading.Margin = new Padding(0);
+            listHeading.TextAlign = ContentAlignment.MiddleLeft;
+            dgvUsers = new DataGridView();
+            dgvUsers.Name = "dgvUsers";
+            dgvUsers.Dock = DockStyle.Fill;
+            dgvUsers.Margin = new Padding(0);
             dgvUsers.AllowUserToAddRows = false;
             dgvUsers.AllowUserToDeleteRows = false;
-            dgvUsers.AllowUserToResizeRows = false;
-            dgvUsers.AutoGenerateColumns = false;
-            dgvUsers.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-            dgvUsers.BackgroundColor = Color.White;
-            dgvUsers.BorderStyle = BorderStyle.None;
-            dgvUsers.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Dock = DockStyle.Fill;
-            dgvUsers.MultiSelect = false;
-            dgvUsers.Name = "dgvUsers";
             dgvUsers.ReadOnly = true;
-            dgvUsers.RowHeadersVisible = false;
-            dgvUsers.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            dgvUsers.TabIndex = 0;
-            dgvUsers.SelectionChanged += dgvUsers_SelectionChanged;
-
-            //
-            // grpInfo
-            //
-            grpInfo.Controls.Add(lblUsername);
-            grpInfo.Controls.Add(txtUsername);
-            grpInfo.Controls.Add(lblFullName);
-            grpInfo.Controls.Add(txtFullName);
-            grpInfo.Controls.Add(lblPassword);
-            grpInfo.Controls.Add(txtPassword);
-            grpInfo.Controls.Add(lblRole);
-            grpInfo.Controls.Add(cboRole);
-            grpInfo.Controls.Add(lblSelectedUser);
-            grpInfo.Controls.Add(btnAddUser);
-            grpInfo.Controls.Add(btnResetPassword);
-            grpInfo.Controls.Add(btnToggleLock);
-            grpInfo.Controls.Add(btnLoad);
-            grpInfo.Dock = DockStyle.Right;
-            grpInfo.Location = new Point(664, 16);
+            dgvUsers.MultiSelect = false;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsers.TabIndex = 1;
+            listHint = new Label();
+            listHint.Name = "listHint";
+            listHint.Text = "Chọn một dòng để xem và chỉnh sửa thông tin.";
+            listHint.AutoSize = false;
+            listHint.Dock = DockStyle.Fill;
+            listHint.Font = UiTheme.BodyFont;
+            listHint.ForeColor = UiTheme.Muted;
+            listHint.Margin = new Padding(0);
+            listHint.TextAlign = ContentAlignment.MiddleLeft;
+            listLayout.Controls.Add(listHeading, 0, 0);
+            listLayout.Controls.Add(dgvUsers, 0, 1);
+            listLayout.Controls.Add(listHint, 0, 2);
+            contentLayout.Controls.Add(grpUsers, 0, 0);
+            grpInfo = new Panel();
             grpInfo.Name = "grpInfo";
-            grpInfo.Size = new Size(320, 568);
-            grpInfo.TabIndex = 1;
-            grpInfo.TabStop = false;
-            grpInfo.Text = "Thông tin và thao tác";
-
-            //
-            // lblUsername
-            //
-            lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(20, 30);
+            grpInfo.Dock = DockStyle.Fill;
+            grpInfo.BackColor = UiTheme.Surface;
+            grpInfo.Padding = new Padding(18);
+            grpInfo.Margin = new Padding(0);
+            editorLayout = new TableLayoutPanel();
+            editorLayout.Name = "editorLayout";
+            editorLayout.Dock = DockStyle.Fill;
+            editorLayout.ColumnCount = 1;
+            editorLayout.RowCount = 2;
+            editorLayout.Margin = new Padding(0);
+            editorLayout.Padding = new Padding(0);
+            editorLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            grpInfo.Controls.Add(editorLayout);
+            editorHeading = new Label();
+            editorHeading.Name = "editorHeading";
+            editorHeading.Text = "Thông tin chi tiết";
+            editorHeading.AutoSize = false;
+            editorHeading.Dock = DockStyle.Fill;
+            editorHeading.Font = UiTheme.SectionFont;
+            editorHeading.ForeColor = UiTheme.Ink;
+            editorHeading.Margin = new Padding(0);
+            editorHeading.TextAlign = ContentAlignment.MiddleLeft;
+            editorLayout.Controls.Add(editorHeading, 0, 0);
+            editorScroll = new Panel();
+            editorScroll.Name = "editorScroll";
+            editorScroll.Dock = DockStyle.Fill;
+            editorScroll.BackColor = UiTheme.Surface;
+            editorScroll.Padding = new Padding(0);
+            editorScroll.Margin = new Padding(0);
+            editorScroll.AutoScroll = true;
+            editorLayout.Controls.Add(editorScroll, 0, 1);
+            fieldsLayout = new TableLayoutPanel();
+            fieldsLayout.Name = "fieldsLayout";
+            fieldsLayout.Dock = DockStyle.Fill;
+            fieldsLayout.ColumnCount = 1;
+            fieldsLayout.RowCount = 13;
+            fieldsLayout.Margin = new Padding(0);
+            fieldsLayout.Padding = new Padding(0);
+            fieldsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            fieldsLayout.Dock = DockStyle.Top;
+            fieldsLayout.Height = 520;
+            fieldsLayout.AutoSize = false;
+            editorScroll.Controls.Add(fieldsLayout);
+            lblUsername = new Label();
             lblUsername.Name = "lblUsername";
             lblUsername.Text = "Tên đăng nhập";
-
-            //
-            // txtUsername
-            //
-            txtUsername.Location = new Point(20, 52);
-            txtUsername.MaxLength = 50;
+            lblUsername.AutoSize = false;
+            lblUsername.Dock = DockStyle.Fill;
+            lblUsername.Font = UiTheme.StrongFont;
+            lblUsername.ForeColor = UiTheme.Ink;
+            lblUsername.Margin = new Padding(0);
+            lblUsername.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblUsername, 0, 0);
+            txtUsername = new TextBox();
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(280, 23);
-            txtUsername.TabIndex = 0;
-
-            //
-            // lblFullName
-            //
-            lblFullName.AutoSize = true;
-            lblFullName.Location = new Point(20, 90);
+            txtUsername.Dock = DockStyle.Top;
+            txtUsername.Margin = new Padding(0, 2, 0, 8);
+            txtUsername.PlaceholderText = "";
+            txtUsername.ReadOnly = false;
+            txtUsername.TabIndex = 2;
+            fieldsLayout.Controls.Add(txtUsername, 0, 1);
+            lblFullName = new Label();
             lblFullName.Name = "lblFullName";
             lblFullName.Text = "Họ và tên";
-
-            //
-            // txtFullName
-            //
-            txtFullName.Location = new Point(20, 112);
-            txtFullName.MaxLength = 150;
+            lblFullName.AutoSize = false;
+            lblFullName.Dock = DockStyle.Fill;
+            lblFullName.Font = UiTheme.StrongFont;
+            lblFullName.ForeColor = UiTheme.Ink;
+            lblFullName.Margin = new Padding(0);
+            lblFullName.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblFullName, 0, 2);
+            txtFullName = new TextBox();
             txtFullName.Name = "txtFullName";
-            txtFullName.Size = new Size(280, 23);
-            txtFullName.TabIndex = 1;
-
-            //
-            // lblPassword
-            //
-            lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(20, 150);
+            txtFullName.Dock = DockStyle.Top;
+            txtFullName.Margin = new Padding(0, 2, 0, 8);
+            txtFullName.PlaceholderText = "";
+            txtFullName.ReadOnly = false;
+            txtFullName.TabIndex = 3;
+            fieldsLayout.Controls.Add(txtFullName, 0, 3);
+            lblPassword = new Label();
             lblPassword.Name = "lblPassword";
             lblPassword.Text = "Mật khẩu tạo mới / đặt lại";
-
-            //
-            // txtPassword
-            //
-            txtPassword.Location = new Point(20, 172);
-            txtPassword.MaxLength = 200;
+            lblPassword.AutoSize = false;
+            lblPassword.Dock = DockStyle.Fill;
+            lblPassword.Font = UiTheme.StrongFont;
+            lblPassword.ForeColor = UiTheme.Ink;
+            lblPassword.Margin = new Padding(0);
+            lblPassword.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblPassword, 0, 4);
+            txtPassword = new TextBox();
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(280, 23);
-            txtPassword.TabIndex = 2;
-            txtPassword.UseSystemPasswordChar = true;
-
-            //
-            // lblRole
-            //
-            lblRole.AutoSize = true;
-            lblRole.Location = new Point(20, 210);
+            txtPassword.Dock = DockStyle.Top;
+            txtPassword.Margin = new Padding(0, 2, 0, 8);
+            txtPassword.PlaceholderText = "";
+            txtPassword.ReadOnly = false;
+            txtPassword.TabIndex = 4;
+            fieldsLayout.Controls.Add(txtPassword, 0, 5);
+            lblRole = new Label();
             lblRole.Name = "lblRole";
             lblRole.Text = "Vai trò khi tạo tài khoản";
-
-            //
-            // cboRole
-            //
-            cboRole.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboRole.Items.AddRange(new object[]
-            {
-                "Admin",
-                "Cashier",
-                "Warehouse"
-            });
-            cboRole.Location = new Point(20, 232);
+            lblRole.AutoSize = false;
+            lblRole.Dock = DockStyle.Fill;
+            lblRole.Font = UiTheme.StrongFont;
+            lblRole.ForeColor = UiTheme.Ink;
+            lblRole.Margin = new Padding(0);
+            lblRole.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblRole, 0, 6);
+            cboRole = new ComboBox();
             cboRole.Name = "cboRole";
-            cboRole.Size = new Size(280, 23);
-            cboRole.TabIndex = 3;
-
-            //
-            // lblSelectedUser
-            //
-            lblSelectedUser.ForeColor = Color.FromArgb(75, 85, 99);
-            lblSelectedUser.Location = new Point(20, 275);
+            cboRole.Dock = DockStyle.Top;
+            cboRole.Margin = new Padding(0, 2, 0, 8);
+            cboRole.TabIndex = 5;
+            cboRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            fieldsLayout.Controls.Add(cboRole, 0, 7);
+            lblSelectedUser = new Label();
             lblSelectedUser.Name = "lblSelectedUser";
-            lblSelectedUser.Size = new Size(280, 45);
             lblSelectedUser.Text = "Chưa chọn tài khoản.";
-
-            //
-            // btnAddUser
-            //
-            btnAddUser.BackColor = Color.FromArgb(41, 100, 180);
-            btnAddUser.FlatAppearance.BorderSize = 0;
-            btnAddUser.FlatStyle = FlatStyle.Flat;
-            btnAddUser.ForeColor = Color.White;
-            btnAddUser.Location = new Point(20, 330);
+            lblSelectedUser.AutoSize = false;
+            lblSelectedUser.Dock = DockStyle.Fill;
+            lblSelectedUser.Font = UiTheme.BodyFont;
+            lblSelectedUser.ForeColor = UiTheme.Muted;
+            lblSelectedUser.Margin = new Padding(0);
+            lblSelectedUser.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblSelectedUser, 0, 8);
+            btnAddUser = new Button();
             btnAddUser.Name = "btnAddUser";
-            btnAddUser.Size = new Size(280, 36);
-            btnAddUser.TabIndex = 4;
-            btnAddUser.Text = "Tạo tài khoản mới";
-            btnAddUser.UseVisualStyleBackColor = false;
-            btnAddUser.Click += btnAddUser_Click;
-
-            //
-            // btnResetPassword
-            //
-            btnResetPassword.Location = new Point(20, 376);
+            btnAddUser.Text = "Tạo tài khoản";
+            btnAddUser.Tag = "primary";
+            btnAddUser.Dock = DockStyle.Fill;
+            btnAddUser.Margin = new Padding(0, 4, 8, 4);
+            btnAddUser.TabIndex = 6;
+            fieldsLayout.Controls.Add(btnAddUser, 0, 9);
+            btnResetPassword = new Button();
             btnResetPassword.Name = "btnResetPassword";
-            btnResetPassword.Size = new Size(280, 36);
-            btnResetPassword.TabIndex = 5;
             btnResetPassword.Text = "Đặt lại mật khẩu";
-            btnResetPassword.UseVisualStyleBackColor = true;
-            btnResetPassword.Click += btnResetPassword_Click;
-
-            //
-            // btnToggleLock
-            //
-            btnToggleLock.Location = new Point(20, 422);
+            btnResetPassword.Tag = "secondary";
+            btnResetPassword.Dock = DockStyle.Fill;
+            btnResetPassword.Margin = new Padding(0, 4, 8, 4);
+            btnResetPassword.TabIndex = 7;
+            fieldsLayout.Controls.Add(btnResetPassword, 0, 10);
+            btnToggleLock = new Button();
             btnToggleLock.Name = "btnToggleLock";
-            btnToggleLock.Size = new Size(280, 36);
-            btnToggleLock.TabIndex = 6;
             btnToggleLock.Text = "Khóa / Mở khóa tài khoản";
-            btnToggleLock.UseVisualStyleBackColor = true;
-            btnToggleLock.Click += btnToggleLock_Click;
-
-            //
-            // btnLoad
-            //
-            btnLoad.Location = new Point(20, 468);
+            btnToggleLock.Tag = "danger";
+            btnToggleLock.Dock = DockStyle.Fill;
+            btnToggleLock.Margin = new Padding(0, 4, 8, 4);
+            btnToggleLock.TabIndex = 8;
+            fieldsLayout.Controls.Add(btnToggleLock, 0, 11);
+            btnLoad = new Button();
             btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(280, 36);
-            btnLoad.TabIndex = 7;
             btnLoad.Text = "Tải lại / Xóa ô nhập";
-            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Tag = "secondary";
+            btnLoad.Dock = DockStyle.Fill;
+            btnLoad.Margin = new Padding(0, 4, 8, 4);
+            btnLoad.TabIndex = 9;
+            fieldsLayout.Controls.Add(btnLoad, 0, 12);
+            contentLayout.Controls.Add(grpInfo, 1, 0);
+            dgvUsers.AutoGenerateColumns = false;
+            cboRole.Items.AddRange(new object[] { "Admin", "Cashier", "Warehouse" });
+            txtPassword.UseSystemPasswordChar = true;
+            txtPassword.MaxLength = 200;
+            txtUsername.MaxLength = 50;
+            txtFullName.MaxLength = 150;
+            dgvUsers.SelectionChanged += dgvUsers_SelectionChanged;
+            btnAddUser.Click += btnAddUser_Click;
+            btnResetPassword.Click += btnResetPassword_Click;
+            btnToggleLock.Click += btnToggleLock_Click;
             btnLoad.Click += btnLoad_Click;
-
-            //
-            // FormUserManagement
-            //
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(244, 245, 247);
-            ClientSize = new Size(1000, 600);
-            Controls.Add(grpUsers);
-            Controls.Add(grpInfo);
-            Name = "FormUserManagement";
-            Padding = new Padding(16);
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Quản trị tài khoản";
             Load += FormUserManagement_Load;
-
-            grpUsers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
-            grpInfo.ResumeLayout(false);
-            grpInfo.PerformLayout();
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private GroupBox grpUsers = null!;
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
+        private TableLayoutPanel contentLayout = null!;
+        private Panel grpUsers = null!;
+        private TableLayoutPanel listLayout = null!;
+        private Label listHeading = null!;
         private DataGridView dgvUsers = null!;
-
-        private GroupBox grpInfo = null!;
+        private Label listHint = null!;
+        private Panel grpInfo = null!;
+        private TableLayoutPanel editorLayout = null!;
+        private Label editorHeading = null!;
+        private Panel editorScroll = null!;
+        private TableLayoutPanel fieldsLayout = null!;
         private Label lblUsername = null!;
         private TextBox txtUsername = null!;
         private Label lblFullName = null!;
@@ -274,7 +353,6 @@ namespace MiniSupermarket.WinForms
         private Label lblRole = null!;
         private ComboBox cboRole = null!;
         private Label lblSelectedUser = null!;
-
         private Button btnAddUser = null!;
         private Button btnResetPassword = null!;
         private Button btnToggleLock = null!;

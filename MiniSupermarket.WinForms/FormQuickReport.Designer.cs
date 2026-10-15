@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+#nullable enable annotations
+
+using System.Drawing;
 using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
 
 namespace MiniSupermarket.WinForms
 {
@@ -9,265 +12,291 @@ namespace MiniSupermarket.WinForms
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && components != null)
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            panelFilters = new Panel();
-            lblReportDate = new Label();
-            dtpReportDate = new DateTimePicker();
-            btnRunReport = new Button();
-
-            tableCards = new TableLayoutPanel();
-
-            panelOrders = new Panel();
-            lblOrdersTitle = new Label();
-            lblTotalOrders = new Label();
-
-            panelRevenue = new Panel();
-            lblRevenueTitle = new Label();
-            lblTotalRevenue = new Label();
-
-            panelBestSeller = new Panel();
-            lblBestSellerTitle = new Label();
-            lblBestSeller = new Label();
-
-            lblReportNote = new Label();
-
-            panelFilters.SuspendLayout();
-            tableCards.SuspendLayout();
-            panelOrders.SuspendLayout();
-            panelRevenue.SuspendLayout();
-            panelBestSeller.SuspendLayout();
             SuspendLayout();
-
-            //
-            // panelFilters
-            //
-            panelFilters.Controls.Add(lblReportDate);
-            panelFilters.Controls.Add(dtpReportDate);
-            panelFilters.Controls.Add(btnRunReport);
-            panelFilters.Dock = DockStyle.Top;
-            panelFilters.Name = "panelFilters";
-            panelFilters.Size = new Size(968, 80);
-
-            //
-            // lblReportDate
-            //
-            lblReportDate.AutoSize = true;
-            lblReportDate.Location = new Point(8, 12);
-            lblReportDate.Text = "Ngày xem báo cáo";
-
-            //
-            // dtpReportDate
-            //
-            dtpReportDate.CustomFormat = "dd/MM/yyyy";
-            dtpReportDate.Format = DateTimePickerFormat.Custom;
-            dtpReportDate.Location = new Point(8, 35);
-            dtpReportDate.Name = "dtpReportDate";
-            dtpReportDate.Size = new Size(190, 23);
-            dtpReportDate.TabIndex = 0;
-
-            //
-            // btnRunReport
-            //
-            btnRunReport.BackColor = Color.FromArgb(41, 100, 180);
-            btnRunReport.FlatAppearance.BorderSize = 0;
-            btnRunReport.FlatStyle = FlatStyle.Flat;
-            btnRunReport.ForeColor = Color.White;
-            btnRunReport.Location = new Point(215, 29);
-            btnRunReport.Name = "btnRunReport";
-            btnRunReport.Size = new Size(170, 36);
-            btnRunReport.TabIndex = 1;
-            btnRunReport.Text = "Xem doanh thu ca";
-            btnRunReport.UseVisualStyleBackColor = false;
-            btnRunReport.Click += btnRunReport_Click;
-
-            //
-            // tableCards
-            //
-            tableCards.ColumnCount = 3;
-            tableCards.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 33.33F));
-            tableCards.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 33.33F));
-            tableCards.ColumnStyles.Add(
-                new ColumnStyle(SizeType.Percent, 33.34F));
-            tableCards.Controls.Add(panelOrders, 0, 0);
-            tableCards.Controls.Add(panelRevenue, 1, 0);
-            tableCards.Controls.Add(panelBestSeller, 2, 0);
-            tableCards.Dock = DockStyle.Top;
-            tableCards.Name = "tableCards";
-            tableCards.RowCount = 1;
-            tableCards.RowStyles.Add(
-                new RowStyle(SizeType.Percent, 100F));
-            tableCards.Size = new Size(968, 190);
-            tableCards.TabIndex = 1;
-
-            //
-            // panelOrders
-            //
-            panelOrders.BackColor = Color.FromArgb(41, 100, 180);
-            panelOrders.Controls.Add(lblTotalOrders);
-            panelOrders.Controls.Add(lblOrdersTitle);
-            panelOrders.Dock = DockStyle.Fill;
-            panelOrders.Margin = new Padding(8);
-            panelOrders.Name = "panelOrders";
-            panelOrders.Padding = new Padding(16);
-
-            //
-            // lblOrdersTitle
-            //
-            lblOrdersTitle.Dock = DockStyle.Top;
-            lblOrdersTitle.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblOrdersTitle.ForeColor = Color.White;
-            lblOrdersTitle.Height = 40;
-            lblOrdersTitle.Text = "TỔNG SỐ HÓA ĐƠN";
-            lblOrdersTitle.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // lblTotalOrders
-            //
-            lblTotalOrders.Dock = DockStyle.Fill;
-            lblTotalOrders.Font =
-                new Font("Segoe UI", 28F, FontStyle.Bold);
-            lblTotalOrders.ForeColor = Color.White;
-            lblTotalOrders.Name = "lblTotalOrders";
-            lblTotalOrders.Text = "--";
-            lblTotalOrders.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // panelRevenue
-            //
-            panelRevenue.BackColor = Color.FromArgb(22, 140, 95);
-            panelRevenue.Controls.Add(lblTotalRevenue);
-            panelRevenue.Controls.Add(lblRevenueTitle);
-            panelRevenue.Dock = DockStyle.Fill;
-            panelRevenue.Margin = new Padding(8);
-            panelRevenue.Name = "panelRevenue";
-            panelRevenue.Padding = new Padding(16);
-
-            //
-            // lblRevenueTitle
-            //
-            lblRevenueTitle.Dock = DockStyle.Top;
-            lblRevenueTitle.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblRevenueTitle.ForeColor = Color.White;
-            lblRevenueTitle.Height = 40;
-            lblRevenueTitle.Text = "TỔNG DOANH THU";
-            lblRevenueTitle.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // lblTotalRevenue
-            //
-            lblTotalRevenue.Dock = DockStyle.Fill;
-            lblTotalRevenue.Font =
-                new Font("Segoe UI", 22F, FontStyle.Bold);
-            lblTotalRevenue.ForeColor = Color.White;
-            lblTotalRevenue.Name = "lblTotalRevenue";
-            lblTotalRevenue.Text = "--";
-            lblTotalRevenue.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // panelBestSeller
-            //
-            panelBestSeller.BackColor = Color.FromArgb(145, 90, 190);
-            panelBestSeller.Controls.Add(lblBestSeller);
-            panelBestSeller.Controls.Add(lblBestSellerTitle);
-            panelBestSeller.Dock = DockStyle.Fill;
-            panelBestSeller.Margin = new Padding(8);
-            panelBestSeller.Name = "panelBestSeller";
-            panelBestSeller.Padding = new Padding(16);
-
-            //
-            // lblBestSellerTitle
-            //
-            lblBestSellerTitle.Dock = DockStyle.Top;
-            lblBestSellerTitle.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblBestSellerTitle.ForeColor = Color.White;
-            lblBestSellerTitle.Height = 40;
-            lblBestSellerTitle.Text = "MẶT HÀNG BÁN CHẠY";
-            lblBestSellerTitle.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // lblBestSeller
-            //
-            lblBestSeller.Dock = DockStyle.Fill;
-            lblBestSeller.Font =
-                new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblBestSeller.ForeColor = Color.White;
-            lblBestSeller.Name = "lblBestSeller";
-            lblBestSeller.Text = "--";
-            lblBestSeller.TextAlign = ContentAlignment.MiddleLeft;
-
-            //
-            // lblReportNote
-            //
-            lblReportNote.Dock = DockStyle.Fill;
-            lblReportNote.ForeColor = Color.FromArgb(75, 85, 99);
-            lblReportNote.Name = "lblReportNote";
-            lblReportNote.Padding = new Padding(8, 20, 8, 0);
-            lblReportNote.Text =
-                "Chọn ngày và bấm Xem doanh thu ca.\n" +
-                "Dữ liệu minh họa cho bài tập phân quyền.";
-
-            //
-            // FormQuickReport
-            //
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(244, 245, 247);
-            ClientSize = new Size(1000, 600);
-            Controls.Add(lblReportNote);
-            Controls.Add(tableCards);
-            Controls.Add(panelFilters);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
             Name = "FormQuickReport";
-            Padding = new Padding(16);
+            Text = "Báo cáo doanh thu • MiniMart";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Báo cáo doanh thu nhanh";
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 2;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Báo cáo doanh thu";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Tổng quan hóa đơn và kết quả bán hàng theo ngày.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            reportLayout = new TableLayoutPanel();
+            reportLayout.Name = "reportLayout";
+            reportLayout.Dock = DockStyle.Fill;
+            reportLayout.ColumnCount = 1;
+            reportLayout.RowCount = 4;
+            reportLayout.Margin = new Padding(0);
+            reportLayout.Padding = new Padding(0);
+            reportLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            reportLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 90F));
+            reportLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+            reportLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            reportLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.Controls.Add(reportLayout, 0, 1);
+            panelFilters = new Panel();
+            panelFilters.Name = "panelFilters";
+            panelFilters.Dock = DockStyle.Fill;
+            panelFilters.BackColor = UiTheme.Surface;
+            panelFilters.Padding = new Padding(12);
+            panelFilters.Margin = new Padding(0);
+            filterLayout = new TableLayoutPanel();
+            filterLayout.Name = "filterLayout";
+            filterLayout.Dock = DockStyle.Fill;
+            filterLayout.ColumnCount = 3;
+            filterLayout.RowCount = 1;
+            filterLayout.Margin = new Padding(0);
+            filterLayout.Padding = new Padding(0);
+            filterLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 240F));
+            filterLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+            filterLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            filterLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
+            panelFilters.Controls.Add(filterLayout);
+            dtpReportDate = new DateTimePicker();
+            dtpReportDate.Name = "dtpReportDate";
+            dtpReportDate.Dock = DockStyle.Top;
+            dtpReportDate.Format = DateTimePickerFormat.Custom;
+            dtpReportDate.CustomFormat = "dd/MM/yyyy";
+            dtpReportDate.Margin = new Padding(0, 10, 16, 0);
+            dtpReportDate.TabIndex = 1;
+            btnRunReport = new Button();
+            btnRunReport.Name = "btnRunReport";
+            btnRunReport.Text = "Xem báo cáo";
+            btnRunReport.Tag = "primary";
+            btnRunReport.Dock = DockStyle.Fill;
+            btnRunReport.Margin = new Padding(0, 4, 8, 4);
+            btnRunReport.TabIndex = 2;
+            filterLayout.Controls.Add(dtpReportDate, 0, 0);
+            filterLayout.Controls.Add(btnRunReport, 1, 0);
+            panelFilters.Margin = new Padding(0, 0, 0, 16);
+            reportLayout.Controls.Add(panelFilters, 0, 0);
+            tableCards = new TableLayoutPanel();
+            tableCards.Name = "tableCards";
+            tableCards.Dock = DockStyle.Fill;
+            tableCards.ColumnCount = 3;
+            tableCards.RowCount = 1;
+            tableCards.Margin = new Padding(0);
+            tableCards.Padding = new Padding(0);
+            tableCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            tableCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            tableCards.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            reportLayout.Controls.Add(tableCards, 0, 1);
+            panelOrders = new Panel();
+            panelOrders.Name = "panelOrders";
+            panelOrders.Dock = DockStyle.Fill;
+            panelOrders.BackColor = UiTheme.Surface;
+            panelOrders.Padding = new Padding(18);
+            panelOrders.Margin = new Padding(0);
+            panelOrders.Margin = new Padding(0, 0, 12, 16);
+            metricLayout0 = new TableLayoutPanel();
+            metricLayout0.Name = "metricLayout0";
+            metricLayout0.Dock = DockStyle.Fill;
+            metricLayout0.ColumnCount = 1;
+            metricLayout0.RowCount = 2;
+            metricLayout0.Margin = new Padding(0);
+            metricLayout0.Padding = new Padding(0);
+            metricLayout0.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            metricLayout0.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            metricLayout0.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            panelOrders.Controls.Add(metricLayout0);
+            lblOrdersTitle = new Label();
+            lblOrdersTitle.Name = "lblOrdersTitle";
+            lblOrdersTitle.Text = "Tổng số hóa đơn";
+            lblOrdersTitle.AutoSize = false;
+            lblOrdersTitle.Dock = DockStyle.Fill;
+            lblOrdersTitle.Font = UiTheme.BodyFont;
+            lblOrdersTitle.ForeColor = UiTheme.Muted;
+            lblOrdersTitle.Margin = new Padding(0);
+            lblOrdersTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalOrders = new Label();
+            lblTotalOrders.Name = "lblTotalOrders";
+            lblTotalOrders.Text = "—";
+            lblTotalOrders.AutoSize = false;
+            lblTotalOrders.Dock = DockStyle.Fill;
+            lblTotalOrders.Font = UiTheme.AmountFont;
+            lblTotalOrders.ForeColor = UiTheme.Ink;
+            lblTotalOrders.Margin = new Padding(0);
+            lblTotalOrders.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalOrders.ForeColor = UiTheme.Accent;
+            metricLayout0.Controls.Add(lblOrdersTitle, 0, 0);
+            metricLayout0.Controls.Add(lblTotalOrders, 0, 1);
+            tableCards.Controls.Add(panelOrders, 0, 0);
+            panelRevenue = new Panel();
+            panelRevenue.Name = "panelRevenue";
+            panelRevenue.Dock = DockStyle.Fill;
+            panelRevenue.BackColor = UiTheme.Surface;
+            panelRevenue.Padding = new Padding(18);
+            panelRevenue.Margin = new Padding(0);
+            panelRevenue.Margin = new Padding(0, 0, 12, 16);
+            metricLayout1 = new TableLayoutPanel();
+            metricLayout1.Name = "metricLayout1";
+            metricLayout1.Dock = DockStyle.Fill;
+            metricLayout1.ColumnCount = 1;
+            metricLayout1.RowCount = 2;
+            metricLayout1.Margin = new Padding(0);
+            metricLayout1.Padding = new Padding(0);
+            metricLayout1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            metricLayout1.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            metricLayout1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            panelRevenue.Controls.Add(metricLayout1);
+            lblRevenueTitle = new Label();
+            lblRevenueTitle.Name = "lblRevenueTitle";
+            lblRevenueTitle.Text = "Tổng doanh thu";
+            lblRevenueTitle.AutoSize = false;
+            lblRevenueTitle.Dock = DockStyle.Fill;
+            lblRevenueTitle.Font = UiTheme.BodyFont;
+            lblRevenueTitle.ForeColor = UiTheme.Muted;
+            lblRevenueTitle.Margin = new Padding(0);
+            lblRevenueTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalRevenue = new Label();
+            lblTotalRevenue.Name = "lblTotalRevenue";
+            lblTotalRevenue.Text = "—";
+            lblTotalRevenue.AutoSize = false;
+            lblTotalRevenue.Dock = DockStyle.Fill;
+            lblTotalRevenue.Font = UiTheme.AmountFont;
+            lblTotalRevenue.ForeColor = UiTheme.Ink;
+            lblTotalRevenue.Margin = new Padding(0);
+            lblTotalRevenue.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalRevenue.ForeColor = UiTheme.Accent;
+            metricLayout1.Controls.Add(lblRevenueTitle, 0, 0);
+            metricLayout1.Controls.Add(lblTotalRevenue, 0, 1);
+            tableCards.Controls.Add(panelRevenue, 1, 0);
+            panelBestSeller = new Panel();
+            panelBestSeller.Name = "panelBestSeller";
+            panelBestSeller.Dock = DockStyle.Fill;
+            panelBestSeller.BackColor = UiTheme.Surface;
+            panelBestSeller.Padding = new Padding(18);
+            panelBestSeller.Margin = new Padding(0);
+            panelBestSeller.Margin = new Padding(0, 0, 12, 16);
+            metricLayout2 = new TableLayoutPanel();
+            metricLayout2.Name = "metricLayout2";
+            metricLayout2.Dock = DockStyle.Fill;
+            metricLayout2.ColumnCount = 1;
+            metricLayout2.RowCount = 2;
+            metricLayout2.Margin = new Padding(0);
+            metricLayout2.Padding = new Padding(0);
+            metricLayout2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            metricLayout2.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            metricLayout2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            panelBestSeller.Controls.Add(metricLayout2);
+            lblBestSellerTitle = new Label();
+            lblBestSellerTitle.Name = "lblBestSellerTitle";
+            lblBestSellerTitle.Text = "Mặt hàng bán chạy";
+            lblBestSellerTitle.AutoSize = false;
+            lblBestSellerTitle.Dock = DockStyle.Fill;
+            lblBestSellerTitle.Font = UiTheme.BodyFont;
+            lblBestSellerTitle.ForeColor = UiTheme.Muted;
+            lblBestSellerTitle.Margin = new Padding(0);
+            lblBestSellerTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblBestSeller = new Label();
+            lblBestSeller.Name = "lblBestSeller";
+            lblBestSeller.Text = "—";
+            lblBestSeller.AutoSize = false;
+            lblBestSeller.Dock = DockStyle.Fill;
+            lblBestSeller.Font = UiTheme.SectionFont;
+            lblBestSeller.ForeColor = UiTheme.Ink;
+            lblBestSeller.Margin = new Padding(0);
+            lblBestSeller.TextAlign = ContentAlignment.MiddleLeft;
+            lblBestSeller.ForeColor = UiTheme.Accent;
+            metricLayout2.Controls.Add(lblBestSellerTitle, 0, 0);
+            metricLayout2.Controls.Add(lblBestSeller, 0, 1);
+            tableCards.Controls.Add(panelBestSeller, 2, 0);
+            lblReportNote = new Label();
+            lblReportNote.Name = "lblReportNote";
+            lblReportNote.Text = "DỮ LIỆU MẪU · Chọn ngày và bấm Xem báo cáo.\nChức năng báo cáo hiện chưa kết nối API doanh thu.";
+            lblReportNote.AutoSize = false;
+            lblReportNote.Dock = DockStyle.Fill;
+            lblReportNote.Font = UiTheme.BodyFont;
+            lblReportNote.ForeColor = UiTheme.Muted;
+            lblReportNote.Margin = new Padding(0);
+            lblReportNote.TextAlign = ContentAlignment.MiddleLeft;
+            lblReportNote.BackColor = UiTheme.AccentSoft;
+            lblReportNote.Padding = new Padding(18);
+            reportLayout.Controls.Add(lblReportNote, 0, 2);
+            btnRunReport.Click += btnRunReport_Click;
             Load += FormQuickReport_Load;
-
-            panelFilters.ResumeLayout(false);
-            panelFilters.PerformLayout();
-            tableCards.ResumeLayout(false);
-            panelOrders.ResumeLayout(false);
-            panelRevenue.ResumeLayout(false);
-            panelBestSeller.ResumeLayout(false);
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
+        private TableLayoutPanel reportLayout = null!;
         private Panel panelFilters = null!;
-        private Label lblReportDate = null!;
+        private TableLayoutPanel filterLayout = null!;
         private DateTimePicker dtpReportDate = null!;
         private Button btnRunReport = null!;
-
         private TableLayoutPanel tableCards = null!;
-
         private Panel panelOrders = null!;
+        private TableLayoutPanel metricLayout0 = null!;
         private Label lblOrdersTitle = null!;
         private Label lblTotalOrders = null!;
-
         private Panel panelRevenue = null!;
+        private TableLayoutPanel metricLayout1 = null!;
         private Label lblRevenueTitle = null!;
         private Label lblTotalRevenue = null!;
-
         private Panel panelBestSeller = null!;
+        private TableLayoutPanel metricLayout2 = null!;
         private Label lblBestSellerTitle = null!;
         private Label lblBestSeller = null!;
-
         private Label lblReportNote = null!;
     }
 }

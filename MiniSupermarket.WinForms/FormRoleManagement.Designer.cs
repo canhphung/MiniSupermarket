@@ -1,228 +1,325 @@
-﻿namespace MiniSupermarket.WinForms
+#nullable enable annotations
+
+using System.Drawing;
+using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
+
+namespace MiniSupermarket.WinForms
 {
     partial class FormRoleManagement
     {
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer? components = null;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            this.grpList = new System.Windows.Forms.GroupBox();
-            this.dgvRoles = new System.Windows.Forms.DataGridView();
-
-            this.grpInfo = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtDescription = new System.Windows.Forms.TextBox();
-            this.lblDescription = new System.Windows.Forms.Label();
-            this.txtRoleName = new System.Windows.Forms.TextBox();
-            this.lblRoleName = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.lblId = new System.Windows.Forms.Label();
-
-            this.grpList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
-            this.grpInfo.SuspendLayout();
-            this.SuspendLayout();
-
-            // 
-            // grpList
-            // 
-            this.grpList.Controls.Add(this.dgvRoles);
-            this.grpList.Location = new System.Drawing.Point(20, 20);
-            this.grpList.Name = "grpList";
-            this.grpList.Size = new System.Drawing.Size(570, 400);
-            this.grpList.TabIndex = 0;
-            this.grpList.TabStop = false;
-            this.grpList.Text = "Danh sách Vai trò";
-
-            // 
-            // dgvRoles
-            // 
-            this.dgvRoles.AllowUserToAddRows = false;
-            this.dgvRoles.AllowUserToDeleteRows = false;
-            this.dgvRoles.AutoSizeColumnsMode =
-                System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvRoles.ColumnHeadersHeightSizeMode =
-                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRoles.Location = new System.Drawing.Point(15, 25);
-            this.dgvRoles.MultiSelect = false;
-            this.dgvRoles.Name = "dgvRoles";
-            this.dgvRoles.ReadOnly = true;
-            this.dgvRoles.RowHeadersWidth = 51;
-            this.dgvRoles.SelectionMode =
-                System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRoles.Size = new System.Drawing.Size(540, 355);
-            this.dgvRoles.TabIndex = 0;
-            this.dgvRoles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellClick);
-
-            // 
-            // grpInfo
-            // 
-            this.grpInfo.Controls.Add(this.btnDelete);
-            this.grpInfo.Controls.Add(this.btnUpdate);
-            this.grpInfo.Controls.Add(this.btnAdd);
-            this.grpInfo.Controls.Add(this.txtDescription);
-            this.grpInfo.Controls.Add(this.lblDescription);
-            this.grpInfo.Controls.Add(this.txtRoleName);
-            this.grpInfo.Controls.Add(this.lblRoleName);
-            this.grpInfo.Controls.Add(this.txtId);
-            this.grpInfo.Controls.Add(this.lblId);
-            this.grpInfo.Location = new System.Drawing.Point(610, 20);
-            this.grpInfo.Name = "grpInfo";
-            this.grpInfo.Size = new System.Drawing.Size(300, 400);
-            this.grpInfo.TabIndex = 1;
-            this.grpInfo.TabStop = false;
-            this.grpInfo.Text = "Thông tin Vai trò";
-
-            // 
-            // lblId
-            // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(20, 35);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(37, 15);
-            this.lblId.TabIndex = 0;
-            this.lblId.Text = "Mã ID";
-
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(20, 55);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(255, 23);
-            this.txtId.TabIndex = 1;
-
-            // 
-            // lblRoleName
-            // 
-            this.lblRoleName.AutoSize = true;
-            this.lblRoleName.Location = new System.Drawing.Point(20, 100);
-            this.lblRoleName.Name = "lblRoleName";
-            this.lblRoleName.Size = new System.Drawing.Size(65, 15);
-            this.lblRoleName.TabIndex = 2;
-            this.lblRoleName.Text = "Tên Vai trò";
-
-            // 
-            // txtRoleName
-            // 
-            this.txtRoleName.Location = new System.Drawing.Point(20, 120);
-            this.txtRoleName.Name = "txtRoleName";
-            this.txtRoleName.Size = new System.Drawing.Size(255, 23);
-            this.txtRoleName.TabIndex = 3;
-
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(20, 165);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(38, 15);
-            this.lblDescription.TabIndex = 4;
-            this.lblDescription.Text = "Mô tả";
-
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(20, 185);
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.ScrollBars =
-                System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(255, 90);
-            this.txtDescription.TabIndex = 5;
-
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(20, 310);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(80, 35);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Thêm mới";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click +=
-                new System.EventHandler(this.btnAdd_Click);
-
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(108, 310);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(80, 35);
-            this.btnUpdate.TabIndex = 7;
-            this.btnUpdate.Text = "Cập nhật";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click +=
-                new System.EventHandler(this.btnUpdate_Click);
-
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(196, 310);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 35);
-            this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Xóa";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click +=
-                new System.EventHandler(this.btnDelete_Click);
-
-            // 
-            // FormRoleManagement
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode =
-                System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize =
-                new System.Drawing.Size(934, 441);
-
-            this.Controls.Add(this.grpInfo);
-            this.Controls.Add(this.grpList);
-
-            this.Name = "FormRoleManagement";
-            this.StartPosition =
-                System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý Vai trò";
-
-            this.Load +=
-                new System.EventHandler(this.FormRoleManagement_Load);
-
-            this.grpList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).EndInit();
-            this.grpInfo.ResumeLayout(false);
-            this.grpInfo.PerformLayout();
-            this.ResumeLayout(false);
+            SuspendLayout();
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
+            Name = "FormRoleManagement";
+            Text = "Quản lý vai trò • MiniMart";
+            StartPosition = FormStartPosition.CenterScreen;
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 2;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Quản lý vai trò";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Danh sách vai trò và mô tả quyền sử dụng hệ thống.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            contentLayout = new TableLayoutPanel();
+            contentLayout.Name = "contentLayout";
+            contentLayout.Dock = DockStyle.Fill;
+            contentLayout.ColumnCount = 2;
+            contentLayout.RowCount = 1;
+            contentLayout.Margin = new Padding(0);
+            contentLayout.Padding = new Padding(0);
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.Controls.Add(contentLayout, 0, 1);
+            grpList = new Panel();
+            grpList.Name = "grpList";
+            grpList.Dock = DockStyle.Fill;
+            grpList.BackColor = UiTheme.Surface;
+            grpList.Padding = new Padding(18);
+            grpList.Margin = new Padding(0);
+            grpList.Margin = new Padding(0, 0, 16, 0);
+            listLayout = new TableLayoutPanel();
+            listLayout.Name = "listLayout";
+            listLayout.Dock = DockStyle.Fill;
+            listLayout.ColumnCount = 1;
+            listLayout.RowCount = 3;
+            listLayout.Margin = new Padding(0);
+            listLayout.Padding = new Padding(0);
+            listLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            listLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            grpList.Controls.Add(listLayout);
+            listHeading = new Label();
+            listHeading.Name = "listHeading";
+            listHeading.Text = "Danh sách vai trò";
+            listHeading.AutoSize = false;
+            listHeading.Dock = DockStyle.Fill;
+            listHeading.Font = UiTheme.SectionFont;
+            listHeading.ForeColor = UiTheme.Ink;
+            listHeading.Margin = new Padding(0);
+            listHeading.TextAlign = ContentAlignment.MiddleLeft;
+            dgvRoles = new DataGridView();
+            dgvRoles.Name = "dgvRoles";
+            dgvRoles.Dock = DockStyle.Fill;
+            dgvRoles.Margin = new Padding(0);
+            dgvRoles.AllowUserToAddRows = false;
+            dgvRoles.AllowUserToDeleteRows = false;
+            dgvRoles.ReadOnly = true;
+            dgvRoles.MultiSelect = false;
+            dgvRoles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRoles.TabIndex = 1;
+            listHint = new Label();
+            listHint.Name = "listHint";
+            listHint.Text = "Chọn một dòng để xem và chỉnh sửa thông tin.";
+            listHint.AutoSize = false;
+            listHint.Dock = DockStyle.Fill;
+            listHint.Font = UiTheme.BodyFont;
+            listHint.ForeColor = UiTheme.Muted;
+            listHint.Margin = new Padding(0);
+            listHint.TextAlign = ContentAlignment.MiddleLeft;
+            listLayout.Controls.Add(listHeading, 0, 0);
+            listLayout.Controls.Add(dgvRoles, 0, 1);
+            listLayout.Controls.Add(listHint, 0, 2);
+            contentLayout.Controls.Add(grpList, 0, 0);
+            grpInfo = new Panel();
+            grpInfo.Name = "grpInfo";
+            grpInfo.Dock = DockStyle.Fill;
+            grpInfo.BackColor = UiTheme.Surface;
+            grpInfo.Padding = new Padding(18);
+            grpInfo.Margin = new Padding(0);
+            editorLayout = new TableLayoutPanel();
+            editorLayout.Name = "editorLayout";
+            editorLayout.Dock = DockStyle.Fill;
+            editorLayout.ColumnCount = 1;
+            editorLayout.RowCount = 2;
+            editorLayout.Margin = new Padding(0);
+            editorLayout.Padding = new Padding(0);
+            editorLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            grpInfo.Controls.Add(editorLayout);
+            editorHeading = new Label();
+            editorHeading.Name = "editorHeading";
+            editorHeading.Text = "Thông tin chi tiết";
+            editorHeading.AutoSize = false;
+            editorHeading.Dock = DockStyle.Fill;
+            editorHeading.Font = UiTheme.SectionFont;
+            editorHeading.ForeColor = UiTheme.Ink;
+            editorHeading.Margin = new Padding(0);
+            editorHeading.TextAlign = ContentAlignment.MiddleLeft;
+            editorLayout.Controls.Add(editorHeading, 0, 0);
+            editorScroll = new Panel();
+            editorScroll.Name = "editorScroll";
+            editorScroll.Dock = DockStyle.Fill;
+            editorScroll.BackColor = UiTheme.Surface;
+            editorScroll.Padding = new Padding(0);
+            editorScroll.Margin = new Padding(0);
+            editorScroll.AutoScroll = true;
+            editorLayout.Controls.Add(editorScroll, 0, 1);
+            fieldsLayout = new TableLayoutPanel();
+            fieldsLayout.Name = "fieldsLayout";
+            fieldsLayout.Dock = DockStyle.Fill;
+            fieldsLayout.ColumnCount = 1;
+            fieldsLayout.RowCount = 7;
+            fieldsLayout.Margin = new Padding(0);
+            fieldsLayout.Padding = new Padding(0);
+            fieldsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 88F));
+            fieldsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Dock = DockStyle.Top;
+            fieldsLayout.Height = 302;
+            fieldsLayout.AutoSize = false;
+            editorScroll.Controls.Add(fieldsLayout);
+            lblId = new Label();
+            lblId.Name = "lblId";
+            lblId.Text = "Mã vai trò";
+            lblId.AutoSize = false;
+            lblId.Dock = DockStyle.Fill;
+            lblId.Font = UiTheme.StrongFont;
+            lblId.ForeColor = UiTheme.Ink;
+            lblId.Margin = new Padding(0);
+            lblId.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblId, 0, 0);
+            txtId = new TextBox();
+            txtId.Name = "txtId";
+            txtId.Dock = DockStyle.Top;
+            txtId.Margin = new Padding(0, 2, 0, 8);
+            txtId.PlaceholderText = "";
+            txtId.ReadOnly = true;
+            txtId.TabIndex = 2;
+            fieldsLayout.Controls.Add(txtId, 0, 1);
+            lblRoleName = new Label();
+            lblRoleName.Name = "lblRoleName";
+            lblRoleName.Text = "Tên vai trò";
+            lblRoleName.AutoSize = false;
+            lblRoleName.Dock = DockStyle.Fill;
+            lblRoleName.Font = UiTheme.StrongFont;
+            lblRoleName.ForeColor = UiTheme.Ink;
+            lblRoleName.Margin = new Padding(0);
+            lblRoleName.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblRoleName, 0, 2);
+            txtRoleName = new TextBox();
+            txtRoleName.Name = "txtRoleName";
+            txtRoleName.Dock = DockStyle.Top;
+            txtRoleName.Margin = new Padding(0, 2, 0, 8);
+            txtRoleName.PlaceholderText = "";
+            txtRoleName.ReadOnly = false;
+            txtRoleName.TabIndex = 3;
+            fieldsLayout.Controls.Add(txtRoleName, 0, 3);
+            lblDescription = new Label();
+            lblDescription.Name = "lblDescription";
+            lblDescription.Text = "Mô tả";
+            lblDescription.AutoSize = false;
+            lblDescription.Dock = DockStyle.Fill;
+            lblDescription.Font = UiTheme.StrongFont;
+            lblDescription.ForeColor = UiTheme.Ink;
+            lblDescription.Margin = new Padding(0);
+            lblDescription.TextAlign = ContentAlignment.MiddleLeft;
+            fieldsLayout.Controls.Add(lblDescription, 0, 4);
+            txtDescription = new TextBox();
+            txtDescription.Name = "txtDescription";
+            txtDescription.Dock = DockStyle.Top;
+            txtDescription.Margin = new Padding(0, 2, 0, 8);
+            txtDescription.PlaceholderText = "";
+            txtDescription.ReadOnly = false;
+            txtDescription.TabIndex = 4;
+            txtDescription.Multiline = true;
+            txtDescription.Height = 72;
+            txtDescription.ScrollBars = ScrollBars.Vertical;
+            fieldsLayout.Controls.Add(txtDescription, 0, 5);
+            actionLayout = new TableLayoutPanel();
+            actionLayout.Name = "actionLayout";
+            actionLayout.Dock = DockStyle.Fill;
+            actionLayout.ColumnCount = 3;
+            actionLayout.RowCount = 1;
+            actionLayout.Margin = new Padding(0);
+            actionLayout.Padding = new Padding(0);
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            actionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28F));
+            actionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            fieldsLayout.Controls.Add(actionLayout, 0, 6);
+            btnAdd = new Button();
+            btnAdd.Name = "btnAdd";
+            btnAdd.Text = "Thêm mới";
+            btnAdd.Tag = "primary";
+            btnAdd.Dock = DockStyle.Fill;
+            btnAdd.Margin = new Padding(0, 4, 8, 4);
+            btnAdd.TabIndex = 5;
+            actionLayout.Controls.Add(btnAdd, 0, 0);
+            btnUpdate = new Button();
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Text = "Cập nhật";
+            btnUpdate.Tag = "secondary";
+            btnUpdate.Dock = DockStyle.Fill;
+            btnUpdate.Margin = new Padding(0, 4, 8, 4);
+            btnUpdate.TabIndex = 6;
+            actionLayout.Controls.Add(btnUpdate, 1, 0);
+            btnDelete = new Button();
+            btnDelete.Name = "btnDelete";
+            btnDelete.Text = "Xóa";
+            btnDelete.Tag = "danger";
+            btnDelete.Dock = DockStyle.Fill;
+            btnDelete.Margin = new Padding(0, 4, 8, 4);
+            btnDelete.TabIndex = 7;
+            actionLayout.Controls.Add(btnDelete, 2, 0);
+            contentLayout.Controls.Add(grpInfo, 1, 0);
+            dgvRoles.CellClick += dgvRoles_CellClick;
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            Load += FormRoleManagement_Load;
+            UiTheme.Apply(this);
+            ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private System.Windows.Forms.GroupBox grpList;
-        private System.Windows.Forms.DataGridView dgvRoles;
-
-        private System.Windows.Forms.GroupBox grpInfo;
-        private System.Windows.Forms.Label lblId;
-        private System.Windows.Forms.TextBox txtId;
-        private System.Windows.Forms.Label lblRoleName;
-        private System.Windows.Forms.TextBox txtRoleName;
-        private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.TextBox txtDescription;
-
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
+        private TableLayoutPanel contentLayout = null!;
+        private Panel grpList = null!;
+        private TableLayoutPanel listLayout = null!;
+        private Label listHeading = null!;
+        private DataGridView dgvRoles = null!;
+        private Label listHint = null!;
+        private Panel grpInfo = null!;
+        private TableLayoutPanel editorLayout = null!;
+        private Label editorHeading = null!;
+        private Panel editorScroll = null!;
+        private TableLayoutPanel fieldsLayout = null!;
+        private Label lblId = null!;
+        private TextBox txtId = null!;
+        private Label lblRoleName = null!;
+        private TextBox txtRoleName = null!;
+        private Label lblDescription = null!;
+        private TextBox txtDescription = null!;
+        private TableLayoutPanel actionLayout = null!;
+        private Button btnAdd = null!;
+        private Button btnUpdate = null!;
+        private Button btnDelete = null!;
     }
 }

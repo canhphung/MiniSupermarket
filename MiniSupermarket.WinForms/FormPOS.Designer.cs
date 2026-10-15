@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+#nullable enable annotations
+
+using System.Drawing;
 using System.Windows.Forms;
+using MiniSupermarket.WinForms.UI;
 
 namespace MiniSupermarket.WinForms
 {
@@ -9,283 +12,317 @@ namespace MiniSupermarket.WinForms
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && components != null)
-            {
-                components.Dispose();
-            }
-
+            if (disposing) components?.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            tableLayoutMain = new TableLayoutPanel();
-            grpCart = new GroupBox();
-            dgvCart = new DataGridView();
-            panelBarcode = new Panel();
-            lblBarcodeTitle = new Label();
-            txtBarcode = new TextBox();
-            grpPayment = new GroupBox();
-            lblPhoneTitle = new Label();
-            txtCustomerPhone = new TextBox();
-            lblCustomerName = new Label();
-            lblTotalTitle = new Label();
-            lblTotalAmount = new Label();
-            lblCashTitle = new Label();
-            txtCashReceived = new TextBox();
-            lblChangeTitle = new Label();
-            lblChange = new Label();
-            btnCheckout = new Button();
-            btnClearCart = new Button();
-            tableLayoutMain.SuspendLayout();
-            grpCart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCart).BeginInit();
-            panelBarcode.SuspendLayout();
-            grpPayment.SuspendLayout();
             SuspendLayout();
-            // 
-            // tableLayoutMain
-            // 
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = UiTheme.BodyFont;
+            ForeColor = UiTheme.Ink;
+            BackColor = UiTheme.Background;
+            ClientSize = new Size(1120, 720);
+            Padding = new Padding(24);
+            AutoScroll = true;
+            Name = "FormPOS";
+            Text = "Bán hàng • MiniMart";
+            StartPosition = FormStartPosition.CenterScreen;
+            pageLayout = new TableLayoutPanel();
+            pageLayout.Name = "pageLayout";
+            pageLayout.Dock = DockStyle.Fill;
+            pageLayout.ColumnCount = 1;
+            pageLayout.RowCount = 2;
+            pageLayout.Margin = new Padding(0);
+            pageLayout.Padding = new Padding(0);
+            pageLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            pageLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pageLayout.MinimumSize = new Size(860, 540);
+            pageHeader = new TableLayoutPanel();
+            pageHeader.Name = "pageHeader";
+            pageHeader.Dock = DockStyle.Fill;
+            pageHeader.ColumnCount = 1;
+            pageHeader.RowCount = 2;
+            pageHeader.Margin = new Padding(0);
+            pageHeader.Padding = new Padding(0);
+            pageHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            pageHeader.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            pageTitle = new Label();
+            pageTitle.Name = "pageTitle";
+            pageTitle.Text = "Bán hàng";
+            pageTitle.AutoSize = false;
+            pageTitle.Dock = DockStyle.Fill;
+            pageTitle.Font = UiTheme.HeadingFont;
+            pageTitle.ForeColor = UiTheme.Ink;
+            pageTitle.Margin = new Padding(0);
+            pageTitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageSubtitle = new Label();
+            pageSubtitle.Name = "pageSubtitle";
+            pageSubtitle.Text = "Quét mã vạch, kiểm tra giỏ hàng và hoàn tất thanh toán.";
+            pageSubtitle.AutoSize = false;
+            pageSubtitle.Dock = DockStyle.Fill;
+            pageSubtitle.Font = UiTheme.BodyFont;
+            pageSubtitle.ForeColor = UiTheme.Muted;
+            pageSubtitle.Margin = new Padding(0);
+            pageSubtitle.TextAlign = ContentAlignment.MiddleLeft;
+            pageHeader.Controls.Add(pageTitle, 0, 0);
+            pageHeader.Controls.Add(pageSubtitle, 0, 1);
+            pageLayout.Controls.Add(pageHeader, 0, 0);
+            this.Controls.Add(pageLayout);
+            tableLayoutMain = new TableLayoutPanel();
+            tableLayoutMain.Name = "tableLayoutMain";
+            tableLayoutMain.Dock = DockStyle.Fill;
             tableLayoutMain.ColumnCount = 2;
+            tableLayoutMain.RowCount = 1;
+            tableLayoutMain.Margin = new Padding(0);
+            tableLayoutMain.Padding = new Padding(0);
             tableLayoutMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
             tableLayoutMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            tableLayoutMain.Controls.Add(grpCart, 0, 0);
-            tableLayoutMain.Controls.Add(grpPayment, 1, 0);
-            tableLayoutMain.Dock = DockStyle.Fill;
-            tableLayoutMain.Location = new Point(12, 12);
-            tableLayoutMain.Name = "tableLayoutMain";
-            tableLayoutMain.RowCount = 1;
             tableLayoutMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutMain.Size = new Size(976, 576);
-            tableLayoutMain.TabIndex = 0;
-            // 
-            // grpCart
-            // 
-            grpCart.Controls.Add(dgvCart);
-            grpCart.Controls.Add(panelBarcode);
-            grpCart.Dock = DockStyle.Fill;
-            grpCart.Location = new Point(3, 3);
+            pageLayout.Controls.Add(tableLayoutMain, 0, 1);
+            grpCart = new Panel();
             grpCart.Name = "grpCart";
-            grpCart.Padding = new Padding(12);
-            grpCart.Size = new Size(628, 570);
-            grpCart.TabIndex = 0;
-            grpCart.TabStop = false;
-            grpCart.Text = "Giỏ hàng";
-            // 
-            // dgvCart
-            // 
+            grpCart.Dock = DockStyle.Fill;
+            grpCart.BackColor = UiTheme.Surface;
+            grpCart.Padding = new Padding(18);
+            grpCart.Margin = new Padding(0);
+            grpCart.Margin = new Padding(0, 0, 16, 0);
+            cartLayout = new TableLayoutPanel();
+            cartLayout.Name = "cartLayout";
+            cartLayout.Dock = DockStyle.Fill;
+            cartLayout.ColumnCount = 1;
+            cartLayout.RowCount = 4;
+            cartLayout.Margin = new Padding(0);
+            cartLayout.Padding = new Padding(0);
+            cartLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            cartLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            cartLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            cartLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            cartLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            grpCart.Controls.Add(cartLayout);
+            lblBarcodeTitle = new Label();
+            lblBarcodeTitle.Name = "lblBarcodeTitle";
+            lblBarcodeTitle.Text = "Quét / nhập mã vạch rồi nhấn Enter";
+            lblBarcodeTitle.AutoSize = false;
+            lblBarcodeTitle.Dock = DockStyle.Fill;
+            lblBarcodeTitle.Font = UiTheme.StrongFont;
+            lblBarcodeTitle.ForeColor = UiTheme.Ink;
+            lblBarcodeTitle.Margin = new Padding(0);
+            lblBarcodeTitle.TextAlign = ContentAlignment.MiddleLeft;
+            txtBarcode = new TextBox();
+            txtBarcode.Name = "txtBarcode";
+            txtBarcode.Dock = DockStyle.Top;
+            txtBarcode.Margin = new Padding(0, 2, 0, 8);
+            txtBarcode.PlaceholderText = "Nhập mã vạch sản phẩm...";
+            txtBarcode.ReadOnly = false;
+            txtBarcode.TabIndex = 1;
+            txtBarcode.MaxLength = 50;
+            dgvCart = new DataGridView();
+            dgvCart.Name = "dgvCart";
+            dgvCart.Dock = DockStyle.Fill;
+            dgvCart.Margin = new Padding(0);
             dgvCart.AllowUserToAddRows = false;
             dgvCart.AllowUserToDeleteRows = false;
-            dgvCart.BackgroundColor = Color.White;
-            dgvCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCart.Dock = DockStyle.Fill;
-            dgvCart.Location = new Point(12, 103);
-            dgvCart.MultiSelect = false;
-            dgvCart.Name = "dgvCart";
             dgvCart.ReadOnly = true;
-            dgvCart.RowHeadersVisible = false;
+            dgvCart.MultiSelect = false;
+            dgvCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCart.Size = new Size(604, 455);
-            dgvCart.TabIndex = 1;
-            // 
-            // panelBarcode
-            // 
-            panelBarcode.Controls.Add(lblBarcodeTitle);
-            panelBarcode.Controls.Add(txtBarcode);
-            panelBarcode.Dock = DockStyle.Top;
-            panelBarcode.Location = new Point(12, 28);
-            panelBarcode.Name = "panelBarcode";
-            panelBarcode.Size = new Size(604, 75);
-            panelBarcode.TabIndex = 2;
-            // 
-            // lblBarcodeTitle
-            // 
-            lblBarcodeTitle.AutoSize = true;
-            lblBarcodeTitle.Location = new Point(0, 5);
-            lblBarcodeTitle.Name = "lblBarcodeTitle";
-            lblBarcodeTitle.Size = new Size(196, 15);
-            lblBarcodeTitle.TabIndex = 0;
-            lblBarcodeTitle.Text = "Quét / nhập mã vạch rồi nhấn Enter";
-            // 
-            // txtBarcode
-            // 
-            txtBarcode.Location = new Point(0, 30);
-            txtBarcode.MaxLength = 50;
-            txtBarcode.Name = "txtBarcode";
-            txtBarcode.Size = new Size(300, 23);
-            txtBarcode.TabIndex = 0;
-            txtBarcode.KeyDown += txtBarcode_KeyDown;
-            // 
-            // grpPayment
-            // 
-            grpPayment.Controls.Add(lblPhoneTitle);
-            grpPayment.Controls.Add(txtCustomerPhone);
-            grpPayment.Controls.Add(lblCustomerName);
-            grpPayment.Controls.Add(lblTotalTitle);
-            grpPayment.Controls.Add(lblTotalAmount);
-            grpPayment.Controls.Add(lblCashTitle);
-            grpPayment.Controls.Add(txtCashReceived);
-            grpPayment.Controls.Add(lblChangeTitle);
-            grpPayment.Controls.Add(lblChange);
-            grpPayment.Controls.Add(btnCheckout);
-            grpPayment.Controls.Add(btnClearCart);
-            grpPayment.Dock = DockStyle.Fill;
-            grpPayment.Location = new Point(637, 3);
+            dgvCart.TabIndex = 2;
+            cartHint = new Label();
+            cartHint.Name = "cartHint";
+            cartHint.Text = "Giá và tồn kho được kiểm tra lại khi thanh toán.";
+            cartHint.AutoSize = false;
+            cartHint.Dock = DockStyle.Fill;
+            cartHint.Font = UiTheme.BodyFont;
+            cartHint.ForeColor = UiTheme.Muted;
+            cartHint.Margin = new Padding(0);
+            cartHint.TextAlign = ContentAlignment.MiddleLeft;
+            cartLayout.Controls.Add(lblBarcodeTitle, 0, 0);
+            cartLayout.Controls.Add(txtBarcode, 0, 1);
+            cartLayout.Controls.Add(dgvCart, 0, 2);
+            cartLayout.Controls.Add(cartHint, 0, 3);
+            tableLayoutMain.Controls.Add(grpCart, 0, 0);
+            grpPayment = new Panel();
             grpPayment.Name = "grpPayment";
-            grpPayment.Size = new Size(336, 570);
-            grpPayment.TabIndex = 1;
-            grpPayment.TabStop = false;
-            grpPayment.Text = "Khách hàng và thanh toán";
-            // 
-            // lblPhoneTitle
-            // 
-            lblPhoneTitle.AutoSize = true;
-            lblPhoneTitle.Location = new Point(16, 30);
+            grpPayment.Dock = DockStyle.Fill;
+            grpPayment.BackColor = UiTheme.Surface;
+            grpPayment.Padding = new Padding(18);
+            grpPayment.Margin = new Padding(0);
+            tableLayoutMain.Controls.Add(grpPayment, 1, 0);
+            grpPayment.AutoScroll = true;
+            paymentLayout = new TableLayoutPanel();
+            paymentLayout.Name = "paymentLayout";
+            paymentLayout.Dock = DockStyle.Fill;
+            paymentLayout.ColumnCount = 1;
+            paymentLayout.RowCount = 12;
+            paymentLayout.Margin = new Padding(0);
+            paymentLayout.Padding = new Padding(0);
+            paymentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            paymentLayout.Dock = DockStyle.Top;
+            paymentLayout.Height = 598;
+            grpPayment.Controls.Add(paymentLayout);
+            paymentHeading = new Label();
+            paymentHeading.Name = "paymentHeading";
+            paymentHeading.Text = "Thanh toán";
+            paymentHeading.AutoSize = false;
+            paymentHeading.Dock = DockStyle.Fill;
+            paymentHeading.Font = UiTheme.SectionFont;
+            paymentHeading.ForeColor = UiTheme.Ink;
+            paymentHeading.Margin = new Padding(0);
+            paymentHeading.TextAlign = ContentAlignment.MiddleLeft;
+            paymentLayout.Controls.Add(paymentHeading, 0, 0);
+            lblPhoneTitle = new Label();
             lblPhoneTitle.Name = "lblPhoneTitle";
-            lblPhoneTitle.Size = new Size(193, 15);
-            lblPhoneTitle.TabIndex = 0;
-            lblPhoneTitle.Text = "SĐT khách hàng — Enter để tra cứu";
-            // 
-            // txtCustomerPhone
-            // 
-            txtCustomerPhone.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCustomerPhone.Location = new Point(16, 55);
-            txtCustomerPhone.MaxLength = 20;
+            lblPhoneTitle.Text = "SĐT khách hàng · Enter để tra cứu";
+            lblPhoneTitle.AutoSize = false;
+            lblPhoneTitle.Dock = DockStyle.Fill;
+            lblPhoneTitle.Font = UiTheme.StrongFont;
+            lblPhoneTitle.ForeColor = UiTheme.Ink;
+            lblPhoneTitle.Margin = new Padding(0);
+            lblPhoneTitle.TextAlign = ContentAlignment.MiddleLeft;
+            paymentLayout.Controls.Add(lblPhoneTitle, 0, 1);
+            txtCustomerPhone = new TextBox();
             txtCustomerPhone.Name = "txtCustomerPhone";
-            txtCustomerPhone.Size = new Size(314, 23);
-            txtCustomerPhone.TabIndex = 0;
+            txtCustomerPhone.Dock = DockStyle.Top;
+            txtCustomerPhone.Margin = new Padding(0, 2, 0, 8);
+            txtCustomerPhone.PlaceholderText = "";
+            txtCustomerPhone.ReadOnly = false;
+            txtCustomerPhone.TabIndex = 3;
+            paymentLayout.Controls.Add(txtCustomerPhone, 0, 2);
+            txtCustomerPhone.MaxLength = 20;
+            lblCustomerName = new Label();
+            lblCustomerName.Name = "lblCustomerName";
+            lblCustomerName.Text = "Khách vãng lai";
+            lblCustomerName.AutoSize = false;
+            lblCustomerName.Dock = DockStyle.Fill;
+            lblCustomerName.Font = UiTheme.StrongFont;
+            lblCustomerName.ForeColor = UiTheme.Ink;
+            lblCustomerName.Margin = new Padding(0);
+            lblCustomerName.TextAlign = ContentAlignment.MiddleLeft;
+            lblCustomerName.BackColor = UiTheme.AccentSoft;
+            lblCustomerName.Padding = new Padding(12, 0, 12, 0);
+            lblCustomerName.Margin = new Padding(0, 0, 0, 12);
+            paymentLayout.Controls.Add(lblCustomerName, 0, 3);
+            lblTotalTitle = new Label();
+            lblTotalTitle.Name = "lblTotalTitle";
+            lblTotalTitle.Text = "Tổng thanh toán";
+            lblTotalTitle.AutoSize = false;
+            lblTotalTitle.Dock = DockStyle.Fill;
+            lblTotalTitle.Font = UiTheme.BodyFont;
+            lblTotalTitle.ForeColor = UiTheme.Muted;
+            lblTotalTitle.Margin = new Padding(0);
+            lblTotalTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalAmount = new Label();
+            lblTotalAmount.Name = "lblTotalAmount";
+            lblTotalAmount.Text = "0 đ";
+            lblTotalAmount.AutoSize = false;
+            lblTotalAmount.Dock = DockStyle.Fill;
+            lblTotalAmount.Font = UiTheme.AmountFont;
+            lblTotalAmount.ForeColor = UiTheme.Ink;
+            lblTotalAmount.Margin = new Padding(0);
+            lblTotalAmount.TextAlign = ContentAlignment.MiddleLeft;
+            lblTotalAmount.ForeColor = UiTheme.Accent;
+            paymentLayout.Controls.Add(lblTotalTitle, 0, 4);
+            paymentLayout.Controls.Add(lblTotalAmount, 0, 5);
+            lblCashTitle = new Label();
+            lblCashTitle.Name = "lblCashTitle";
+            lblCashTitle.Text = "Tiền khách đưa";
+            lblCashTitle.AutoSize = false;
+            lblCashTitle.Dock = DockStyle.Fill;
+            lblCashTitle.Font = UiTheme.StrongFont;
+            lblCashTitle.ForeColor = UiTheme.Ink;
+            lblCashTitle.Margin = new Padding(0);
+            lblCashTitle.TextAlign = ContentAlignment.MiddleLeft;
+            paymentLayout.Controls.Add(lblCashTitle, 0, 6);
+            txtCashReceived = new TextBox();
+            txtCashReceived.Name = "txtCashReceived";
+            txtCashReceived.Dock = DockStyle.Top;
+            txtCashReceived.Margin = new Padding(0, 2, 0, 8);
+            txtCashReceived.PlaceholderText = "Ví dụ: 100000";
+            txtCashReceived.ReadOnly = false;
+            txtCashReceived.TabIndex = 4;
+            paymentLayout.Controls.Add(txtCashReceived, 0, 7);
+            lblChangeTitle = new Label();
+            lblChangeTitle.Name = "lblChangeTitle";
+            lblChangeTitle.Text = "Tiền thừa";
+            lblChangeTitle.AutoSize = false;
+            lblChangeTitle.Dock = DockStyle.Fill;
+            lblChangeTitle.Font = UiTheme.BodyFont;
+            lblChangeTitle.ForeColor = UiTheme.Muted;
+            lblChangeTitle.Margin = new Padding(0);
+            lblChangeTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblChange = new Label();
+            lblChange.Name = "lblChange";
+            lblChange.Text = "0 đ";
+            lblChange.AutoSize = false;
+            lblChange.Dock = DockStyle.Fill;
+            lblChange.Font = UiTheme.SectionFont;
+            lblChange.ForeColor = UiTheme.Ink;
+            lblChange.Margin = new Padding(0);
+            lblChange.TextAlign = ContentAlignment.MiddleLeft;
+            paymentLayout.Controls.Add(lblChangeTitle, 0, 8);
+            paymentLayout.Controls.Add(lblChange, 0, 9);
+            btnCheckout = new Button();
+            btnCheckout.Name = "btnCheckout";
+            btnCheckout.Text = "Thanh toán  ·  F9";
+            btnCheckout.Tag = "primary";
+            btnCheckout.Dock = DockStyle.Fill;
+            btnCheckout.Margin = new Padding(0, 4, 8, 4);
+            btnCheckout.TabIndex = 5;
+            btnClearCart = new Button();
+            btnClearCart.Name = "btnClearCart";
+            btnClearCart.Text = "Hủy giỏ hàng";
+            btnClearCart.Tag = "danger";
+            btnClearCart.Dock = DockStyle.Fill;
+            btnClearCart.Margin = new Padding(0, 4, 8, 4);
+            btnClearCart.TabIndex = 6;
+            paymentLayout.Controls.Add(btnCheckout, 0, 10);
+            paymentLayout.Controls.Add(btnClearCart, 0, 11);
+            txtBarcode.KeyDown += txtBarcode_KeyDown;
             txtCustomerPhone.TextChanged += txtCustomerPhone_TextChanged;
             txtCustomerPhone.KeyDown += txtCustomerPhone_KeyDown;
-            // 
-            // lblCustomerName
-            // 
-            lblCustomerName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblCustomerName.Location = new Point(16, 90);
-            lblCustomerName.Name = "lblCustomerName";
-            lblCustomerName.Size = new Size(426, 50);
-            lblCustomerName.TabIndex = 1;
-            lblCustomerName.Text = "Khách vãng lai";
-            // 
-            // lblTotalTitle
-            // 
-            lblTotalTitle.AutoSize = true;
-            lblTotalTitle.Location = new Point(16, 160);
-            lblTotalTitle.Name = "lblTotalTitle";
-            lblTotalTitle.Size = new Size(66, 15);
-            lblTotalTitle.TabIndex = 2;
-            lblTotalTitle.Text = "TỔNG TIỀN";
-            // 
-            // lblTotalAmount
-            // 
-            lblTotalAmount.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTotalAmount.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            lblTotalAmount.ForeColor = Color.FromArgb(22, 140, 95);
-            lblTotalAmount.Location = new Point(16, 185);
-            lblTotalAmount.Name = "lblTotalAmount";
-            lblTotalAmount.Size = new Size(426, 55);
-            lblTotalAmount.TabIndex = 3;
-            lblTotalAmount.Text = "0 đ";
-            // 
-            // lblCashTitle
-            // 
-            lblCashTitle.AutoSize = true;
-            lblCashTitle.Location = new Point(16, 260);
-            lblCashTitle.Name = "lblCashTitle";
-            lblCashTitle.Size = new Size(161, 15);
-            lblCashTitle.TabIndex = 4;
-            lblCashTitle.Text = "Tiền khách đưa, ví dụ: 100000";
-            // 
-            // txtCashReceived
-            // 
-            txtCashReceived.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCashReceived.Location = new Point(16, 285);
-            txtCashReceived.Name = "txtCashReceived";
-            txtCashReceived.Size = new Size(314, 23);
-            txtCashReceived.TabIndex = 1;
             txtCashReceived.TextChanged += txtCashReceived_TextChanged;
-            // 
-            // lblChangeTitle
-            // 
-            lblChangeTitle.AutoSize = true;
-            lblChangeTitle.Location = new Point(16, 330);
-            lblChangeTitle.Name = "lblChangeTitle";
-            lblChangeTitle.Size = new Size(65, 15);
-            lblChangeTitle.TabIndex = 5;
-            lblChangeTitle.Text = "TIỀN THỪA";
-            // 
-            // lblChange
-            // 
-            lblChange.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblChange.Location = new Point(16, 355);
-            lblChange.Name = "lblChange";
-            lblChange.Size = new Size(290, 40);
-            lblChange.TabIndex = 6;
-            lblChange.Text = "0 đ";
-            // 
-            // btnCheckout
-            // 
-            btnCheckout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnCheckout.BackColor = Color.FromArgb(22, 140, 95);
-            btnCheckout.FlatAppearance.BorderSize = 0;
-            btnCheckout.FlatStyle = FlatStyle.Flat;
-            btnCheckout.ForeColor = Color.White;
-            btnCheckout.Location = new Point(16, 425);
-            btnCheckout.Name = "btnCheckout";
-            btnCheckout.Size = new Size(314, 45);
-            btnCheckout.TabIndex = 2;
-            btnCheckout.Text = "THANH TOÁN (F9)";
-            btnCheckout.UseVisualStyleBackColor = false;
             btnCheckout.Click += btnCheckout_Click;
-            // 
-            // btnClearCart
-            // 
-            btnClearCart.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnClearCart.BackColor = Color.FromArgb(190, 55, 55);
-            btnClearCart.FlatAppearance.BorderSize = 0;
-            btnClearCart.FlatStyle = FlatStyle.Flat;
-            btnClearCart.ForeColor = Color.White;
-            btnClearCart.Location = new Point(16, 480);
-            btnClearCart.Name = "btnClearCart";
-            btnClearCart.Size = new Size(314, 40);
-            btnClearCart.TabIndex = 3;
-            btnClearCart.Text = "HỦY GIỎ HÀNG";
-            btnClearCart.UseVisualStyleBackColor = false;
             btnClearCart.Click += btnClearCart_Click;
-            // 
-            // FormPOS
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(244, 245, 247);
-            ClientSize = new Size(1000, 600);
-            Controls.Add(tableLayoutMain);
-            Name = "FormPOS";
-            Padding = new Padding(12);
-            Text = "Bán hàng POS";
             FormClosing += FormPOS_FormClosing;
             Load += FormPOS_Load;
-            tableLayoutMain.ResumeLayout(false);
-            grpCart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvCart).EndInit();
-            panelBarcode.ResumeLayout(false);
-            panelBarcode.PerformLayout();
-            grpPayment.ResumeLayout(false);
-            grpPayment.PerformLayout();
+            UiTheme.Apply(this);
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
+        private TableLayoutPanel pageLayout = null!;
+        private TableLayoutPanel pageHeader = null!;
+        private Label pageTitle = null!;
+        private Label pageSubtitle = null!;
         private TableLayoutPanel tableLayoutMain = null!;
-        private GroupBox grpCart = null!;
-        private Panel panelBarcode = null!;
+        private Panel grpCart = null!;
+        private TableLayoutPanel cartLayout = null!;
         private Label lblBarcodeTitle = null!;
         private TextBox txtBarcode = null!;
         private DataGridView dgvCart = null!;
-
-        private GroupBox grpPayment = null!;
+        private Label cartHint = null!;
+        private Panel grpPayment = null!;
+        private TableLayoutPanel paymentLayout = null!;
+        private Label paymentHeading = null!;
         private Label lblPhoneTitle = null!;
         private TextBox txtCustomerPhone = null!;
         private Label lblCustomerName = null!;
