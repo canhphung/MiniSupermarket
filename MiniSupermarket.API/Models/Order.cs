@@ -1,4 +1,4 @@
-﻿
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +15,9 @@ namespace MiniSupermarket.API.Models
         /// </summary>
         [Key]
         public int OrderId { get; set; }
+
+        /// <summary>Điểm đã tặng khi checkout, dùng để hoàn tác đúng lúc hủy.</summary>
+        public int RewardPointsAwarded { get; set; }
 
         /// <summary>
         /// Thời điểm tạo đơn hàng theo múi giờ UTC.

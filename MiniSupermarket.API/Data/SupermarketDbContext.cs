@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MiniSupermarket.API.Models;
 
 namespace MiniSupermarket.API.Data
@@ -21,6 +21,10 @@ namespace MiniSupermarket.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>().Property(o => o.RewardPointsAwarded).HasDefaultValue(0);
+            modelBuilder.Entity<Order>().HasIndex(o => o.CreatedAtUtc);
+            modelBuilder.Entity<Product>().HasIndex(p => p.Barcode);
 
             modelBuilder.Entity<Order>()
                 .HasMany(order => order.Items)

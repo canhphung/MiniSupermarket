@@ -90,6 +90,7 @@ namespace MiniSupermarket.API.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    RewardPointsAwarded = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CreatedAtUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CashierId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
@@ -248,9 +249,19 @@ namespace MiniSupermarket.API.Migrations
                 column: "CashierId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_CreatedAtUtc",
+                table: "Orders",
+                column: "CreatedAtUtc");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_Barcode",
+                table: "Products",
+                column: "Barcode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",

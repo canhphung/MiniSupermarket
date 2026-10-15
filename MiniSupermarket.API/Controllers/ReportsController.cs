@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using MiniSupermarket.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,35 @@ namespace MiniSupermarket.API.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly SupermarketDbContext _context;
+        private readonly AdoReportService _ado;
 
-        public ReportsController(SupermarketDbContext context)
+        public ReportsController(SupermarketDbContext context, AdoReportService ado)
         {
             _context = context;
+            _ado = ado;
+        }
+
+        [HttpGet("revenue-by-cashier")]
+        public async Task<IActionResult> RevenueByCashier(CancellationToken ct)
+        {
+            var data = await _ado.RevenueAsync(null, null, ct);
+            return Ok(new { totalCashiers = data.Count, data });
+        }
+
+        [HttpGet("revenue-by-date-range")]
+        public async Task<IActionResult> RevenueByDateRange(
+            [FromQuery] DateOnly fromDate, [FromQuery] DateOnly toDate, CancellationToken ct)
+        {
+            try { return Ok(await _ado.RevenueAsync(fromDate, toDate, ct)); }
+            catch (CheckoutException ex) { return BadRequest(new { message = ex.Message }); }
+        }
+
+        [HttpGet("top-products")]
+        public async Task<IActionResult> TopProducts(
+            [FromQuery] DateOnly? fromDate, [FromQuery] DateOnly? toDate, CancellationToken ct)
+        {
+            try { return Ok(await _ado.TopProductsAsync(fromDate, toDate, ct)); }
+            catch (CheckoutException ex) { return BadRequest(new { message = ex.Message }); }
         }
 
         // GET /api/reports/daily?date=2026-10-15

@@ -12,7 +12,7 @@ using MiniSupermarket.API.Data;
 namespace MiniSupermarket.API.Migrations
 {
     [DbContext(typeof(SupermarketDbContext))]
-    [Migration("20261008124926_IntialDB")]
+    [Migration("20261015121013_IntialDB")]
     partial class IntialDB
     {
         /// <inheritdoc />
@@ -334,12 +334,19 @@ namespace MiniSupermarket.API.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<int>("RewardPointsAwarded")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("CashierId");
+
+                    b.HasIndex("CreatedAtUtc");
 
                     b.HasIndex("CustomerId");
 
@@ -411,6 +418,8 @@ namespace MiniSupermarket.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("Barcode");
 
                     b.HasIndex("CategoryId");
 

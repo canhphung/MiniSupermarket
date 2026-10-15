@@ -19,6 +19,7 @@ namespace MiniSupermarket.WinForms
         public FormMainShell()
         {
             InitializeComponent();
+            btnReports.Text = "Báo cáo & Hóa đơn";
 
             // Designer trước đó chưa gắn sự kiện cho ba nút này.
             btnProduct.Click += btnProduct_Click;
@@ -324,7 +325,7 @@ namespace MiniSupermarket.WinForms
             }
 
             OpenChildForm<FormQuickReport>(
-                "Báo cáo doanh thu",
+                "Báo cáo & Hóa đơn",
                 btnReports);
         }
 

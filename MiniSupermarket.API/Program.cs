@@ -1,3 +1,4 @@
+using MiniSupermarket.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -96,6 +97,11 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddSingleton<SqlConnectionFactory>();
+builder.Services.AddScoped<AdoCheckoutService>();
+builder.Services.AddScoped<AdoProductService>();
+builder.Services.AddScoped<AdoReportService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

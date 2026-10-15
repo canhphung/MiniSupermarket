@@ -139,7 +139,7 @@ namespace MiniSupermarket.WinForms
         {
             string json = await SendApiAsync(
                 HttpMethod.Get,
-                $"products/barcode/{Uri.EscapeDataString(barcode)}");
+                $"ado-products/barcode/{Uri.EscapeDataString(barcode)}");
 
             var product = JsonSerializer.Deserialize<ProductDto>(
                 json, JsonOptions)
@@ -336,7 +336,7 @@ namespace MiniSupermarket.WinForms
 
                 string json = await SendApiAsync(
                     HttpMethod.Post,
-                    "orders/checkout",
+                    "checkout",
                     orderRequest);
 
                 var result =
@@ -348,7 +348,8 @@ namespace MiniSupermarket.WinForms
                 MessageBox.Show(
                     $"Đã lưu hóa đơn #{result.OrderId}.\n" +
                     $"Tổng tiền: {FormatMoney(result.TotalAmount)}\n" +
-                    $"Tiền thừa: {FormatMoney(result.ChangeAmount)}",
+                    $"Tiền thừa: {FormatMoney(result.ChangeAmount)}\n" +
+                    $"Điểm thưởng: +{result.RewardPointsAdded}",
                     "Thanh toán thành công",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -593,6 +594,7 @@ namespace MiniSupermarket.WinForms
 
     public class PosCheckoutResponse
     {
+        public int RewardPointsAdded { get; set; }
         public int OrderId { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal CashReceived { get; set; }
