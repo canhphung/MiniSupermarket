@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using MiniSupermarket.API.DTOs;
+using MiniSupermarket.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiniSupermarket.API.Data;
@@ -17,6 +19,27 @@ namespace MiniSupermarket.API.Controllers
         public CustomersController(SupermarketDbContext context)
         {
             _context = context;
+        }
+
+        // Bài 6.1: điểm giảm dần, khóa chính giải quyết trường hợp bằng điểm.
+        [HttpGet("paged")]
+        public async Task<ActionResult<PagedResult<Customer>>> GetPagedCustomers(
+            [FromQuery] string? keyword, [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 5, CancellationToken cancellationToken = default)
+        {
+            var query = _context.Customers.AsNoTracking();
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string search = keyword.Trim().ToLower();
+                query = query.Where(c => c.CustomerName.ToLower().Contains(search)
+                    || c.PhoneNumber.Contains(search));
+            }
+            int total = await query.CountAsync(cancellationToken);
+            var (page, size, pages) = Paging.Normalize(pageNumber, pageSize, total);
+            var items = await query.OrderByDescending(c => c.RewardPoints).ThenBy(c => c.CustomerId)
+                .Skip((page - 1) * size).Take(size).ToListAsync(cancellationToken);
+            return Ok(new PagedResult<Customer>
+            { CurrentPage = page, PageSize = size, TotalItems = total, TotalPages = pages, Items = items });
         }
 
         // 1. READ: Lấy toàn bộ danh sách khách hàng

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using MiniSupermarket.API.DTOs;
+using MiniSupermarket.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +20,39 @@ namespace MiniSupermarket.API.Controllers
         public ProductsController(SupermarketDbContext context)
         {
             _context = context;
+        }
+
+        // Buổi 6: lọc trước Count; SQL chỉ trả về một trang.
+        [HttpGet("paged")]
+        [Authorize(Roles = "Admin,Warehouse")]
+        public async Task<ActionResult<PagedResult<ProductItemDto>>> GetPagedProducts(
+            [FromQuery] string? keyword, [FromQuery] int? categoryId,
+            [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5,
+            CancellationToken cancellationToken = default)
+        {
+            var query = _context.Products.Include(p => p.Category).AsNoTracking().AsQueryable();
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string search = keyword.Trim().ToLower();
+                query = query.Where(p => p.ProductName.ToLower().Contains(search)
+                    || p.Barcode.Contains(search));
+            }
+            if (categoryId.HasValue && categoryId.Value > 0)
+                query = query.Where(p => p.CategoryId == categoryId.Value);
+
+            int total = await query.CountAsync(cancellationToken);
+            var (page, size, pages) = Paging.Normalize(pageNumber, pageSize, total);
+            // Project CategoryName thành JOIN; không truy vấn riêng cho từng dòng (N+1).
+            var items = await query.OrderBy(p => p.ProductId)
+                .Skip((page - 1) * size).Take(size)
+                .Select(p => new ProductItemDto
+                {
+                    ProductId = p.ProductId, Barcode = p.Barcode, ProductName = p.ProductName,
+                    Price = p.Price, StockQuantity = p.StockQuantity, CategoryId = p.CategoryId,
+                    CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty
+                }).ToListAsync(cancellationToken);
+            return Ok(new PagedResult<ProductItemDto>
+            { CurrentPage = page, PageSize = size, TotalItems = total, TotalPages = pages, Items = items });
         }
 
         [HttpGet("barcode/{barcode}")]
@@ -242,21 +277,37 @@ namespace MiniSupermarket.API.Controllers
     }
     public class ProductSaveRequest
     {
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Mã vạch không được để trống!")]
+        [StringLength(
+            50,
+            ErrorMessage = "Mã vạch không được vượt quá 50 ký tự!")]
         public string Barcode { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(150)]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống!")]
+        [StringLength(
+            150,
+            ErrorMessage = "Tên sản phẩm không được vượt quá 150 ký tự!")]
         public string ProductName { get; set; } = string.Empty;
 
-        [Range(typeof(decimal), "0", "9999999999999999.99")]
+        [Range(
+            typeof(decimal),
+            "0",
+            "9999999999999999.99",
+            ParseLimitsInInvariantCulture = true,
+            ConvertValueInInvariantCulture = true,
+            ErrorMessage = "Giá bán nằm ngoài phạm vi cho phép!")]
         public decimal Price { get; set; }
 
-        [Range(0, int.MaxValue)]
+        [Range(
+            0,
+            int.MaxValue,
+            ErrorMessage = "Số lượng tồn kho không được âm!")]
         public int StockQuantity { get; set; }
 
-        [Range(1, int.MaxValue)]
+        [Range(
+            1,
+            int.MaxValue,
+            ErrorMessage = "Vui lòng chọn nhóm hàng hợp lệ!")]
         public int CategoryId { get; set; }
     }
 }

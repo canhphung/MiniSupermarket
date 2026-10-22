@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,10 +13,7 @@ namespace MiniSupermarket.WinForms
 {
     public partial class FormProductManagement : Form
     {
-        private static readonly HttpClient Client = new()
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
+        private static HttpClient Client => ApiClientService.Client;
 
         private static readonly JsonSerializerOptions JsonOptions =
             new(JsonSerializerDefaults.Web);
@@ -24,12 +21,21 @@ namespace MiniSupermarket.WinForms
         private readonly BindingSource _productSource = new();
 
         private bool _isBusy;
+        private int _currentPage = 1, _totalPages;
+        private const int PageSize = 5;
+        private readonly Button btnPrev = new() { Text = "<< Trước", Dock = DockStyle.Fill };
+        private readonly Button btnNext = new() { Text = "Sau >>", Dock = DockStyle.Fill };
+        private readonly Label lblPaging = new() { Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleCenter };
+        private string _activeKeyword = string.Empty;
+        private int _activeCategoryId;
+
 
         public FormProductManagement()
         {
             InitializeComponent();
             SetupControls();
             SetupGrid();
+            SetupPaging();
 
             dgvProducts.DataSource = _productSource;
 
@@ -47,13 +53,59 @@ namespace MiniSupermarket.WinForms
             btnDelete.Click += btnDelete_Click;
         }
 
+        private void SetupPaging()
+        {
+            txtSearchBarcode.PlaceholderText = "Tên sản phẩm hoặc mã vạch...";
+            txtSearchBarcode.MaxLength = 150;
+            listLayout.RowStyles[2].Height = 48;
+            listLayout.Controls.Remove(listHint);
+            listHint.Dispose();
+            var bar = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 3, RowCount = 1, Margin = new Padding(0) };
+            bar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105));
+            bar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            bar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105));
+            bar.Controls.Add(btnPrev, 0, 0);
+            bar.Controls.Add(lblPaging, 1, 0);
+            bar.Controls.Add(btnNext, 2, 0);
+            listLayout.Controls.Add(bar, 0, 2);
+            MiniSupermarket.WinForms.UI.UiTheme.Apply(bar);
+            btnPrev.Click += async (_, _) => await MovePageAsync(-1);
+            btnNext.Click += async (_, _) => await MovePageAsync(1);
+            cboFilterCategory.SelectionChangeCommitted += async (_, _) => await SearchAsync();
+            UpdatePagingButtons();
+        }
+
+        private async Task MovePageAsync(int delta)
+        {
+            await RunActionAsync(async () => await LoadProductsAsync(_currentPage + delta));
+        }
+
+        private async Task SearchAsync()
+        {
+            await RunActionAsync(async () =>
+            {
+                string oldKeyword = _activeKeyword;
+                int oldCategory = _activeCategoryId;
+                _activeKeyword = txtSearchBarcode.Text.Trim();
+                _activeCategoryId = (cboFilterCategory.SelectedItem as ProductCategoryDto)?.CategoryId ?? 0;
+                try { await LoadProductsAsync(1); }
+                catch { _activeKeyword = oldKeyword; _activeCategoryId = oldCategory; throw; }
+            });
+        }
+
+        private void UpdatePagingButtons()
+        {
+            btnPrev.Enabled = !_isBusy && HasPermission() && _currentPage > 1;
+            btnNext.Enabled = !_isBusy && HasPermission() && _currentPage < _totalPages;
+        }
+
         private void SetupControls()
         {
             txtId.ReadOnly = true;
 
             txtBarcode.MaxLength = 50;
             txtProductName.MaxLength = 150;
-            txtSearchBarcode.MaxLength = 50;
+            txtSearchBarcode.MaxLength = 150;
 
             cboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFilterCategory.DropDownStyle =
@@ -188,35 +240,22 @@ namespace MiniSupermarket.WinForms
             cboFilterCategory.DataSource = filterCategories;
         }
 
-        private async Task LoadProductsAsync()
+        private Task LoadProductsAsync() => LoadProductsAsync(_currentPage);
+
+        private async Task LoadProductsAsync(int requestedPage)
         {
-            string barcode = txtSearchBarcode.Text.Trim();
-
-            int categoryId =
-                (cboFilterCategory.SelectedItem as ProductCategoryDto)
-                ?.CategoryId ?? 0;
-
-            string endpoint =
-                $"products?barcode={Uri.EscapeDataString(barcode)}";
-
-            if (categoryId > 0)
-            {
-                endpoint += $"&categoryId={categoryId}";
-            }
-
-            string json = await SendApiAsync(
-                HttpMethod.Get, endpoint);
-
-            var products =
-                JsonSerializer.Deserialize<List<ProductManagementDto>>(
-                    json, JsonOptions)
-                ?? new List<ProductManagementDto>();
-
-            _productSource.DataSource = products;
+            string endpoint = $"products/paged?keyword={Uri.EscapeDataString(_activeKeyword)}&pageNumber={requestedPage}&pageSize={PageSize}";
+            if (_activeCategoryId > 0) endpoint += $"&categoryId={_activeCategoryId}";
+            string json = await SendApiAsync(HttpMethod.Get, endpoint);
+            var page = JsonSerializer.Deserialize<PagedViewResult<ProductManagementDto>>(json, JsonOptions)
+                ?? throw new InvalidOperationException("API không trả dữ liệu phân trang.");
+            _currentPage = page.CurrentPage;
+            _totalPages = page.TotalPages;
+            _productSource.DataSource = page.Items;
             dgvProducts.ClearSelection();
-
-            // Xóa chi tiết để không sửa nhầm sản phẩm từ kết quả cũ.
+            lblPaging.Text = $"Trang {(page.TotalItems == 0 ? 0 : _currentPage)} / {_totalPages} | {page.TotalItems} SP";
             ClearInputs();
+            UpdatePagingButtons();
         }
 
         // ================= CHỌN SẢN PHẨM =================
@@ -255,7 +294,7 @@ namespace MiniSupermarket.WinForms
         private async void btnSearch_Click(
             object? sender, EventArgs e)
         {
-            await RunActionAsync(LoadProductsAsync);
+            await SearchAsync();
         }
 
         private async void txtSearchBarcode_KeyDown(
@@ -269,7 +308,7 @@ namespace MiniSupermarket.WinForms
             e.SuppressKeyPress = true;
             e.Handled = true;
 
-            await RunActionAsync(LoadProductsAsync);
+            await SearchAsync();
         }
 
         private async void btnLoad_Click(
@@ -278,6 +317,9 @@ namespace MiniSupermarket.WinForms
             await RunActionAsync(async () =>
             {
                 txtSearchBarcode.Clear();
+                _activeKeyword = string.Empty;
+                _activeCategoryId = 0;
+                _currentPage = 1;
 
                 await LoadCategoriesToComboAsync();
                 await LoadProductsAsync();
@@ -419,84 +461,8 @@ namespace MiniSupermarket.WinForms
 
         // ================= API KÈM JWT =================
 
-        private static async Task<string> SendApiAsync(
-            HttpMethod method,
-            string endpoint,
-            object? body = null)
-        {
-            if (string.IsNullOrWhiteSpace(SessionManager.JwtToken))
-            {
-                throw new InvalidOperationException(
-                    "Bạn chưa đăng nhập!");
-            }
-
-            using var request = new HttpRequestMessage(method, endpoint);
-
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer", SessionManager.JwtToken);
-
-            if (body != null)
-            {
-                request.Content = JsonContent.Create(body);
-            }
-
-            using var response = await Client.SendAsync(request);
-
-            string content =
-                await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                return content;
-            }
-
-            if ((int)response.StatusCode == 401)
-            {
-                throw new InvalidOperationException(
-                    "Phiên đăng nhập không hợp lệ. Hãy đăng nhập lại.");
-            }
-
-            if ((int)response.StatusCode == 403)
-            {
-                throw new InvalidOperationException(
-                    "Bạn không có quyền quản lý sản phẩm!");
-            }
-
-            string error =
-                $"API trả về HTTP {(int)response.StatusCode}.";
-
-            try
-            {
-                using var document = JsonDocument.Parse(content);
-                var root = document.RootElement;
-
-                if (root.TryGetProperty("message", out var message))
-                {
-                    error = message.GetString() ?? error;
-                }
-                else if (root.TryGetProperty("errors", out var errors))
-                {
-                    var messages = errors.EnumerateObject()
-                        .SelectMany(property =>
-                            property.Value.EnumerateArray()
-                                .Select(value => value.GetString()
-                                    ?? "Dữ liệu không hợp lệ."));
-
-                    error = string.Join(Environment.NewLine, messages);
-                }
-                else if (root.TryGetProperty("title", out var title))
-                {
-                    error = title.GetString() ?? error;
-                }
-            }
-            catch (JsonException)
-            {
-                // Giữ thông báo HTTP nếu phản hồi không phải JSON.
-            }
-
-            throw new InvalidOperationException(error);
-        }
+        private static Task<string> SendApiAsync(HttpMethod method, string endpoint, object? body = null)
+            => ApiClientService.SendAsync(method, endpoint, body);
 
         // ================= PHÂN QUYỀN / CHỐNG BẤM LẶP =================
 
@@ -576,6 +542,7 @@ namespace MiniSupermarket.WinForms
             btnUpdate.Enabled = enabled;
             btnDelete.Enabled = enabled;
 
+            UpdatePagingButtons();
             UseWaitCursor = busy;
         }
 

@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace MiniSupermarket.WinForms
@@ -7,10 +7,7 @@ namespace MiniSupermarket.WinForms
     {
 
         // Khởi tạo HttpClient trỏ đến địa chỉ của Web API Backend
-        private static readonly HttpClient _client = new HttpClient
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
+        private static HttpClient _client => ApiClientService.Client;
 
         public FormLogin()
         {
@@ -32,27 +29,8 @@ namespace MiniSupermarket.WinForms
 
             try
             {
-                // Đóng gói dữ liệu gửi lên endpoint POST /api/auth/login
-                var loginData = new { Username = username, Password = password };
-                var response = await _client.PostAsJsonAsync("auth/login", loginData);
-
-                if (response.IsSuccessStatusCode)
+                if (await ApiClientService.LoginAsync(username, password))
                 {
-                    // Đọc kết quả đăng nhập.
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    using var doc = JsonDocument.Parse(jsonString);
-
-                    // Lưu thông tin phiên.
-                    SessionManager.JwtToken =
-                        doc.RootElement.GetProperty("token").GetString()
-                        ?? string.Empty;
-
-                    SessionManager.CurrentRole =
-                        doc.RootElement.GetProperty("role").GetString()
-                        ?? string.Empty;
-
-                    SessionManager.CurrentUsername = username;
-
                     // Mở giao diện chính.
                     this.Hide();
 
@@ -99,3 +77,4 @@ namespace MiniSupermarket.WinForms
         }
     }
 }
+

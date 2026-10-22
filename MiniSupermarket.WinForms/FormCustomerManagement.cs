@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace MiniSupermarket.WinForms
@@ -6,24 +6,7 @@ namespace MiniSupermarket.WinForms
     public partial class FormCustomerManagement : Form
     {
         // Tạo HttpClient có BaseAddress và JWT Token
-        private HttpClient GetAuthenticatedClient()
-        {
-            var client = new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:7203/api/")
-            };
-
-            if (!string.IsNullOrEmpty(SessionManager.JwtToken))
-            {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue(
-                        "Bearer",
-                        SessionManager.JwtToken
-                    );
-            }
-
-            return client;
-        }
+        private HttpClient GetAuthenticatedClient() => ApiClientService.Client;
 
         private bool IsCashier()
         {
@@ -79,7 +62,7 @@ namespace MiniSupermarket.WinForms
         {
             try
             {
-                using var client = GetAuthenticatedClient();
+                var client = GetAuthenticatedClient();
 
                 var customers =
                     await client.GetFromJsonAsync<List<CustomerDto>>("customers");
@@ -160,7 +143,7 @@ namespace MiniSupermarket.WinForms
 
             try
             {
-                using var client = GetAuthenticatedClient();
+                var client = GetAuthenticatedClient();
 
                 var response =
                     await client.PostAsJsonAsync("customers", newCustomer);
@@ -238,7 +221,7 @@ namespace MiniSupermarket.WinForms
 
             try
             {
-                using var client = GetAuthenticatedClient();
+                var client = GetAuthenticatedClient();
 
                 var response = await client.PutAsJsonAsync(
                     $"customers/{id}",
@@ -307,7 +290,7 @@ namespace MiniSupermarket.WinForms
 
             try
             {
-                using var client = GetAuthenticatedClient();
+                var client = GetAuthenticatedClient();
 
                 var response =
                     await client.DeleteAsync($"customers/{id}");
@@ -359,7 +342,7 @@ namespace MiniSupermarket.WinForms
 
             try
             {
-                using var client = GetAuthenticatedClient();
+                var client = GetAuthenticatedClient();
 
                 string encodedKeyword =
                     Uri.EscapeDataString(keyword);

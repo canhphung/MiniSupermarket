@@ -16,11 +16,7 @@ namespace MiniSupermarket.WinForms;
 public partial class FormQuickReport : Form
 {
     private static readonly CultureInfo VietnameseCulture = CultureInfo.GetCultureInfo("vi-VN");
-    private static readonly HttpClient Client = new()
-    {
-        BaseAddress = new Uri("https://localhost:7203/api/"),
-        Timeout = TimeSpan.FromSeconds(15)
-    };
+    private static HttpClient Client => ApiClientService.Client;
     private bool _isBusy;
     private DateTimePicker dtpToDate = null!;
     private DataGridView dgvCashiers = null!, dgvTopProducts = null!, dgvOrders = null!;
@@ -295,3 +291,4 @@ public record OrderReportRow(int OrderId, DateTime CreatedAtUtc, string CashierU
 }
 public record CancelReportRow(int OrderId, int RewardPointsDeducted);
 public record ReportApiError(string Message);
+

@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using System.Windows.Forms;
 
 namespace MiniSupermarket.WinForms
@@ -6,10 +6,7 @@ namespace MiniSupermarket.WinForms
     public partial class FormRoleManagement : Form
     {
         // Kết nối đến API /api/roles (Đảm bảo Port khớp với Backend của bạn)
-        private static readonly HttpClient _client = new HttpClient
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
+        private static HttpClient _client => ApiClientService.Client;
 
         public FormRoleManagement()
         {
@@ -136,3 +133,4 @@ namespace MiniSupermarket.WinForms
         public string? Description { get; set; }
     }
 }
+

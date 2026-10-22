@@ -18,10 +18,7 @@ namespace MiniSupermarket.WinForms
         private readonly BindingList<CartItemDto> _cart = new();
         private readonly BindingSource _cartSource = new();
 
-        private static readonly HttpClient Client = new()
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
+        private static HttpClient Client => ApiClientService.Client;
 
         private static readonly JsonSerializerOptions JsonOptions =
             new(JsonSerializerDefaults.Web);

@@ -7,7 +7,11 @@ public class CheckoutRequest
     [StringLength(15)]
     public string CustomerPhone { get; set; } = string.Empty;
 
-    [Range(typeof(decimal), "0", "9999999999999999.99")]
+    [Range(typeof(decimal), 
+        "0",
+        "9999999999999999.99",
+        ParseLimitsInInvariantCulture = true,
+        ConvertValueInInvariantCulture = true)]
     public decimal CashReceived { get; set; }
 
     [Required, MinLength(1), MaxLength(100)]
@@ -20,7 +24,10 @@ public class CheckoutItemRequest
     public int ProductId { get; set; }
     [Range(1, 100000)]
     public int Quantity { get; set; }
-    [Range(typeof(decimal), "0", "9999999999999999.99")]
+    [Range(typeof(decimal), "0", "9999999999999999.99",
+        ParseLimitsInInvariantCulture = true,
+        ConvertValueInInvariantCulture = true
+        )]
     public decimal ExpectedUnitPrice { get; set; }
 }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -11,10 +11,7 @@ namespace MiniSupermarket.WinForms
 {
     public partial class FormUserManagement : Form
     {
-        private static readonly HttpClient Client = new()
-        {
-            BaseAddress = new Uri("https://localhost:7203/api/")
-        };
+        private static HttpClient Client => ApiClientService.Client;
 
         private static readonly JsonSerializerOptions JsonOptions =
             new(JsonSerializerDefaults.Web);
